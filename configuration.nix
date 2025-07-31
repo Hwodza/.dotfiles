@@ -149,6 +149,7 @@
     lazygit
     anki
     zathura
+    poppler
     lua-language-server
     oh-my-posh
     networkmanagerapplet
