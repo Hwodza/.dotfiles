@@ -1,0 +1,39 @@
+---
+name: dotfiles
+project_root: "/home/henry"
+windows:
+- waybar:
+    layout: 5fe1,210x55,0,0[210x43,0,0{104x43,0,0,1,105x43,105,0,2},210x11,0,44,3]
+    panes:
+    - cd /home/henry
+    - cd /home/henry
+    - cd /home/henry/.dotfiles/.config/waybar
+- nix:
+    layout: ca72,210x55,0,0[210x43,0,0,4,210x11,0,44,5]
+    panes:
+    - cd /home/henry/.dotfiles
+    - cd /home/henry/.dotfiles
+- Hyprland:
+    layout: c0e3,210x55,0,0,6
+    panes:
+    - cd /home/henry/.dotfiles
+- tmux:
+    layout: c0e4,210x55,0,0,7
+    panes:
+    - cd /home/henry
+- nvim:
+    layout: c0e5,210x55,0,0,8
+    panes:
+    - cd /home/henry
+- bash:
+    layout: 609f,210x55,0,0,10
+    panes:
+    - cd /home/henry/.dotfiles
+    - cd /home/henry
+    - cd /home/henry
+- bash:
+    layout: f57d,210x55,0,0{105x55,0,0,11,104x55,106,0,12}
+    panes:
+    - cd /home/henry/.dotfiles
+    - cd /home/henry
+    - cd /home/henry
