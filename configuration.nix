@@ -147,6 +147,7 @@
     lua
     smplayer
     lazygit
+    anki
     lua-language-server
     oh-my-posh
     networkmanagerapplet
