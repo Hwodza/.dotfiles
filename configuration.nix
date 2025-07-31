@@ -148,6 +148,7 @@
     smplayer
     lazygit
     anki
+    zathura
     lua-language-server
     oh-my-posh
     networkmanagerapplet
