@@ -2,38 +2,39 @@
 name: dotfiles
 project_root: "/home/henry"
 windows:
-- waybar:
-    layout: 5fe1,210x55,0,0[210x43,0,0{104x43,0,0,1,105x43,105,0,2},210x11,0,44,3]
+- git:
     panes:
-    - cd /home/henry
-    - cd /home/henry
-    - cd /home/henry/.dotfiles/.config/waybar
+    - git:
+        - cd ~/.dotfiles
+        - clear
 - nix:
-    layout: ca72,210x55,0,0[210x43,0,0,4,210x11,0,44,5]
+    layout: 404c,210x55,0,0[210x47,0,0,1,210x7,0,48,7]
     panes:
-    - cd /home/henry/.dotfiles
-    - cd /home/henry/.dotfiles
+    - editor:
+        - cd /home/henry/.dotfiles
+        - nvim configuration.nix
+    - cmd:
+        - cd /home/henry/.dotfiles
+        - clear
+        - tmux send-keys -t nix.1 'sudo nixos-rebuild switch --flake .'
 - Hyprland:
     layout: c0e3,210x55,0,0,6
     panes:
-    - cd /home/henry/.dotfiles
+    - nvim /home/henry/.dotfiles/.config/hypr/hyprland.conf 
+- waybar:
+    layout: even-horizontal
+    panes:
+    - nvim ~/.dotfiles/.config/waybar/style.css
+    - nvim ~/.dotfiles/.config/waybar/config
 - tmux:
-    layout: c0e4,210x55,0,0,7
+    layout: 5154,210x55,0,0{80x55,0,0,9,129x55,81,0[129x27,81,0,4,129x27,81,28,11]}
     panes:
-    - cd /home/henry
+    - nvim ~/.dotfiles/.config/tmuxinator/dotfiles.yml
+    - nvim ~/.dotfiles/.tmux.conf
+    - nvim ~/.dotfiles/.config/sesh/sesh.toml
 - nvim:
-    layout: c0e5,210x55,0,0,8
     panes:
-    - cd /home/henry
+    - nvim ~/.dotfiles/.config/nvim/init.lua
 - bash:
-    layout: 609f,210x55,0,0,10
     panes:
-    - cd /home/henry/.dotfiles
-    - cd /home/henry
-    - cd /home/henry
-- bash:
-    layout: f57d,210x55,0,0{105x55,0,0,11,104x55,106,0,12}
-    panes:
-    - cd /home/henry/.dotfiles
-    - cd /home/henry
-    - cd /home/henry
+    - nvim ~/.dotfiles/.bashrc

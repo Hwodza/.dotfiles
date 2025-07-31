@@ -135,7 +135,6 @@
     python314
     python313
     tmux
-    tmuxinator
     neofetch
     obsidian
     blueman
