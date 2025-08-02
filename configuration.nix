@@ -148,6 +148,7 @@
     smplayer
     lazygit
     anki
+    hyprpicker
     zathura
     poppler
     lua-language-server
