@@ -2,6 +2,7 @@
 name: dotfiles
 project_root: "/home/henry"
 windows:
+- cmd:
 - git:
     panes:
     - git:
