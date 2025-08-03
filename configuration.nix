@@ -152,8 +152,8 @@
     hyprpicker
     zathura
     poppler
-    plex
     lua-language-server
+    jellyfin
     oh-my-posh
     networkmanagerapplet
     hyprpaper
