@@ -152,6 +152,7 @@
     hyprpicker
     zathura
     poppler
+    plex
     lua-language-server
     oh-my-posh
     networkmanagerapplet
