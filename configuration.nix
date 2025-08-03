@@ -81,6 +81,12 @@
     #media-session.enable = true;
   };
 
+  # Jellyfin settings
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -154,6 +160,8 @@
     poppler
     lua-language-server
     jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
     hyprpaper
