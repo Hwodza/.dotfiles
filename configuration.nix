@@ -161,6 +161,7 @@
     lua-language-server
     jellyfin
     jellyfin-web
+    zoom-us
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
