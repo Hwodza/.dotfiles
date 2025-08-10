@@ -3,6 +3,10 @@ name: dotfiles
 project_root: "/home/henry"
 windows:
 - cmd:
+    panes:
+    - cmd:
+        - cd ~/.dotfiles
+        - clear
 - git:
     panes:
     - git:
