@@ -8,6 +8,7 @@ windows:
     - git:
         - cd ~/.dotfiles
         - clear
+        - lazygit
 - nix:
     layout: 404c,210x55,0,0[210x47,0,0,1,210x7,0,48,7]
     panes:
