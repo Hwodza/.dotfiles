@@ -162,6 +162,7 @@
     jellyfin
     jellyfin-web
     zoom-us
+    btop
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
