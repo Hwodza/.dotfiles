@@ -30,7 +30,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.powersave = false;
+  
 
 
   # Set your time zone.
@@ -165,6 +165,7 @@
     jellyfin-web
     zoom-us
     btop
+    go
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
