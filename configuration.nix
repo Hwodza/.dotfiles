@@ -167,7 +167,7 @@
     zoom-us
     btop
     go
-	chromium
+	google-chrome
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
