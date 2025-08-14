@@ -167,6 +167,7 @@
     zoom-us
     btop
     go
+	gopls
 	google-chrome
     jellyfin-ffmpeg
     oh-my-posh
