@@ -31,6 +31,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
+
+
+
+  environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox"
   
 
 
