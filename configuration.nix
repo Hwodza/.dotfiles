@@ -34,7 +34,7 @@
 
 
 
-  environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox"
+  environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
   
 
 
