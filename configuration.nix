@@ -134,6 +134,7 @@
     rofi-wayland
     wl-clipboard
     hyprland
+	hyprlock
     firefox
     git
     unzip
