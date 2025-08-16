@@ -26,3 +26,8 @@ vim.lsp.config['gopls'] = {
 	-- Filetypes to automatically attach to.
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 }
+vim.lsp.config['nixd'] = {
+  cmd = { 'nixd' },
+  filetypes = { 'nix' },
+  root_markers = { 'flake.nix', 'git' },
+}

@@ -17,6 +17,7 @@ require("config.lsp")
 
 vim.lsp.enable('luals')
 vim.lsp.enable('gopls')
+vim.lsp.enable('nixd')
 vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Show hover' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
