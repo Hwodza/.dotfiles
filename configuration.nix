@@ -102,22 +102,22 @@
     isNormalUser = true;
     description = "henry";
     extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
-    packages = with pkgs; [
-    ];
+    #packages = with pkgs; [
+    #];
   };
 
 
   # TTY login
-  services.getty.autologinUser = "henry";
-  #services.greetd = {
-  #	enable = true;
-  #	settings = {
-  #        default_session = {
-  #    	command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #    	user = "greeter";
-  #    };
-  #	};
-  #};
+  # services.getty.autologinUser = "henry";
+  services.greetd = {
+  	enable = true;
+  	settings = {
+          default_session = {
+      	command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      	user = "greeter";
+      };
+  	};
+  };
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -143,7 +143,7 @@
     rofi-wayland
     wl-clipboard
     hyprland
-	hyprlock
+    hyprlock
     firefox
     git
     unzip
@@ -182,8 +182,8 @@
     zoom-us
     btop
     go
-	gopls
-	google-chrome
+    gopls
+    google-chrome
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
