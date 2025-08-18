@@ -184,6 +184,7 @@
     go
     gopls
     google-chrome
+    element-desktop
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
