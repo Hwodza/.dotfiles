@@ -31,7 +31,7 @@ windows:
     layout: even-horizontal
     panes:
     - nvim ~/.dotfiles/.config/waybar/style.css
-    - nvim ~/.dotfiles/.config/waybar/config
+    - nvim ~/.dotfiles/.config/waybar/config.jsonc
 - tmux:
     layout: 5154,210x55,0,0{80x55,0,0,9,129x55,81,0[129x27,81,0,4,129x27,81,28,11]}
     panes:
