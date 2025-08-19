@@ -27,7 +27,15 @@ vim.lsp.config['gopls'] = {
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 }
 vim.lsp.config['nixd'] = {
-  cmd = { 'nixd' },
-  filetypes = { 'nix' },
-  root_markers = { 'flake.nix', 'git' },
+	cmd = { 'nixd' },
+	filetypes = { 'nix' },
+	root_markers = { 'flake.nix', 'git' },
+}
+vim.lsp.config['jsonls'] = {
+  cmd = { 'vscode-json-language-server', '--stdio' },
+  filetypes = { 'json', 'jsonc' },
+  init_options = {
+    provideFormatter = true,
+  },
+  root_markers = { '.git' },
 }
