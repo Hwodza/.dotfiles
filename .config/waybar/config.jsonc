@@ -7,11 +7,11 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-    	"custom/os_button",
+        "custom/os_button",
         "hyprland/workspaces",
     ],
     "modules-center": [
-	"clock",
+        "clock",
     ],
     "modules-right": [
         "backlight",
@@ -21,34 +21,42 @@
         "memory",
         "temperature",
         "battery",
-	"battery#bat2", 
+        "battery#bat2",
         "tray",
         "custom/power"
     ],
     "custom/os_button": {
-	"format": "",
-	"on-click": "rofi -show drun",
-	"tooltip": false,
+        "format": "",
+        "on-click": "rofi -show drun",
+        "tooltip": false,
     },
     "hyprland/workspaces": {
-	"format": "{name}: {windows}",
-	"on-click": "activate",
-	"persistent-workspaces": {
-	"*":[1,2,3,4,5,6,7]
-	},
-	"window-rewrite-default": "",
-	"window-rewrite": {
-		"title<.*youtube.*>": "", // Windows whose titles contain "youtube"
-	    	"class<firefox>": "", // Windows whose classes are "firefox"
-	    	"kitty": "", // Windows that contain "kitty" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
-		"discord": "",
-		"spotify": "",
-		"obsidian": "",
-	},
-       "persistent-workspaces": {
-             "*": 5, // 5 workspaces by default on every monitor
-             "HDMI-A-1": 3 // but only three on HDMI-A-1
-       }
+        "format": "{name}: {windows}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+            ]
+        },
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
+            "class<firefox>": "", // Windows whose classes are "firefox"
+            "kitty": "", // Windows that contain "kitty" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
+            "discord": "",
+            "spotify": "",
+            "obsidian": "",
+        },
+        "persistent-workspaces": {
+            "*": 5, // 5 workspaces by default on every monitor
+            "HDMI-A-1": 3 // but only three on HDMI-A-1
+        }
     },
     "keyboard-state": {
         "numlock": true,
@@ -60,9 +68,9 @@
         }
     },
     "backlight/slider": {
-    	"min": 0,
-	"max": 100,
-	"orientation": "horizontal",
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal",
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
@@ -123,12 +131,26 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery": {
         "states": {
@@ -143,32 +165,38 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-	// "on-click": "nm-applet",
+        // "on-click": "nm-applet",
         "format-wifi": "{essid} ({signalStrength}%) <span color='#00FFFF'> </span>",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-	"on-click": "~/.config/rofi/scripts/rofi-wifi-menu.sh",
+        "on-click": "~/.config/rofi/scripts/rofi-wifi-menu.sh",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -185,7 +213,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol"
     },
@@ -202,15 +234,15 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+        "format": "⏻ ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+        "menu-actions": {
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
     }
 }
