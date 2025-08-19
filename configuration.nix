@@ -186,6 +186,7 @@
     google-chrome
     element-desktop
     jq
+    vscode-langservers-extracted
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
