@@ -187,6 +187,7 @@
     element-desktop
     jq
     vscode-langservers-extracted
+    bash-language-server
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
