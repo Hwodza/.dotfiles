@@ -60,20 +60,6 @@ function move_workspace {
     esac
 
     hyprctl dispatch moveworkspacetomonitor $workspace "$screen"
-    row=$(($workspace / matrix_size))
-
-    row_workspaces=""
-    for ((x=0; x<matrix_size; x++)); do
-        id=$((row * matrix_size + x + 1))
-        row_workspaces="$row_workspaces,$id"
-    done
-    row_workspaces="[${row_workspaces:1}]"
-
-
-    echo "{\"persistent-workspaces\": {\"*\": $row_workspaces}}" \
-        > ~/.config/waybar/persistent.json
-    # reload waybar
-    reload_waybar
 }
 
 original_monitor=$(hyprctl monitors -j | jq '.[] | select(.focused) | .id, .activeWorkspace.id')
