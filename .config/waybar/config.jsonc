@@ -8,7 +8,8 @@
     // Choose the order of the modules
     "modules-left": [
         "custom/os_button",
-        "hyprland/workspaces",
+        "hyprland/workspaces"
+        // "custom/workspaces"
     ],
     "modules-center": [
         "clock",
@@ -30,10 +31,13 @@
         "on-click": "rofi -show drun",
         "tooltip": false,
     },
+    // "custom/workspaces": {
+    //     
+    // },
     "hyprland/workspaces": {
         "format": "{name}: {windows}",
         "on-click": "activate",
-        "include": "~/.config/waybar/persistent.json",
+        "include": "~/.dotfiles/.config/waybar/persistent.json",
         "window-rewrite-default": "",
         "window-rewrite": {
             "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
