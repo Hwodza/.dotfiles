@@ -168,6 +168,7 @@
     curl
     nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
     stow
     lua
     smplayer
