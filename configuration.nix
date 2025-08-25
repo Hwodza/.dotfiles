@@ -169,6 +169,7 @@
     nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
+    nerd-fonts.symbols-only
     stow
     lua
     smplayer
