@@ -187,6 +187,7 @@
     go
     gopls
     google-chrome
+    unzip
     element-desktop
     jq
     vscode-langservers-extracted
