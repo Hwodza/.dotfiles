@@ -22,7 +22,7 @@ windows:
     - cmd:
         - cd /home/henry/.dotfiles
         - clear
-        - tmux send-keys -t nix.1 'sudo nixos-rebuild switch --flake .'
+        - tmux send-keys -t nix.1 'sudo nixos-rebuild switch --flake . --impure'
 - Hyprland:
     layout: c0e3,210x55,0,0,6
     panes:
