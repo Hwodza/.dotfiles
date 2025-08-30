@@ -144,6 +144,7 @@
     wl-clipboard
     hyprland
     hyprlock
+    hypridle
     firefox
     git
     unzip
