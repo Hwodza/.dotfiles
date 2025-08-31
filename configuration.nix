@@ -191,6 +191,7 @@
     jq
     vscode-langservers-extracted
     bash-language-server
+    luajitPackages.luarocks-nix
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
