@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Firefox Private
+Exec=firefox --private-window %u
+Icon=firefox
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+StartupNotify=true
+

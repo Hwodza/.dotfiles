@@ -144,6 +144,7 @@
     wl-clipboard
     hyprland
     hyprlock
+    hypridle
     firefox
     git
     unzip
@@ -171,6 +172,7 @@
     nerd-fonts.meslo-lg
     nerd-fonts.symbols-only
     font-awesome
+    wlogout
     stow
     lua
     smplayer
@@ -192,6 +194,7 @@
     jq
     vscode-langservers-extracted
     bash-language-server
+    luajitPackages.luarocks-nix
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
