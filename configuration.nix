@@ -190,6 +190,7 @@
     gopls
     google-chrome
     powertop
+    qutebrowser
     unzip
     element-desktop
     jq
