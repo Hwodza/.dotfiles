@@ -189,6 +189,7 @@
     go
     gopls
     google-chrome
+    powertop
     unzip
     element-desktop
     jq
