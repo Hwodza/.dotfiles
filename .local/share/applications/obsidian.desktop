@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Obsidian (Wayland)
+Exec=env ELECTRON_OZONE_PLATFORM_HINT=wayland obsidian --ozone-platform=wayland --enable-features=WaylandWindowDecorations --force-device-scale-factor=1 %U
+Terminal=false
+Type=Application
+Icon=obsidian
+StartupWMClass=obsidian
+Categories=Office;Notes;
+

@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -144,6 +144,7 @@
     wl-clipboard
     hyprland
     hyprlock
+    hypridle
     firefox
     git
     unzip
@@ -168,6 +169,10 @@
     curl
     nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    nerd-fonts.symbols-only
+    font-awesome
+    wlogout
     stow
     lua
     smplayer
@@ -184,10 +189,14 @@
     go
     gopls
     google-chrome
+    powertop
+    qutebrowser
+    unzip
     element-desktop
     jq
     vscode-langservers-extracted
     bash-language-server
+    luajitPackages.luarocks-nix
     jellyfin-ffmpeg
     oh-my-posh
     networkmanagerapplet
