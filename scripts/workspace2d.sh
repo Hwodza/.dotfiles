@@ -6,6 +6,8 @@ if [ $# -ne 3 ]; then
 fi
 
 matrix_size=8
+# matrix_width=10
+# matrix_height=5
 # matrix_max=$((matrix_size ** 2))
 max_screens=10
 direction=$1
@@ -47,7 +49,7 @@ function move_workspace {
         "right" | "move_right") x_index=$(((x_index + 1) % matrix_size)) ;;
         "up" | "move_up") y_index=$(((y_index + matrix_size - 1) % matrix_size)) ;;
         "down" | "move_down") y_index=$(((y_index + 1) % matrix_size)) ;;
-        "query") echo "($x_index,$y_index)"; exit ;;
+        "query") echo "($x_index,$y_index), $workspace"; exit ;;
     esac
 
     local workspace=$((max_screens * (y_index * matrix_size + x_index) + screen + 1))
