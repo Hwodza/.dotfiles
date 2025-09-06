@@ -101,6 +101,7 @@
       eval "$(zoxide init bash)"
       '';
   };
+  home.file.".config/hypr/hyprland.conf".source = ./.config/hypr/hyprland.conf;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
