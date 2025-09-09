@@ -4,6 +4,8 @@
   inputs = {
     # NixOS official package source, using the nixos-25.05 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
@@ -20,6 +22,10 @@
           # so the old configuration file still takes effect
           ./configuration.nix
         ];
+      };
+      homeConfigurations.henry = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./home.nix];
       };
     };
 }
