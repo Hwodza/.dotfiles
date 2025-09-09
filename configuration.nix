@@ -189,6 +189,7 @@
     go
     gopls
     google-chrome
+    pavucontrol
     powertop
     qutebrowser
     unzip
