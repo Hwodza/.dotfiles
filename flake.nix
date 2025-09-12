@@ -1,31 +1,33 @@
 {
-  description = "A simple NixOS flake";
-
+  description = "Henry's dotfiles for nixos and home manager";
   inputs = {
-    # NixOS official package source, using the nixos-25.05 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland-workspace2d = {
+      url = "github:404wolf/Hyprland-Workspace-2D";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
-    # Please replace my-nixos with your hostname
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # Import the previous configuration.nix we used,
-          # so the old configuration file still takes effect
-          ./configuration.nix
-        ];
+      nixosConfigurations = {
+        tester = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./profiles/tester/configuration.nix
+          ];
+        };
       };
-      homeConfigurations.henry = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./home.nix];
+      homeConfigurations = {
+        tester = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [./profiles/tester/home.nix];
+        };
       };
     };
 }
