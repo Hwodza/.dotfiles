@@ -40,11 +40,21 @@
             ./profiles/tester/configuration.nix
           ];
         };
+        framework = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./profiles/framework/configuration.nix
+          ];
+        };
       };
       homeConfigurations = {
         tester = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [./profiles/tester/home.nix];
+        };
+        framework = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [./profiles/framework/home.nix];
         };
       };
     };
