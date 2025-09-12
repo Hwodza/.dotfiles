@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../system/network.nix
     ];
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
