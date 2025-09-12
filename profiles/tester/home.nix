@@ -5,6 +5,9 @@
   # manage.
   home.username = "henry";
   home.homeDirectory = "/home/henry";
+  imports = [
+    ../../user/desktop/hyprland/hyprland.nix
+  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -102,7 +105,7 @@
       '';
   };
   home.file.".tmux.conf".source = ./.tmux.conf;
-  home.file.".config/hypr/".source = ./.config/hypr;
+  # home.file.".config/hypr/".source = ./.config/hypr;
   home.file.".config/kitty/".source = ./.config/kitty;
   home.file.".config/lazygit/".source = ./.config/lazygit;
   home.file.".config/neofetch/".source = ./.config/neofetch;
