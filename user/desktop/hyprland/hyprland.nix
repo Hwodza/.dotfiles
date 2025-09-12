@@ -279,10 +279,10 @@ in
 						# Switch workspaces with workspace2d.sh
 						# Navigate workspaces in 2D
 
-						bind = $mainMod, H, exec, bash -l -c ${workspace2d} left "" ""
-						bind = $mainMod, L, exec, bash -l -c ${workspace2d} right "" ""
-						bind = $mainMod, K, exec, bash -l -c ${workspace2d} up "" ""
-						bind = $mainMod, J, exec, bash -l -c ${workspace2d} down "" ""
+						bind = $mainMod, H, exec, ${workspace2d} left "" ""
+						bind = $mainMod, L, exec, ${workspace2d} right "" ""
+						bind = $mainMod, K, exec, ${workspace2d} up "" ""
+						bind = $mainMod, J, exec, ${workspace2d} down "" ""
 
 						# Move windows instead of focus
 						bind = $mainMod SHIFT, H, exec, ${workspace2d} move_left "" ""
