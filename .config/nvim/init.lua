@@ -21,13 +21,15 @@ vim.lsp.enable('gopls')
 vim.lsp.enable('nixd')
 vim.lsp.enable('jsonls')
 vim.lsp.enable('bashls')
-vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
+vim.lsp.enable('clangd')
+-- vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Show hover' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to implementation' })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts, { desc = 'Show references' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostic quickfix list' })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'Highlight when yanking (copying) text',
 	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
