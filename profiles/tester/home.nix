@@ -6,7 +6,8 @@
   home.username = "henry";
   home.homeDirectory = "/home/henry";
   imports = [
-    ../../user/desktop/hyprland/hyprland.nix
+    # ../../user/desktop/hyprland/hyprland.nix
+    ../../user/default.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
