@@ -1,7 +1,7 @@
 {
   imports = [
-    ./apps
+    # ./apps
     ./hyprland/default.nix
-    ./waybar
+    # ./waybar
   ];
 }

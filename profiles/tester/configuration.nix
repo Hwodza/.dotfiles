@@ -8,8 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../system/network.nix
-      ../../user/tosort.nix
+      ../../system/default.nix
     ];
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
