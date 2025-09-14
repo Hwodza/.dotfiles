@@ -4,6 +4,7 @@
     vim 
     wget
     kitty
+    libclang
     swww
     killall
     neovim
