@@ -14,4 +14,6 @@ s() {
   sesh connect "$(sesh list | fzf)"
 }
 export EDITOR="nvim"
+export HYPRSHOT_DIR="$HOME/Pictures/Screenshots/"
 eval "$(zoxide init bash)"
+

@@ -1,4 +1,4 @@
-{pkgs, lib, system, ...}:
+{pkgs, lib, system, config, ...}:
 let
 		workspace2d = "${lib.getBin pkgs.hyprland-workspace2d}/bin/workspace2d";
 in
@@ -71,7 +71,8 @@ in
 						env = XCURSOR_SIZE,24
 						env = HYPRCURSOR_SIZE,24
 						env = ELECTRON_OZONE_PLATFORM_HINT,auto
-						env = XDG_CONFIG_HOME, /home/henry/.config
+						env = XDG_CONFIG_HOME, ${config.home.homeDirectory}/.config
+						env = HYPRSHOT_DIR, ${config.home.homeDirectory}/Pictures/Screenshots
 						env = TERM, xterm-256color
 
 
@@ -234,7 +235,7 @@ in
 						bind = $mainMod, E, exec, $fileManager
 						bind = $mainMod, V, togglefloating,
 						bind = $mainMod, SPACE, exec, $menu
-						bind = $mainMod, P, pseudo, # dwindle
+						# bind = $mainMod, P, pseudo, # dwindle
 						bind = $mainMod, T, togglesplit, # dwindle
 						bind = $mainMod, R, exec, ~/.config/waybar/scripts/launch.sh
 						# bind = $mainMod, S, exec, hyprlock
@@ -304,7 +305,7 @@ in
 						bind = $mainMod CTRL SHIFT, J, exec, ${workspace2d} down all sync
 
 						# Screenshot a region
-						bind = $mainMod, P, exec, hyprshot -m region
+						bind = $mainMod, P, exec, env XDG_PICTURES_DIR=${config.home.homeDirectory}/Pictures/Screenshots hyprshot -m region
 
 						# Example special workspace (scratchpad)
 						bind = $mainMod, S, togglespecialworkspace, magic

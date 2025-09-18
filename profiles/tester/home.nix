@@ -102,6 +102,7 @@
         sesh connect "$(sesh list | fzf)"
       }
 
+      export HYPRSHOT_DIR="$HOME/Pictures/Screenshots/"
       eval "$(zoxide init bash)"
       '';
   };
