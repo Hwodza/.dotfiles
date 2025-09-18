@@ -224,7 +224,8 @@ in
 						###################
 
 						# See https://wiki.hyprland.org/Configuring/Keywords/
-						$mainMod = SUPER # Sets "Windows" key as main modifier
+						# $mainMod = SUPER # Sets "Windows" key as main modifier
+						$mainMod = ALT # Sets Alt key as main modifer
 
 						# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 						bind = $mainMod, Q, exec, $terminal
@@ -236,7 +237,7 @@ in
 						bind = $mainMod, P, pseudo, # dwindle
 						bind = $mainMod, T, togglesplit, # dwindle
 						bind = $mainMod, R, exec, ~/.config/waybar/scripts/launch.sh
-						bind = $mainMod, S, exec, hyprlock
+						# bind = $mainMod, S, exec, hyprlock
 
 
 						# Move focus with mainMod + arrow keys
@@ -301,6 +302,9 @@ in
 						bind = $mainMod CTRL SHIFT, L, exec, ${workspace2d} right all sync
 						bind = $mainMod CTRL SHIFT, K, exec, ${workspace2d} up all sync
 						bind = $mainMod CTRL SHIFT, J, exec, ${workspace2d} down all sync
+
+						# Screenshot a region
+						bind = $mainMod, P, exec, hyprshot -m region
 
 						# Example special workspace (scratchpad)
 						bind = $mainMod, S, togglespecialworkspace, magic
