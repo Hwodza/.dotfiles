@@ -5,6 +5,10 @@
   # manage.
   home.username = "henry";
   home.homeDirectory = "/home/henry";
+  imports = [
+    # ../../user/desktop/hyprland/hyprland.nix
+    ../../user/default.nix
+  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -67,51 +71,52 @@
   #
   #  /etc/profiles/per-user/henry/etc/profile.d/hm-session-vars.sh
   #
-  # home.sessionVariables = {
-  #   EDITOR = "nvim";
-  # };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
-  # programs.bash = {
-  #   enable = true;
-  #   shellAliases = {
-  #     n = "nvim";
-  #     v = "nvim";
-  #     cd = "z";
-  #     t = "tmux";
-  #   };
-  #   bashrcExtra = ''
-  #     # add ohmyposh
-  #     eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/kushal.omp.json)"
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      n = "nvim";
+      v = "nvim";
+      cd = "z";
+      t = "tmux";
+    };
+    bashrcExtra = ''
+      # add ohmyposh
+      eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/kushal.omp.json)"
 
-  #     # Start ssh-agent if not already running and add github id
-  #     if [ -z "$SSH_AUTH_SOCK" ]; then
-  #       eval "$(ssh-agent -s)"
-  #       ssh-add ~/.ssh/id_github
-  #     fi
-  #     
-  #     clear
+      # Start ssh-agent if not already running and add github id
+      if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_github
+      fi
+      
+      clear
 
-  #     neofetch
+      neofetch
 
-  #     # Add sesh keybind
-  #     s() {
-  #       sesh connect "$(sesh list | fzf)"
-  #     }
+      # Add sesh keybind
+      s() {
+        sesh connect "$(sesh list | fzf)"
+      }
 
-  #     eval "$(zoxide init bash)"
-  #     '';
-  # };
-  # home.file.".tmux.conf".source = ./.tmux.conf;
+      export HYPRSHOT_DIR="$HOME/Pictures/Screenshots/"
+      eval "$(zoxide init bash)"
+      '';
+  };
+  home.file.".tmux.conf".source = ../../.tmux.conf;
   # home.file.".config/hypr/".source = ./.config/hypr;
-  # home.file.".config/kitty/".source = ./.config/kitty;
-  # home.file.".config/lazygit/".source = ./.config/lazygit;
-  # home.file.".config/neofetch/".source = ./.config/neofetch;
-  # home.file.".config/nvim/".source = ./.config/nvim;
-  # home.file.".config/ohmyposh/".source = ./.config/ohmyposh;
-  # home.file.".config/waybar/".source = ./.config/waybar;
-  # home.file.".config/rofi/".source = ./.config/rofi;
-  # home.file.".config/sesh/".source = ./.config/sesh;
-  # home.file.".config/tmuxinator/".source = ./.config/tmuxinator;
+  home.file.".config/kitty/".source = ../.././.config/kitty;
+  home.file.".config/lazygit/".source = ../.././.config/lazygit;
+  home.file.".config/neofetch/".source = ../.././.config/neofetch;
+  home.file.".config/nvim/".source = ../.././.config/nvim;
+  home.file.".config/ohmyposh/".source = ../.././.config/ohmyposh;
+  home.file.".config/waybar/".source = ../.././.config/waybar;
+  home.file.".config/rofi/".source = ../.././.config/rofi;
+  home.file.".config/sesh/".source = ../.././.config/sesh;
+  home.file.".config/tmuxinator/".source = ../.././.config/tmuxinator;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

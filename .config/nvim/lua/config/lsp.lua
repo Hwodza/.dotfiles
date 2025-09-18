@@ -56,3 +56,8 @@ vim.lsp.config['bashls'] = {
 	filetypes = { 'bash', 'sh' },
 	root_markers = { '.git' },
 }
+vim.lsp.config['clangd'] = {
+	cmd = { "clangd" },
+	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+
+}

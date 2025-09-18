@@ -7,13 +7,13 @@ return {
 			require('mini.pairs').setup()
 		end
 	},
-	{
-		'echasnovski/mini.pick',
-		version = false,
-		config = function()
-			require('mini.pick').setup()
-		end
-	},
+	-- {
+	-- 	'echasnovski/mini.pick',
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require('mini.pick').setup()
+	-- 	end
+	-- },
 	{
 		'echasnovski/mini.nvim',
 		config = function()
