@@ -242,14 +242,14 @@ in
 
 
 						# Move focus with mainMod + arrow keys
-						bind = $mainMod CAPS, left, movefocus, l
-						bind = $mainMod CAPS, right, movefocus, r
-						bind = $mainMod CAPS, up, movefocus, u
-						bind = $mainMod CAPS, down, movefocus, d
-						bind = $mainMod CAPS, H, movefocus, l
-						bind = $mainMod CAPS, L, movefocus, r
-						bind = $mainMod CAPS, K, movefocus, u
-						bind = $mainMod CAPS, J, movefocus, d
+						bind = SUPER, left, movefocus, l
+						bind = SUPER, right, movefocus, r
+						bind = SUPER, up, movefocus, u
+						bind = SUPER, down, movefocus, d
+						bind = SUPER, H, movefocus, l
+						bind = SUPER, L, movefocus, r
+						bind = SUPER, K, movefocus, u
+						bind = SUPER, J, movefocus, d
 
 						# Switch workspaces with mainMod + [0-9]
 						bind = $mainMod, 1, workspace, 1
