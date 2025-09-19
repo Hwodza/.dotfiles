@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     vim 
+    hyprpanel
     wget
     kitty
     libclang
