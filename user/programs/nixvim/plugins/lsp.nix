@@ -33,6 +33,17 @@
           tflint.enable = true;
         };
       };
+      lazydev = {
+        enable = true; # autoEnableSources not enough
+        settings = {
+          library = [
+            {
+              path = "\${3rd}/luv/library";
+              words = [ "vim%.uv" ];
+            }
+          ];
+        };
+      };
       lsp-format = {
         enable = true;
       };
