@@ -1,7 +1,7 @@
 {
   imports = [
     ./desktop/default.nix
-    # ./programs
+    ./programs/default.nix
     # ./tosort.nix
     ./shell/default.nix
   ];
