@@ -2,6 +2,11 @@
   description = "Henry's dotfiles for nixos and home manager";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixvim = {
+        url = "github:nix-community/nixvim/nixos-25.05";
+        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +55,10 @@
       homeConfigurations = {
         tester = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [./profiles/tester/home.nix];
+          modules = [
+            ./profiles/tester/home.nix
+            inputs.nixvim.homeManagerModules.nixvim
+            ];
         };
         framework = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
