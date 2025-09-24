@@ -1,8 +1,10 @@
 {
   imports = [
-    ./oil.nix
-    ./lsp.nix
-    ./which-key.nix
     ./blink.nix
+    ./conform.nix
+    ./lsp.nix
+    ./mini.nix
+    ./oil.nix
+    ./which-key.nix
   ];
 }
