@@ -1,5 +1,10 @@
 {
   programs.nixvim = {
+    autoGroups = {
+      kickstart-highlight-yank = {
+        clear = true;
+      };
+    };
     autoCmd = [
       # Highlight when yanking (copying) text
       #  Try it with `yap` in normal mode
