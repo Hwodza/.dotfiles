@@ -14,6 +14,8 @@
       url = "github:404wolf/Hyprland-Workspace-2D";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    astal.url = "github:aylur/astal";
+    ags.url = "github:aylur/ags";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
@@ -37,6 +39,7 @@
           ];
         }
       );
+      pkgs-unstable = import nixpkgs-unstable {inherit system; };
     in {
       nixosConfigurations = {
         tester = nixpkgs.lib.nixosSystem {
@@ -44,6 +47,9 @@
           modules = [
             ./profiles/tester/configuration.nix
           ];
+          specialArgs = {
+           inherit pkgs-unstable;
+          };
         };
         framework = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -58,7 +64,11 @@
           modules = [
             ./profiles/tester/home.nix
             inputs.nixvim.homeManagerModules.nixvim
-            ];
+          ];
+          extraSpecialArgs = {
+           inherit pkgs-unstable;
+           inherit inputs;
+          };
         };
         framework = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
