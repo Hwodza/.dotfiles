@@ -7,6 +7,7 @@
     ./mini.nix
     ./obsidian.nix
     ./oil.nix
+    ./telescope.nix
     ./which-key.nix
   ];
 }
