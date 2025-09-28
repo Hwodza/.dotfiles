@@ -30,6 +30,14 @@
           desc = "Open [d]iagnostic quickfix list";
         };
       }
+      {
+        mode = "n";
+        key = "<leader>ca";
+        action = ":lua vim.lsp.buf.code_action()<CR>";
+        options = {
+          desc = "[c]ode [a]ction";
+        };
+      }
 		];
 	};
 }
