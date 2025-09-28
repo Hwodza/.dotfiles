@@ -45,8 +45,11 @@
         };
       };
       lsp-format = {
-        enable = true;
-      };
+        enable = false;
+        settings = {
+          exclude = [ "clangd" ];
+        };
+     };
     };
   };
 }
