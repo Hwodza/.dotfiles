@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.nixvim = {
     # Dependencies
     #
@@ -7,6 +6,9 @@
     extraPackages = with pkgs; [
       # Used to format Lua code
       astyle
+      alejandra
+      beautysh
+      gofumpt
       stylua
     ];
 
@@ -33,9 +35,12 @@
         #   end
         # '';
         formatters_by_ft = {
-          lua = [ "stylua" ];
-          c = [ "astyle" ];
-          cpp = [ "astyle" ];
+          lua = ["stylua"];
+          c = ["clang-format"];
+          cpp = ["clang-format"];
+          nix = ["alejandra"];
+          bash = ["beautysh"];
+          go = ["gofumpt"];
           # Conform can also run multiple formatters sequentially
           # python = [ "isort "black" ];
           #
