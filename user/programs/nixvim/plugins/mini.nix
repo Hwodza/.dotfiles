@@ -28,6 +28,8 @@
         };
         statusline = {};
         pairs = {};
+        icons = {};
+        mockDevIcons = {};
       };
     };
   };
