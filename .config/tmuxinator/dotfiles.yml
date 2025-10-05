@@ -7,6 +7,7 @@ windows:
     - cmd:
         - cd ~/.dotfiles
         - clear
+        - tmux send-keys -t cmd.1 'home-manager rebuild switch --flake .#'
 - git:
     panes:
     - git:
@@ -18,15 +19,15 @@ windows:
     panes:
     - editor:
         - cd /home/henry/.dotfiles
-        - nvim configuration.nix
+        - nvim flake.nix
     - cmd:
         - cd /home/henry/.dotfiles
         - clear
-        - tmux send-keys -t nix.1 'sudo nixos-rebuild switch --flake . --impure'
+        - tmux send-keys -t nix.1 'sudo nixos-rebuild switch --flake .#'
 - Hyprland:
     layout: c0e3,210x55,0,0,6
     panes:
-    - nvim /home/henry/.dotfiles/.config/hypr/hyprland.conf 
+    - nvim /home/henry/.dotfiles/user/desktop/hyprland/hyprland.nix
 - waybar:
     layout: even-horizontal
     panes:
