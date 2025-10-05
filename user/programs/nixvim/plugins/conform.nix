@@ -39,7 +39,7 @@
           c = ["clang-format"];
           cpp = ["clang-format"];
           nix = ["alejandra"];
-          bash = ["beautysh"];
+          sh = ["beautysh"];
           go = ["gofumpt"];
           # Conform can also run multiple formatters sequentially
           # python = [ "isort "black" ];
