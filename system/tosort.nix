@@ -51,6 +51,7 @@
     hyprpicker
     zathura
     poppler
+    obs-studio
     lua-language-server
     jellyfin
     jellyfin-web
