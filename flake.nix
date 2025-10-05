@@ -11,7 +11,7 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hyprland-workspace2d = {
-      url = "github:404wolf/Hyprland-Workspace-2D";
+      url = "github:Hwodza/Hyprland-Workspace-2D";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     astal.url = "github:aylur/astal";
