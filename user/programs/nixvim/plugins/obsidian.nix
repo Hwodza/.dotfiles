@@ -14,6 +14,7 @@
             path = "~/Documents/The Vault/";
           }
         ];
+        templates.subdir = "~/Documents/The Vault/5-Templates/";
       };
     };
   };
