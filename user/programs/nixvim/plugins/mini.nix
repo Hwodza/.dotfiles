@@ -29,7 +29,6 @@
         statusline = {};
         pairs = {};
         icons = {};
-        mockDevIcons = {};
       };
     };
   };
