@@ -1,4 +1,4 @@
-{pkgs, lib, system, config, ...}:
+{pkgs, lib, config, ...}:
 let
 		workspace2d = "${lib.getBin pkgs.hyprland-workspace2d}/bin/workspace2d";
 in
