@@ -56,6 +56,9 @@
           modules = [
             ./profiles/framework/configuration.nix
           ];
+          specialArgs = {
+           inherit pkgs-unstable;
+          };
         };
       };
       homeConfigurations = {
@@ -72,7 +75,14 @@
         };
         framework = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [./profiles/framework/home.nix];
+          modules = [
+            ./profiles/framework/home.nix
+            inputs.nixvim.homeManagerModules.nixvim
+            ];
+          extraSpecialArgs = {
+           inherit pkgs-unstable;
+           inherit inputs;
+          };
         };
       };
     };
