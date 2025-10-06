@@ -144,11 +144,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759694041,
-        "narHash": "sha256-9hcbBA7KBcFGINr2vSb21APw4I+BtN5yc8wHejcIu74=",
+        "lastModified": 1759775176,
+        "narHash": "sha256-HXKtr//fiX3hT/Tr1UvO46+BRnE4xASUEiEqtiELJZ8=",
         "owner": "Hwodza",
         "repo": "Hyprland-Workspace-2D",
-        "rev": "914dcdcf0e65b6bc6ecc4f4f2765355bf7b08a14",
+        "rev": "8e3fb8bf1cb78017ae1c9efec2b2410a64d77837",
         "type": "github"
       },
       "original": {
