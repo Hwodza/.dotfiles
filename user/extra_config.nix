@@ -11,5 +11,6 @@
     ".config/rofi/".source = ../.config/rofi;
     ".config/sesh/".source = ../.config/sesh;
     ".config/tmuxinator/".source = ../.config/tmuxinator;
+    ".config/scripts/".source = ../scripts;
   };
 }
