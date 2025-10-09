@@ -311,6 +311,12 @@ in
 						bind = $mainMod, S, togglespecialworkspace, magic
 						bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
+            # Special workspaces
+            bind = $mainMod, D, exec, ~/.config/scripts/specialWorkspaces.sh discord Discord
+            bind = $mainMod, S, exec, ~/.config/scripts/specialWorkspaces.sh spotify spotify
+            bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi $fileManager
+
+
 						# Scroll through existing workspaces with mainMod + scroll
 						bind = $mainMod, mouse_down, workspace, e+1
 						bind = $mainMod, mouse_up, workspace, e-1
@@ -356,12 +362,12 @@ in
 						# windowrulev2 = workspace 2, class:firefox
 
 						# Make Discord open to workspace 3
-						windowrulev2 = workspace 3, class:discord
+						# windowrulev2 = workspace 3, class:discord
 						# Make Spotify open to workspace 4
-						windowrulev2 = workspace 4, class:spotify
+						# windowrulev2 = workspace 4, class:spotify
 
 						# Make Obsidian open to workspace 6
-						windowrulev2 = workspace 6, class:obsidian
+						# windowrulev2 = workspace 6, class:obsidian
 
 				'';
 		};
