@@ -14,12 +14,9 @@ if [[ "$current_ws" == "special:$workspace_name" ]]; then
     exit 0
 fi
 
-# Check if the app is already running
+# Start app if not already up
 if ! pgrep -x "$app_command" >/dev/null; then
-    # Launch the app on the special workspace
-    hyprctl dispatch exec "[workspace special:$workspace_name silent] $app_command"
-else
-    # Just toggle to it
-    hyprctl dispatch togglespecialworkspace "$workspace_name"
+    $app_command &
 fi
 
+hyprctl dispatch togglespecialworkspace "$workspace_name"

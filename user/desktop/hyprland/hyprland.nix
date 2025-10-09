@@ -232,7 +232,7 @@ in
 						bind = $mainMod, Q, exec, $terminal
 						bind = $mainMod, X, killactive,
 						bind = $mainMod, M, exit,
-						bind = $mainMod, E, exec, $fileManager
+						# bind = $mainMod, E, exec, $fileManager
 						bind = $mainMod, V, togglefloating,
 						bind = $mainMod, SPACE, exec, $menu
 						# bind = $mainMod, P, pseudo, # dwindle
@@ -308,13 +308,13 @@ in
 						bind = $mainMod, P, exec, env XDG_PICTURES_DIR=${config.home.homeDirectory}/Pictures/Screenshots hyprshot -m region
 
 						# Example special workspace (scratchpad)
-						bind = $mainMod, S, togglespecialworkspace, magic
-						bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+						# bind = $mainMod, S, togglespecialworkspace, magic
+						# bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
             # Special workspaces
             bind = $mainMod, D, exec, ~/.config/scripts/specialWorkspaces.sh discord Discord
             bind = $mainMod, S, exec, ~/.config/scripts/specialWorkspaces.sh spotify spotify
-            bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi $fileManager
+            bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi "kitty --hold -e yazi"
 
 
 						# Scroll through existing workspaces with mainMod + scroll
@@ -368,7 +368,9 @@ in
 
 						# Make Obsidian open to workspace 6
 						# windowrulev2 = workspace 6, class:obsidian
-
+            windowrulev2 = workspace special:discord, class:^(discord)$
+            windowrulev2 = workspace special:spotify, class:^(spotify)$
+            windowrulev2 = workspace special:yazi, title:^(yazi)$
 				'';
 		};
 }
