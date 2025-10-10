@@ -1,8 +1,13 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["henry"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
     hyprpanel
+    virt-manager
     wget
     kitty
     libclang
