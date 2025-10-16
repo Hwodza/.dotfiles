@@ -1,17 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../system/default.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../system/default.nix
+  ];
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -33,11 +34,7 @@
   networking.networkmanager.enable = true;
   # networking.networkmanager.wifi.powersave = false;
 
-
-
   environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
-  
-
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -58,7 +55,7 @@
   };
 
   # Set Wayland as default I think (found in hyprland Master Tutorial)
-  environment.sessionVariables.NIXOS_OZONE_WL=1;
+  environment.sessionVariables.NIXOS_OZONE_WL = 1;
   environment.variables = {
     QT_QPA_PLATFORM = "wayland";
     GDK_BACKEND = "wayland";
@@ -102,24 +99,27 @@
   users.users.henry = {
     isNormalUser = true;
     description = "henry";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = ["networkmanager" "wheel" "video" "audio"];
     #packages = with pkgs; [
     #];
   };
 
-
-  # TTY login
-  # services.getty.autologinUser = "henry";
-  services.greetd = {
-  	enable = true;
-  	settings = {
-          default_session = {
-      	command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      	user = "greeter";
-      };
-  	};
-  };
-  # Install firefox.
+  # # TTY login
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       # Default to Hyprland
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #     plasma = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+  #
   programs.firefox.enable = true;
 
   # Allow unfree packages
@@ -134,7 +134,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = with pkgs; [
-  #   vim 
+  #   vim
   #   wget
   #   kitty
   #   swww
@@ -239,5 +239,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

@@ -4,6 +4,23 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
+  # TTY login
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        # Default to Hyprland
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "greeter";
+      };
+      plasma = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        user = "greeter";
+      };
+    };
+  };
+
+
   environment.systemPackages = with pkgs; [
     vim
     hyprpanel

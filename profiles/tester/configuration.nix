@@ -108,17 +108,18 @@
     #];
   };
 
-  # TTY login
-  # services.getty.autologinUser = "henry";
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
-      };
-    };
-  };
+  # # TTY login
+  # # services.getty.autologinUser = "henry";
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time ---sessions --user-men";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+  #
   # Install firefox.
   programs.firefox.enable = true;
 
