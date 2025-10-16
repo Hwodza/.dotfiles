@@ -314,7 +314,9 @@ in
             # Special workspaces
             bind = $mainMod, D, exec, ~/.config/scripts/specialWorkspaces.sh discord Discord
             bind = $mainMod, S, exec, ~/.config/scripts/specialWorkspaces.sh spotify spotify
-            bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi "kitty --hold -e yazi"
+            bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi "kitty --class="kitty-yazi" -e yazi"
+            # exec = kitty --class="kitty-yazi" -e yazi
+            # bind = $mainMod, E, togglespecialworkspace, yazi
 
 
 						# Scroll through existing workspaces with mainMod + scroll
@@ -368,9 +370,11 @@ in
 
 						# Make Obsidian open to workspace 6
 						# windowrulev2 = workspace 6, class:obsidian
+
+            # Special workspace rules
             windowrulev2 = workspace special:discord, class:^(discord)$
             windowrulev2 = workspace special:spotify, class:^(spotify)$
-            windowrulev2 = workspace special:yazi, title:^(yazi)$
+            windowrulev2 = workspace special:yazi, class:^(kitty-yazi)$
 				'';
 		};
 }

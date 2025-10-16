@@ -15,8 +15,9 @@ if [[ "$current_ws" == "special:$workspace_name" ]]; then
 fi
 
 # Start app if not already up
-if ! pgrep -x "$app_command" >/dev/null; then
-    $app_command &
+active=$(hyprctl workspaces -j | jq --arg NAME "special:$workspace_name" '[.[] | select(.name == $NAME)] | length')
+if $active -eq 0; then
+  $app_command &
 fi
 
 hyprctl dispatch togglespecialworkspace "$workspace_name"
