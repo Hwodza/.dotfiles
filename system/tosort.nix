@@ -28,6 +28,7 @@
     wget
     kitty
     libclang
+    expressvpn
     swww
     killall
     neovim
