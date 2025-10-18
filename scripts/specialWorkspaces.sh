@@ -16,7 +16,7 @@ fi
 
 # Start app if not already up
 active=$(hyprctl workspaces -j | jq --arg NAME "special:$workspace_name" '[.[] | select(.name == $NAME)] | length')
-if $active -eq 0; then
+if [ "$active" -eq 0 ]; then
   $app_command &
 fi
 

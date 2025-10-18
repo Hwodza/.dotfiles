@@ -232,7 +232,6 @@ in
 						bind = $mainMod, Q, exec, $terminal
 						bind = $mainMod, X, killactive,
 						bind = $mainMod, M, exit,
-						# bind = $mainMod, E, exec, $fileManager
 						bind = $mainMod, V, togglefloating,
 						bind = $mainMod, SPACE, exec, $menu
 						# bind = $mainMod, P, pseudo, # dwindle
@@ -315,8 +314,7 @@ in
             bind = $mainMod, D, exec, ~/.config/scripts/specialWorkspaces.sh discord Discord
             bind = $mainMod, S, exec, ~/.config/scripts/specialWorkspaces.sh spotify spotify
             bind = $mainMod, E, exec, ~/.config/scripts/specialWorkspaces.sh yazi "kitty --class="kitty-yazi" -e yazi"
-            # exec = kitty --class="kitty-yazi" -e yazi
-            # bind = $mainMod, E, togglespecialworkspace, yazi
+            bind = $mainMod, B, exec, ~/.config/scripts/specialWorkspaces.sh btop "kitty --class="kitty-btop" -e btop"
 
 
 						# Scroll through existing workspaces with mainMod + scroll
@@ -375,6 +373,7 @@ in
             windowrulev2 = workspace special:discord, class:^(discord)$
             windowrulev2 = workspace special:spotify, class:^(spotify)$
             windowrulev2 = workspace special:yazi, class:^(kitty-yazi)$
+            windowrulev2 = workspace special:btop, class:^(kitty-btop)$
 				'';
 		};
 }
