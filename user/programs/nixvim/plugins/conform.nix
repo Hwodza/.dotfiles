@@ -40,7 +40,9 @@
           cpp = ["clang-format"];
           nix = ["alejandra"];
           sh = ["beautysh"];
-          go = ["gofumpt"];
+          go = ["goimports" "gofmt"];
+          py = ["autopep8"];
+          rust = ["rustfmt"];
           # Conform can also run multiple formatters sequentially
           # python = [ "isort "black" ];
           #
