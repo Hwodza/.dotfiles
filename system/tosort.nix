@@ -3,6 +3,7 @@
   users.groups.libvirtd.members = ["henry"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
+  services.expressvpn.enable = true;
 
   # TTY login
   services.greetd = {
@@ -20,11 +21,15 @@
     };
   };
 
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  boot.kernelModules = ["usb_storage" "uas" "sd_mod" "scsi_mod"];
 
   environment.systemPackages = with pkgs; [
     vim
     hyprpanel
     virt-manager
+    nautilus
     wget
     kitty
     libclang
