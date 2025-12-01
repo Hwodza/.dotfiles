@@ -28,6 +28,7 @@
   environment.systemPackages = with pkgs; [
     vim
     hyprpanel
+    rustup
     virt-manager
     nautilus
     wget
