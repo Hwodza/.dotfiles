@@ -68,6 +68,15 @@
           inherit pkgs-unstable;
         };
       };
+      pc = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./profiles/pc/configuration.nix
+        ];
+        specialArgs = {
+          inherit pkgs-unstable;
+        };
+      };
     };
     homeConfigurations = {
       tester = home-manager.lib.homeManagerConfiguration {
