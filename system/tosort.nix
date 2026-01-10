@@ -39,7 +39,7 @@
     killall
     neovim
     waybar
-    rofi-wayland
+    rofi
     wl-clipboard
     hyprland
     hyprlock
