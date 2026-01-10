@@ -27,6 +27,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    hyprland-workspace2d
     hyprpanel
     rustup
     virt-manager
