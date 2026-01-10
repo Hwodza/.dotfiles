@@ -1,14 +1,14 @@
 {
   description = "Henry's dotfiles for nixos and home manager";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hyprland-workspace2d = {
       url = "github:Hwodza/Hyprland-Workspace-2D";
@@ -16,8 +16,6 @@
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    astal.url = "github:aylur/astal";
-    ags.url = "github:aylur/ags";
   };
   outputs = {
     self,
@@ -37,13 +35,15 @@
       };
     };
     # pkgs-unstable = import nixpkgs-unstable pkgs-options;
+    workspace2dOverlay = final: prev: {
+      hyprland-workspace2d =
+        inputs.hyprland-workspace2d.packages.${prev.system}.workspace2d;
+    };
     pkgs = import nixpkgs (
       pkgs-options
       // {
         overlays = [
-          (final: prev: {
-            hyprland-workspace2d = inputs.hyprland-workspace2d.packages.${system}.workspace2d;
-          })
+          workspace2dOverlay
         ];
       }
     );
@@ -71,7 +71,20 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          {nixpkgs.overlays = [workspace2dOverlay];}
           ./profiles/pc/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.henry = {
+              imports = [
+                inputs.nixvim.homeManagerModules.nixvim
+                ./profiles/pc/home.nix
+              ];
+            };
+          }
         ];
         specialArgs = {
           inherit pkgs-unstable;
@@ -96,7 +109,20 @@
           ./profiles/framework/home.nix
           inputs.nixvim.homeManagerModules.nixvim
           nix-index-database.homeModules.nix-index
-          { programs.nix-index-database.comma.enable = true; }
+          {programs.nix-index-database.comma.enable = true;}
+        ];
+        extraSpecialArgs = {
+          inherit pkgs-unstable;
+          inherit inputs;
+        };
+      };
+      pc = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./profiles/pc/home.nix
+          inputs.nixvim.homeManagerModules.nixvim
+          nix-index-database.homeModules.nix-index
+          {programs.nix-index-database.comma.enable = true;}
         ];
         extraSpecialArgs = {
           inherit pkgs-unstable;

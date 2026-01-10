@@ -1,35 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../system/default.nix
-    ];
-
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../system/default.nix
+  ];
+  # Enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
-  programs.ssh.startAgent = true;
-  
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
   };
-
   services.blueman.enable = true;
-  networking.hostName = "henry-nix-pc"; # Define your hostname.
+  networking.hostName = "henry-framework"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -38,6 +32,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # networking.networkmanager.wifi.powersave = false;
+
+  environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -57,15 +54,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      user = "greeter";
-      };
-  };
-
-  services.xserver.enable = true;
+  # Set Wayland as default I think (found in hyprland Master Tutorial)
   environment.sessionVariables.NIXOS_OZONE_WL = 1;
   environment.variables = {
     QT_QPA_PLATFORM = "wayland";
@@ -73,20 +62,14 @@
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
-  # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "us";
-  #   variant = "";
-  # };
+  # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
+  services.xserver.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.henry = {
-    isNormalUser = true;
-    description = "Henry";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
 
+  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -104,42 +87,132 @@
     #media-session.enable = true;
   };
 
+  # Jellyfin settings
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.henry = {
+    isNormalUser = true;
+    description = "henry";
+    extraGroups = ["networkmanager" "wheel" "video" "audio"];
+    #packages = with pkgs; [
+    #];
+  };
+
+  # # TTY login
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       # Default to Hyprland
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #     plasma = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+  #
+  programs.firefox.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.firefox.enable = true;
-
+  # Hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = with pkgs; [
-  #    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #    wget
-  #    git
-  #    neovim
-  #    kitty
-  #    waybar
-  #    yazi
-  #    curl
-  #    lua
-  #    lua-language-server
-  #    go
-  #    gopls
-  #    fzf
-  #    zoxide
-  #    hyprland
-  #    firefox
-  #    egl-wayland
-  #    rofi
-  #    lazygit
-  #    tmux
-  #    nil
+  #   vim
+  #   wget
+  #   kitty
+  #   swww
+  #   killall
+  #   neovim
+  #   waybar
+  #   rofi-wayland
+  #   wl-clipboard
+  #   hyprland
+  #   hyprlock
+  #   hypridle
+  #   firefox
+  #   git
+  #   unzip
+  #   ripgrep
+  #   wl-clipboard
+  #   gcc
+  #   gnumake
+  #   kdePackages.dolphin
+  #   yazi
+  #   gpt-cli
+  #   brightnessctl
+  #   python314
+  #   python313
+  #   tmux
+  #   tmuxinator
+  #   neofetch
+  #   obsidian
+  #   nixd
+  #   blueman
+  #   bluez
+  #   fastfetch
+  #   curl
+  #   nerd-fonts.symbols-only
+  #   nerd-fonts.jetbrains-mono
+  #   nerd-fonts.meslo-lg
+  #   nerd-fonts.symbols-only
+  #   font-awesome
+  #   wlogout
+  #   stow
+  #   lua
+  #   smplayer
+  #   lazygit
+  #   anki
+  #   hyprpicker
+  #   zathura
+  #   poppler
+  #   lua-language-server
+  #   jellyfin
+  #   jellyfin-web
+  #   zoom-us
+  #   btop
+  #   go
+  #   gopls
+  #   google-chrome
+  #   pavucontrol
+  #   powertop
+  #   qutebrowser
+  #   unzip
+  #   element-desktop
+  #   jq
+  #   vscode-langservers-extracted
+  #   bash-language-server
+  #   luajitPackages.luarocks-nix
+  #   jellyfin-ffmpeg
+  #   oh-my-posh
+  #   networkmanagerapplet
+  #   hyprpaper
+  #   discord
+  #   spotify
+  #   sesh
+  #   zoxide
+  #   fzf
+  #   alsa-utils
   # ];
+
+  environment.variables.EDITOR = "neovim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -166,6 +239,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
-
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
