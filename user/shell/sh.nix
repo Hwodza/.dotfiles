@@ -15,8 +15,8 @@ programs.bash = {
       # Start ssh-agent if not already running and add github id
       if [ -z "$SSH_AUTH_SOCK" ]; then
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_github
       fi
+      ssh-add ~/.ssh/id_github
       
       clear
 
