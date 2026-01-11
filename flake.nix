@@ -2,11 +2,6 @@
   description = "Henry's dotfiles for nixos and home manager";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
-      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -80,8 +75,10 @@
 
             home-manager.users.henry = {
               imports = [
-                inputs.nixvim.homeManagerModules.nixvim
                 ./profiles/pc/home.nix
+                
+          nix-index-database.homeModules.nix-index
+          {programs.nix-index-database.comma.enable = true;}
               ];
             };
           }
@@ -96,7 +93,8 @@
         inherit pkgs;
         modules = [
           ./profiles/tester/home.nix
-          inputs.nixvim.homeManagerModules.nixvim
+          nix-index-database.homeModules.nix-index
+          {programs.nix-index-database.comma.enable = true;}
         ];
         extraSpecialArgs = {
           inherit pkgs-unstable;
@@ -107,7 +105,6 @@
         inherit pkgs;
         modules = [
           ./profiles/framework/home.nix
-          inputs.nixvim.homeManagerModules.nixvim
           nix-index-database.homeModules.nix-index
           {programs.nix-index-database.comma.enable = true;}
         ];
@@ -120,7 +117,6 @@
         inherit pkgs;
         modules = [
           ./profiles/pc/home.nix
-          inputs.nixvim.homeManagerModules.nixvim
           nix-index-database.homeModules.nix-index
           {programs.nix-index-database.comma.enable = true;}
         ];
