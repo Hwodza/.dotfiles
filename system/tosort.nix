@@ -21,6 +21,10 @@
     };
   };
 
+  services.xserver.xkb = {
+    options = "caps:none";
+    layout = "us";
+  };
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   boot.kernelModules = ["usb_storage" "uas" "sd_mod" "scsi_mod"];
@@ -29,6 +33,7 @@
     vim
     hyprland-workspace2d
     hyprpanel
+    nwg-displays
     rustup
     virt-manager
     nautilus
