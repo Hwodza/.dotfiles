@@ -27,13 +27,13 @@ vim.lsp.config['gopls'] = {
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 }
 vim.lsp.config('rust_analyzer', {
-  settings = {
-    ['rust-analyzer'] = {
-    }
-  }
+	settings = {
+		['rust-analyzer'] = {
+		}
+	}
 })
 vim.lsp.config['nil_ls'] = {
-	cmd = { 'nil_ls' },
+	cmd = { 'nil' },
 	filetypes = { 'nix' },
 	root_markers = { 'flake.nix', 'git' },
 }
