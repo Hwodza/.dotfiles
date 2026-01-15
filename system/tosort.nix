@@ -60,6 +60,7 @@
     firefox
     git
     unzip
+    nil
     ripgrep
     wl-clipboard
     gcc
