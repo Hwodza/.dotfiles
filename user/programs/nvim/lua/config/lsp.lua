@@ -45,6 +45,11 @@ vim.lsp.config['jsonls'] = {
 	},
 	root_markers = { '.git' },
 }
+vim.lsp.config['astro'] = {
+	cmd = { 'astro-ls', '--stdio' },
+	filetypes = { 'astro' },
+	root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+}
 vim.lsp.config['bashls'] = {
 	cmd = { 'bash-language-server', 'start' },
 	settings = {
