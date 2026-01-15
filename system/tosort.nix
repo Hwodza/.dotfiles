@@ -68,6 +68,7 @@
     kdePackages.dolphin
     yazi
     gpt-cli
+    tor-browser
     brightnessctl
     python314
     python313
