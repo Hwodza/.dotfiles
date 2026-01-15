@@ -53,6 +53,7 @@
     waybar
     rofi
     wl-clipboard
+    vscode
     hyprland
     hyprlock
     hypridle
