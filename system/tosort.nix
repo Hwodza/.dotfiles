@@ -53,6 +53,7 @@
     waybar
     rofi
     wl-clipboard
+    calibre
     astro-language-server
     vscode
     hyprland
