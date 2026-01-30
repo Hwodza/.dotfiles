@@ -9,7 +9,13 @@
     services.wallpaper-refresh = {
       Unit = {
         Description = "Refresh wallpaper";
-        After = [ "graphical-session.target" ];
+        After = [
+          "graphical-session.target"
+          "hyprland-session.target"
+          "hyprpaper.service"
+        ];
+        Wants = [ "hyprpaper.service" ];
+        PartOf = [ "hyprland-session.target" ];
       };
       Service = {
         Type = "oneshot";
@@ -20,6 +26,7 @@
           	    hyprctl hyprpaper wallpaper ,"${config.my.variables.wallpaper-path}"
         '';
       };
+      Install.WantedBy = [ "hyprland-session.target" ];
     };
     timers.wallpaper-refresh = {
       Unit = {
@@ -27,8 +34,10 @@
         After = [ "graphical-session.target" ];
       };
       Timer = {
-        OnBootSec = "1min";
-        OnCalendar = "Sun *-*-* 00:00:00";
+        # OnBootSec = "1min";
+        # OnCalendar = "Sun *-*-* 00:00:00";
+        OnCalendar = "daily";
+        Persistent = true;
       };
       Install.WantedBy = [ "timers.target" ];
     };
