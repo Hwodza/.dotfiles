@@ -5,20 +5,22 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../system/default.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../system/default.nix
+  ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   programs.ssh.startAgent = true;
-  
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -57,13 +59,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      user = "greeter";
-      };
-  };
+  # services.greetd = {
+  #   enable = true;
+  #   settings.default_session = {
+  #     command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #     user = "greeter";
+  #     };
+  # };
 
   services.xserver.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = 1;
@@ -83,8 +85,11 @@
   users.users.henry = {
     isNormalUser = true;
     description = "Henry";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   services.pulseaudio.enable = false;
@@ -113,7 +118,6 @@
     enable = true;
     xwayland.enable = true;
   };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
