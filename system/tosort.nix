@@ -12,11 +12,11 @@
     settings = {
       default_session = {
         # Default to Hyprland
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --user-menu --cmd Hyprland";
         user = "greeter";
       };
       plasma = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
         user = "greeter";
       };
     };
