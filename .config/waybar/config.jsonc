@@ -24,6 +24,7 @@
         "battery",
         "battery#bat2",
         "tray",
+        "idle_inhibitor",
         "custom/power"
     ],
     "custom/os_button": {
@@ -226,6 +227,13 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     },
     "custom/power": {
         "format": "⏻ ",
