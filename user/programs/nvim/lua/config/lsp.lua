@@ -72,3 +72,22 @@ vim.lsp.config['clangd'] = {
 	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 
 }
+vim.lsp.config['cssls'] = {
+	cmd = { "vscode-css-language-server", "--stdio" },
+	filetypes = { "css", "scss", "less" },
+	root_markers = { '.git', '.css' },
+	-- root_dir = function(fname)
+	-- 	return root_pattern(fname) or vim.loop.os_homedir()
+	-- end,
+	settings = {
+		css = {
+			validate = true
+		},
+		less = {
+			validate = true
+		},
+		scss = {
+			validate = true
+		}
+	}
+}

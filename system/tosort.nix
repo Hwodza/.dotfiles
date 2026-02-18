@@ -113,6 +113,7 @@
     element-desktop
     jq
     vscode-langservers-extracted
+    prettierd
     bash-language-server
     luajitPackages.luarocks-nix
     jellyfin-ffmpeg
