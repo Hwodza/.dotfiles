@@ -20,6 +20,19 @@ vim.lsp.config['luals'] = {
 		}
 	}
 }
+vim.lsp.config["tinymist"] = {
+	cmd = { "tinymist" },
+
+	filetypes = { "typst" },
+	root_markers = { '.git' },
+
+	settings = {
+
+		-- ...
+
+	}
+
+}
 vim.lsp.config['gopls'] = {
 	-- Command and arguments to start the server.
 	cmd = { 'gopls' },
@@ -29,7 +42,7 @@ vim.lsp.config['gopls'] = {
 vim.lsp.config['nixd'] = {
 	cmd = { 'nixd' },
 	filetypes = { 'nix' },
-	root_markers = { 'flake.nix', 'git' },
+	root_markers = { 'flake.nix', '.git' },
 }
 vim.lsp.config['jsonls'] = {
 	cmd = { 'vscode-json-language-server', '--stdio' },
