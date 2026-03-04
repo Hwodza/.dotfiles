@@ -53,6 +53,9 @@
     waybar
     rofi
     wl-clipboard
+    dbeaver-bin
+    typst
+    tinymist
     calibre
     astro-language-server
     vscode
