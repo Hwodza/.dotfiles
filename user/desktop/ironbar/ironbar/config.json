@@ -1,7 +1,37 @@
 {
   "position": "top",
-  "height": 42,
-  "start": [],
-  "center": [],
-  "end": []
+  "height": 30,
+  "start": [
+    {
+      "type": "workspaces"
+    }
+  ],
+  "center": [
+    {
+      "type": "focused",
+      "icon_size": 16
+    }
+  ],
+  "end": [
+    {
+      "type": "battery",
+      "show_if": "ls /sys/class/power_supply/ | grep --quiet '^BAT'"
+    },
+    {
+      "type": "sys_info",
+      "format": [
+        "{cpu_percent}% ",
+        "{memory_percent}% "
+      ],
+      "interval": {
+        "cpu": 1
+      }
+    },
+    {
+      "type": "tray"
+    },
+    {
+      "type": "clock"
+    }
+  ]
 }
