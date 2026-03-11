@@ -59,7 +59,22 @@
         framework = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            { nixpkgs.overlays = [ workspace2dOverlay ]; }
             ./profiles/framework/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.henry = {
+                imports = [
+                  ./profiles/framework/home.nix
+
+                  nix-index-database.homeModules.nix-index
+                  { programs.nix-index-database.comma.enable = true; }
+                ];
+              };
+            }
           ];
           specialArgs = {
             inherit pkgs-unstable;
