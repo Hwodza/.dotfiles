@@ -1,265 +1,97 @@
-:root {
-  --color-dark-primary: #1c1c1caa;
-  --color-dark-secondary: #2d2d2daa;
-
-  --color-border-dark: #776de844;
-  --color-border-light: #776de822;
-
-  --color-white: #fff;
-  --color-active: #776de8cc;
-  --color-urgent: #8f0a0a;
-
-  --gradient: linear-gradient(90deg, #6699cc19 35%, #cc99cc19 100%);
-
-  --margin-lg: 1em;
-  --margin-sm: 0.5em;
-  --margin-xs: 0.25em;
-
-  --size-xxl: 2.6em;
-  --size-xl: 2.2em;
-  --size-lg: 1.5em;
-  --size-md: 16px;
-}
+@define-color dark_primary #1c1c1c;
+@define-color dark_secondary #2d2d2d;
+@define-color white #ffffff;
+@define-color active #6699cc;
+@define-color urgent #8f0a0a;
 
 * {
-  font-family: sans-serif;
-  font-size: var(--size-md);
   border-radius: 0;
   border: none;
   box-shadow: none;
+  background-image: none;
+  font-family: monospace;
 }
 
+scale > trough {
+  background-color: @dark_secondary;
+}
+
+scale > trough > highlight {
+  background-color: @active;
+  border-style: solid;
+  border-color: @active;
+  border-width: 0.2em;
+}
+
+scale > trough > slider {
+  background-color: @white;
+}
+
+switch > slider {
+  background-color: @white;
+}
+
+switch:checked {
+  background-color: @active;
+}
+
+switch {
+  background-color: @dark_secondary;
+}
+
+#bar,
 popover,
-popover contents {
-  border-radius: 12px;
-  padding: 0;
-}
-
-window,
-popover {
-  background-color: var(--color-dark-secondary);
+popover contents,
+calendar {
+  background-color: @dark_primary;
 }
 
 box,
 button,
-label,
-calendar {
-  background-color: #0000;
-}
-
-#bar,
-popover contents {
-  background: var(--gradient);
-}
-
-scale.horizontal highlight {
-  background: linear-gradient(90deg, #6699cccc 35%, #cc99ccb2 100%);
-}
-
-scale.vertical highlight {
-  background: linear-gradient(0, #6699cccc 35%, #cc99ccb2 100%);
-}
-
-slider {
-  border-radius: 100%;
+label {
+  background-color: transparent;
+  color: @white;
 }
 
 button {
-  padding-left: var(--margin-sm);
-  padding-right: var(--margin-sm);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 button:hover,
 button:active {
-  background-color: var(--color-dark-secondary);
-}
-
-dropdown popover row:hover,
-dropdown popover row:focus,
-dropdown popover row:selected {
-  background-color: var(--color-dark-secondary);
-}
-
-radio {
-  /* make purple */
-  -gtk-icon-filter: hue-rotate(45deg) contrast(0.6);
-  margin-right: var(--margin-sm);
+  background-color: @dark_secondary;
 }
 
 #end > * + * {
-  margin-left: var(--margin-sm);
+  margin-left: 1em;
 }
 
-.popup {
-  padding: var(--margin-lg);
+.sysinfo > * + * {
+  margin-left: 0.5em;
 }
-
-/* --- clock --- */
 
 .clock {
   font-weight: bold;
 }
 
 .popup-clock .calendar-clock {
-  font-size: var(--size-xl);
-  margin-bottom: var(--margin-xs);
+  font-size: 2em;
 }
 
 .popup-clock .calendar .today {
-  background-color: #776de899;
-  border-radius: 0.25em;
+  background-color: @active;
 }
-
-.popup-clipboard .item {
-  padding: var(--margin-xs);
-}
-
-.popup-clipboard .item + .item {
-  border-top: 1px solid var(--color-border-light);
-}
-
-/* --- launcher --- */
-
-.launcher .item + .item {
-  margin-left: 4px;
-}
-
-.launcher .item.open {
-  box-shadow: inset 0 -1px var(--color-white);
-}
-
-.launcher .item.focused {
-  box-shadow: inset 0 -1px var(--color-active);
-}
-
-.launcher .item.urgent {
-  box-shadow: inset 0 -1px var(--color-urgent);
-}
-
-.popup-launcher {
-  padding: var(--margin-sm);
-}
-
-.popup-launcher .popup-item {
-  padding: var(--margin-lg);
-  border-radius: 10px;
-}
-
-.popup-launcher .popup-item label {
-  margin-top: var(--margin-sm);
-}
-
-/* --- menu --- */
-
-.menu label {
-  padding: 0 var(--margin-sm);
-}
-
-.popup-menu .sub-menu {
-  border-left: 1px solid var(--color-border-light);
-  padding-left: var(--margin-sm);
-}
-
-.popup-menu .category,
-.popup-menu .application {
-  padding: var(--margin-xs);
-}
-
-.popup-menu .category.open {
-  background-color: var(--color-dark-secondary);
-}
-
-/* --- music --- */
-
-.popup-music .album-art {
-  margin-right: var(--margin-lg);
-  border-radius: 5px;
-}
-
-.popup-music .icon-box {
-  margin-right: var(--margin-sm);
-}
-
-.popup-music .title .icon,
-.popup-music .title .label {
-  font-size: var(--size-lg);
-}
-
-.popup-music .artist .label,
-.popup-music .album .label {
-  margin-left: 6px;
-}
-
-.popup-music .volume .icon {
-  /* fix icon offset */
-  margin-right: 3px;
-}
-
-/* --- notifications --- */
-
-.notifications .count {
-  font-size: 0.8em;
-  padding: 0.18em;
-}
-
-/* --- sysinfo --- */
-
-.sysinfo > .item + .item {
-  margin-left: var(--margin-sm);
-}
-
-/* --- tray --- */
-
-.tray popover contents {
-  padding: var(--margin-lg);
-}
-
-/* --- volume --- */
-
-.volume .source {
-  margin-left: var(--margin-sm);
-}
-
-.popup-volume .device-box {
-  padding-right: var(--margin-lg);
-  margin-right: var(--margin-lg);
-  border-right: 1px solid var(--color-border-light);
-}
-
-/* --- workspaces --- */
 
 .workspaces .item.visible {
-  box-shadow: inset 0 -1px var(--color-white);
+  box-shadow: inset 0 -1px @white;
 }
 
 .workspaces .item.focused {
-  box-shadow: inset 0 -1px var(--color-active);
-  background-color: var(--color-dark-secondary);
+  box-shadow: inset 0 -1px @active;
+  background-color: @dark_secondary;
 }
 
 .workspaces .item.urgent {
-  background-color: var(--color-urgent);
-}
-
-/* --- custom: power menu ---  */
-
-.popup-power-menu #header {
-  font-size: var(--size-lg);
-  margin-bottom: 0.6em;
-}
-
-.popup-power-menu .power-btn {
-  border: 1px solid var(--color-border-dark);
-  border-radius: 10px;
-  padding: 0 1.2em;
-}
-
-.popup-power-menu .power-btn label {
-  font-size: var(--size-xxl);
-}
-
-/* need to use funky selector
-due to widgets being wrapped in GtkRevealers */
-.popup-power-menu #buttons > * + * {
-  margin-left: 1.3em;
+  background-color: @urgent;
 }

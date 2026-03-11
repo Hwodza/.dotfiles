@@ -1,9 +1,10 @@
 {
   "position": "top",
-  "height": 30,
+  "height": 24,
   "start": [
     {
-      "type": "workspaces"
+      "type": "workspaces",
+      "all": false
     }
   ],
   "center": [
