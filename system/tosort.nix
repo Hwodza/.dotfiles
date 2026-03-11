@@ -49,6 +49,7 @@
     nwg-displays
     rustup
     virt-manager
+    ironbar
     nautilus
     wget
     kitty
