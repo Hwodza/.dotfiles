@@ -35,6 +35,13 @@
     "scsi_mod"
   ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.symbols-only
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    font-awesome
+  ];
+
   environment.systemPackages = with pkgs; [
     vim
     hyprland-workspace2d
@@ -89,7 +96,6 @@
     nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
-    nerd-fonts.symbols-only
     font-awesome
     wlogout
     stow
