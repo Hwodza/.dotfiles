@@ -1,11 +1,9 @@
 {
-  pkgs,
-  lib,
   config,
   ...
 }:
 let
-  ironbarPath = "${config.home.homeDirectory}/.dotfiles/user/desktop/ironbar/ironbar";
+  ironbarPath = "${config.home.homeDirectory}/.dotfiles/user/desktop/bars/ironbar";
 in
 {
   # wayland.windowManager.hyprland.enable = true;

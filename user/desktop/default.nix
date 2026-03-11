@@ -3,6 +3,6 @@
     # ./apps
     ./hyprland/default.nix
     # ./waybar
-    ./ironbar
+    ./bars
   ];
 }
