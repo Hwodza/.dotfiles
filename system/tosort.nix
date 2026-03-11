@@ -100,6 +100,7 @@
     font-awesome
     wlogout
     stow
+    claude-code
     lua
     smplayer
     lazygit
