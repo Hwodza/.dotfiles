@@ -22,7 +22,7 @@
         Type = "oneshot";
         ExecStart = pkgs.writeShellScript "wallpaper-refresh" ''
           mkdir -p "${config.my.variables.wallpaper-dir-path}"
-          ${pkgs.curl}/bin/curl -o "${config.my.variables.wallpaper-path}" -L "https://picsum.photos/3840/2160" 
+          ${pkgs.curl}/bin/curl -o "${config.my.variables.wallpaper-path}" -L "https://api.nasa.gov/planetary/apod?api_key=HBfXo50oP9KB4EDEzCPAIhMVDhFerv8oeB8q99SD" 
         '';
       };
       Install.WantedBy = [
