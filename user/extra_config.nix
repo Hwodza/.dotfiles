@@ -1,6 +1,6 @@
 {
   home.file = {
-    ".tmux.conf".source = ../.tmux.conf;
+    # ".tmux.conf".source = ../.tmux.conf;
     # ".config/hypr/".source = ./.config/hypr;
     ".config/kitty/".source = ../.config/kitty;
     ".config/lazygit/".source = ../.config/lazygit;

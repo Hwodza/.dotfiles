@@ -7,6 +7,7 @@ in
   imports = [
     # ./nixvim
     ./udiskie.nix
+    ./tmux
   ];
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink nvimPath;
   xdg.configFile."../.tmux".source = config.lib.file.mkOutOfStoreSymlink tmuxPath;
