@@ -5,14 +5,21 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../system/default.nix
   ];
   # Enable flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings = {
+    secret-key-files = [ "/etc/nix/signing-key.sec" ];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -99,7 +106,12 @@
   users.users.henry = {
     isNormalUser = true;
     description = "henry";
-    extraGroups = ["networkmanager" "wheel" "video" "audio"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+    ];
     #packages = with pkgs; [
     #];
   };
