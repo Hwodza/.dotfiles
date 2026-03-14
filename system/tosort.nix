@@ -65,6 +65,7 @@
     typst
     tinymist
     calibre
+    imagemagick
     astro-language-server
     vscode
     hyprland
