@@ -26,12 +26,20 @@ vim.lsp.config['gopls'] = {
 	-- Filetypes to automatically attach to.
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 }
-vim.lsp.config('rust_analyzer', {
-	settings = {
-		['rust-analyzer'] = {
-		}
-	}
-})
+vim.lsp.config['rust_analyzer'] = {
+	cmd = { 'rust-analyzer' },
+	filetypes = { "rust" },
+	root_markers = { 'Cargo.toml', 'git', 'flake.nix' }
+}
+-- vim.lsp.config('rust_analyzer', {
+-- 	settings = {
+-- 		['rust-analyzer'] = {
+-- 			diagnostics = {
+-- 				enable = true,
+-- 			}
+-- 		}
+-- 	}
+-- })
 vim.lsp.config['nil_ls'] = {
 	cmd = { 'nil' },
 	filetypes = { 'nix' },
