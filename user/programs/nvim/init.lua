@@ -33,6 +33,7 @@ vim.keymap.set('n', '<leader>r', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
 require("config.lazy")
 require("config.lsp")
 
