@@ -56,6 +56,7 @@
     nvtopPackages.full
     rustup
     virt-manager
+    open-webui
     ironbar
     nautilus
     wget
