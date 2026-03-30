@@ -53,6 +53,7 @@
     hyprland-workspace2d
     hyprpanel
     nwg-displays
+    nvtopPackages.full
     rustup
     virt-manager
     ironbar
