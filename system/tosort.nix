@@ -44,7 +44,11 @@
 
   services.ollama = {
     enable = true;
-    loadModels = [ "llama3:8b" ];
+    loadModels = [
+      "llama3.1:8b"
+      "qwen2.5:7b"
+      "qwen3:8b"
+    ];
     package = pkgs.ollama-cuda;
   };
 
