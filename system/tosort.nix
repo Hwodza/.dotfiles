@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "henry" ];
@@ -54,6 +54,36 @@
 
   services.searx = {
     enable = true;
+    settingsFile = config.sops.templates."searx-settings.yml".path;
+    settings = {
+      engines = [
+        {
+          name = "google news";
+          engine = "google_news";
+          categories = "news";
+          language = "en";
+          enabled = true;
+        }
+        {
+          name = "bing news";
+          engine = "bing_news";
+          categories = "news";
+          enabled = true;
+        }
+        {
+          name = "duckduckgo";
+          engine = "duckduckgo";
+          categories = "general";
+          enabled = true;
+        }
+        {
+          name = "brave";
+          engine = "brave";
+          categories = "general";
+          enabled = true;
+        }
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [

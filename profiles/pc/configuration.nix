@@ -2,13 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../system/default.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   nix.settings.experimental-features = [
@@ -118,7 +124,33 @@
     enable = true;
     xwayland.enable = true;
   };
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
+    age.keyFile = "/home/henry/.config/sops/age/keys.txt";
+
+    secrets.searxng_secret_key = {
+      owner = "searx";
+    };
+
+    templates."searx-settings.yml" = {
+      owner = "searx";
+      content = ''
+        use_default_settings: true
+        server:
+          secret_key: "${config.sops.placeholder.searxng_secret_key}"
+          bind_address: "127.0.0.1"
+          port: 8888
+        search:
+          formats:
+            - html
+            - json
+      '';
+    };
+  };
+
+  services.searx.settings.server.secret_key = config.sops.secrets.searxng_secret_key.path;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = with pkgs; [
