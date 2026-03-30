@@ -48,6 +48,10 @@
     package = pkgs.ollama-cuda;
   };
 
+  services.open-webui = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     hyprland-workspace2d
@@ -56,7 +60,6 @@
     nvtopPackages.full
     rustup
     virt-manager
-    open-webui
     ironbar
     nautilus
     wget
