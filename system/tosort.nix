@@ -42,6 +42,12 @@
     font-awesome
   ];
 
+  services.ollama = {
+    enable = true;
+    loadModels = [ "llama3:8b" ];
+    package = pkgs.ollama-cuda;
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     hyprland-workspace2d
