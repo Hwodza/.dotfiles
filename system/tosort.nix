@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  config,
+  ...
+}:
 {
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "henry" ];
@@ -46,10 +51,10 @@
     enable = true;
     loadModels = [
       "llama3.1:8b"
-      "qwen2.5:7b"
-      "qwen3:8b"
+      "qwen3.5:9b"
+      "nomic-embed-text-v2-moe"
     ];
-    package = pkgs.ollama-cuda;
+    package = pkgs-unstable.ollama-cuda;
   };
 
   services.open-webui = {
@@ -98,6 +103,7 @@
     nvtopPackages.full
     rustup
     virt-manager
+    claude-code
     ironbar
     nautilus
     wget
