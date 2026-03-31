@@ -127,6 +127,7 @@
     hyprlock
     hypridle
     firefox
+    zotero
     git
     unzip
     nil
