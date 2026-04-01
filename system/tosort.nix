@@ -9,7 +9,10 @@
   users.groups.libvirtd.members = [ "henry" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  services.expressvpn.enable = true;
+  services.expressvpn = {
+    enable = true;
+    package = pkgs-unstable.expressvpn;
+  };
 
   # TTY login
   services.greetd = {
@@ -103,13 +106,13 @@
     nvtopPackages.full
     rustup
     virt-manager
+    pkgs-unstable.expressvpn
     claude-code
     ironbar
     nautilus
     wget
     kitty
     libclang
-    expressvpn
     swww
     killall
     neovim
