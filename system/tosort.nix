@@ -9,11 +9,20 @@
   users.groups.libvirtd.members = [ "henry" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  services.expressvpn = {
-    enable = true;
-    package = pkgs-unstable.expressvpn;
+  # services.expressvpn = {
+  #   enable = true;
+  #   package = pkgs-unstable.expressvpn;
+  # };
+  systemd.services.expressvpn = {
+    description = "ExpressVPN daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs-unstable.expressvpn}/bin/expressvpnd";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
   };
-
   # TTY login
   services.greetd = {
     enable = true;
