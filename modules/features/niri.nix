@@ -14,7 +14,13 @@
 				];
 				xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
-				input.keyboard.xkb.layout = "us,ua";
+				input = {
+					keyboard.xkb.layout = "us,ua";
+					touchpad = {
+						tap = null;
+						natural-scroll = null;
+					};
+				};
 
 				layout.gaps = 5;
 
