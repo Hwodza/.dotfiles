@@ -4,4 +4,9 @@
       self.nixosModules.testerConfiguration
     ];
   };
+  flake.nixosModules.hostTester = {pkgs, ...}: {
+  	imports = [
+		self.nixosModules.base
+	];
+  };
 }
