@@ -12,6 +12,9 @@
 	    [ # Include the results of the hardware scan.
 	      self.nixosModules.testerHardware
 	      self.nixosModules.niri
+		self.nixosModules.base
+		self.nixosModules.general
+		self.nixosModules.desktop
 	    ];
 
 	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -84,16 +87,16 @@
 	  # services.xserver.libinput.enable = true;
 
 	  # Define a user account. Don't forget to set a password with ‘passwd’.
-	  users.users.henry = {
-	    isNormalUser = true;
-	    description = "henry";
-	    extraGroups = [ "networkmanager" "wheel" ];
-	    packages = with pkgs; [
-		neovim
-		git
-	    #  thunderbird
-	    ];
-	  };
+	  # users.users.henry = {
+	  #   isNormalUser = true;
+	  #   description = "henry";
+	  #   extraGroups = [ "networkmanager" "wheel" ];
+	  #   packages = with pkgs; [
+	  #       neovim
+	  #       git
+	  #   #  thunderbird
+	  #   ];
+	  # };
 
 	  # Install firefox.
 	  programs.firefox.enable = true;
