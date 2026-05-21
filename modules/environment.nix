@@ -61,7 +61,7 @@
         self'.packages.neovimDynamic
         # self'.packages.qalc
         # self'.packages.lf
-        # self'.packages.git
+        self'.packages.git
         # self'.packages.jujutsu
         # self'.packages.jjui
         # self'.packages.nix-check-bin
