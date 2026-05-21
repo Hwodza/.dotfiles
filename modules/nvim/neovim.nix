@@ -114,4 +114,5 @@
         self.modules.neovim.allServers
       ];
     };
+};
 }
