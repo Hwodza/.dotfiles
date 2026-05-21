@@ -102,7 +102,7 @@ in {
       };
       dynamicInitLua = lib.mkOption {
         type = lib.types.either wlib.types.stringable lib.types.luaInline;
-        default = lib.generators.mkLuaInline "vim.uv.os_homedir() .. '/.dotfiles/modules/features/neovim'";
+        default = lib.generators.mkLuaInline "vim.uv.os_homedir() .. '/.dotfiles/modules/neovim'";
       };
     };
     config = {
