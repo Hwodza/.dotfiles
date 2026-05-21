@@ -53,7 +53,7 @@
         pkgs.btop
         pkgs.zoxide
         pkgs.ripgrep
-        pkgs.neofetch
+        pkgs.fastfetch
         pkgs.tree-sitter
         pkgs.lazygit
 
