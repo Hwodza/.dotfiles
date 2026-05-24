@@ -26,7 +26,7 @@
 
 				binds = {
 				  "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
-				  "Mod+Return".spawn = "kitty";
+				  "Mod+Return".spawn = lib.getExe self'.packages.terminal;
 				  "Mod+Q".close-window = null;
 				};
 			};
