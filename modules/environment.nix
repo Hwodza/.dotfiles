@@ -47,7 +47,7 @@
         pkgs.p7zip
         pkgs.wget
         pkgs.killall
-        pkgs.sshfs
+        pkgs.openssh
         pkgs.fzf
         pkgs.htop
         pkgs.btop
