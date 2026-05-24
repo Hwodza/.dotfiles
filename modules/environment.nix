@@ -30,7 +30,7 @@
     # My primary flake shell with all of it's packages
     packages.environment = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
-      package = pkgs.bash;
+      package = self'.packages.bash;
       runtimeInputs = [
         # nix
         pkgs.nil
