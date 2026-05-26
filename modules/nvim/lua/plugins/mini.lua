@@ -1,7 +1,38 @@
+-- lua/plugins/mini.lua
 return {
-	'mini.comment',
-	after = function()
-		require('mini.comment').setup(
+	{
+		'nvim-mini/mini.pairs',
+		version = false,
+		config = function()
+			require('mini.pairs').setup()
+		end
+	},
+	-- {
+	-- 	'echasnovski/mini.pick',
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require('mini.pick').setup()
+	-- 	end
+	-- },
+	{
+		'nvim-mini/mini.nvim',
+		config = function()
+			local statusline = require 'mini.statusline'
+			statusline.setup { use_icons = true }
+		end
+	},
+	{
+		'nvim-mini/mini.surround',
+		version = false,
+		config = function()
+			require('mini.surround').setup()
+		end
+	},
+	{
+		'nvim-mini/mini.nvim',
+		version = false,
+		config = function()
+			require('mini.comment').setup(
 				{
 					mappings = {
 						comment = "<C-_>",
@@ -11,5 +42,6 @@ return {
 					},
 				}
 			)
-	end
+		end
+	}
 }
