@@ -1,0 +1,12 @@
+local keymap = vim.keymap.set
+keymap('n', 'K', vim.lsp.buf.hover, { desc = 'Show hover' })
+keymap('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
+keymap('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to implementation' })
+keymap('n', 'gr', vim.lsp.buf.references, bufopts, { desc = 'Show references' })
+keymap('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostic quickfix list' })
+keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
+keymap('n', '<leader>r', ':update<CR> :source<CR>')
+keymap('n', '<leader>w', ':write<CR>')
+keymap('n', '<leader>q', ':quit<CR>')
+keymap('n', 'K', vim.lsp.buf.hover, {desc = "Hover Documentation"})

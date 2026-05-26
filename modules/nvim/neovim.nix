@@ -124,7 +124,7 @@ in {
 
       specs.plugins = {
         data = [
-          pkgs.vimPlugins.LazyVim
+          pkgs.vimPlugins.lz-n
           pkgs.vimPlugins.plenary-nvim
           pkgs.vimPlugins.nvim-lspconfig
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
