@@ -136,6 +136,8 @@ in {
           pkgs.vimPlugins.blink-cmp
 
           # misc
+          pkgs.vimPlugins.which-key-nvim
+          pkgs.vimPlugins.mini-comment
           pkgs.vimPlugins.snacks-nvim
           pkgs.vimPlugins.oil-nvim
           pkgs.vimPlugins.lualine-nvim
@@ -150,7 +152,6 @@ in {
           pkgs.vimPlugins.gitsigns-nvim
           pkgs.vimPlugins.nvim-autopairs
           pkgs.vimPlugins.fastaction-nvim
-          pkgs.vimPlugins.mini-files
           pkgs.vimPlugins.codecompanion-nvim
         ];
       };

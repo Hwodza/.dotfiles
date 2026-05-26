@@ -1,5 +1,6 @@
 return {
 	'mini.comment',
+  lazy = false,
 	after = function()
 		require('mini.comment').setup(
 				{
