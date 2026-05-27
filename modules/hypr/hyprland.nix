@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.hypr = {
     pkgs,
     lib,
@@ -13,7 +17,7 @@
 
     programs.hyprland = {
       enable = true;
-      package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.myHyprland;
+      package = self.packages.${pkgs.stdenv.hostPlatform.system}.myHyprland;
     };
 
     environment.systemPackages = [
@@ -28,6 +32,7 @@
     packages.myHyprland = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
       package = pkgs.hyprland;
+      binName = "Hyprland";
       runtimeInputs = [
         self'.packages.myNoctalia
       ];
