@@ -13,6 +13,7 @@
 
     environment.systemPackages = [
       selfpkgs.terminal
+      pkgs.vscode
     ];
 
     fonts.packages = with pkgs; [
