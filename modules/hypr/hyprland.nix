@@ -4,7 +4,7 @@
       inherit pkgs;
       package = pkgs.hyprland;
       flags = {
-        "--config" = "~/.dotfiles/modules/hypr/hyprland.lua";
+        "--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
       };
     };
   };
