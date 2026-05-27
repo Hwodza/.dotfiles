@@ -1,11 +1,12 @@
-{inputs, ...}: {
-  perSystem = {pkgs, ...}: {
-    packages.hyprland = inputs.wrappers.lib.wrapPackage {
-      inherit pkgs;
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.hypr = {pkgs, lib, ...}: {
+    programs.hyprland = {
+      enable = true;
       package = pkgs.hyprland;
-      flags = {
-        "--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
-      };
     };
   };
 }
