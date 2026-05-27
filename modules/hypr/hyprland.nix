@@ -3,27 +3,22 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.hypr = {
-    pkgs,
-    lib,
-    config,
-    ...
-  }: {
+  flake.nixosModules.hypr = {pkgs, ...}: {
     nixpkgs.overlays = [
       (_final: prev: {
-        hyprland-workspace2d = inputs.hyprland-workspace2d.packages.${prev.system}.workspace2d;
+        hyprland-workspace2d =
+          inputs.hyprland-workspace2d.packages.${prev.system}.workspace2d;
       })
     ];
 
     programs.hyprland = {
       enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.myHyprland;
+      package = self.packages.${pkgs.system}.myHyprland;
     };
 
-    environment.systemPackages = [
-      pkgs.hyprland-workspace2d
-    ];
+    environment.systemPackages = [pkgs.hyprland-workspace2d];
   };
+
   perSystem = {
     pkgs,
     self',
@@ -33,12 +28,8 @@
       inherit pkgs;
       package = pkgs.hyprland;
       binName = "Hyprland";
-      runtimeInputs = [
-        self'.packages.myNoctalia
-      ];
-      flags = {
-        "--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
-      };
+      runtimeInputs = [self'.packages.myNoctalia];
+      flags."--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
     };
   };
 }
