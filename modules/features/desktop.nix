@@ -15,6 +15,7 @@
     environment.systemPackages = [
       selfpkgs.terminal
       pkgs.vscode
+      pkgs.tmux
     ];
 
     fonts.packages = with pkgs; [
