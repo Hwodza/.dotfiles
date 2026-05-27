@@ -3,7 +3,9 @@
     selfpkgs = self.packages."${pkgs.system}";
   in {
     imports = [
-      self.nixosModules.hypr
+      self.nixosModules.hypr {
+              my.hyprland.package = self.packages.${pkgs.system}.myHyprland;
+      }
     ];
 
     # programs.niri.enable = true;
