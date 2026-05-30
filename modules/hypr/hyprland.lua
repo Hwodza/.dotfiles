@@ -274,7 +274,7 @@ hl.bind(mainMod .. " + " .. "right", hl.dsp.focus({ direction = "right" }))
 
 hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
 
-hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
 
 -- Switch workspaces with mainMod + [0-9]
 
