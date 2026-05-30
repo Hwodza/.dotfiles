@@ -16,6 +16,7 @@
       selfpkgs.terminal
       vscode
       tmux
+      google-chrome
     ];
 
     # Install firefox.
