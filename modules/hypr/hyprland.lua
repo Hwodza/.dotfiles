@@ -394,13 +394,35 @@ hl.bind(mainMod .. " + " .. "P", hl.dsp.exec_cmd("hyprshot -m region"))
 -- bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
 -- Special workspaces
+local function toggle_special_workspace(workspace_name, app_command)
+  local active_ws = hl.get_active_workspace()
+  if active_ws ~= nil and active_ws.name == "special:" .. workspace_name then
+    hl.dispatch(hl.dsp.workspace.toggle_special(workspace_name))
+    return
+  end
+
+  local ws_exists = false
+  for _, ws in ipairs(hl.get_workspaces()) do
+    if ws.name == "special:" .. workspace_name and ws.windows > 0 then
+      ws_exists = true
+      break
+    end
+  end
+
+  if not ws_exists then
+    hl.dispatch(hl.dsp.exec_cmd("/usr/bin/env sh -c '" .. app_command .. "'"))
+  end
+  hl.dispatch(hl.dsp.workspace.toggle_special(workspace_name))
+end
 
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh discord Discord"))
 
 hl.bind(mainMod .. " + " .. "S", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh spotify spotify"))
-
-hl.bind(mainMod .. " + " .. "E",
-  hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh yazi kitty --class=kitty-yazi  -e yazi"))
+hl.bind(mainMod .. " + " .. "E", function ()
+  toggle_special_workspace("yazi", "kitty --class=kitty-yazi -e yazi")
+end)
+-- hl.bind(mainMod .. " + " .. "E",
+--   hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh yazi kitty --class=kitty-yazi  -e yazi"))
 
 hl.bind(mainMod .. " + " .. "B",
   hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh btop kitty --class=kitty-btop  -e btop"))
@@ -536,10 +558,11 @@ hl.window_rule({
 
 -- Autostart
 hl.on("hyprland.start", function()
-  hl.exec_cmd("waybar")
-  hl.exec_cmd("swww-daemon")
-  hl.exec_cmd("hypridle")
-  hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("blueman-applet")
+  -- hl.exec_cmd("waybar")
+  -- hl.exec_cmd("swww-daemon")
+  -- hl.exec_cmd("hypridle")
+  -- hl.exec_cmd("hyprpaper")
+  -- hl.exec_cmd("nm-applet")
+  -- hl.exec_cmd("blueman-applet")
+  hl.exec_cmd("noctalia-shell")
 end)
