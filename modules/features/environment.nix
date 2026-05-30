@@ -31,31 +31,32 @@
     packages.environment = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
       package = self'.packages.bash;
-      runtimeInputs = [
+      runtimeInputs = with pkgs; [
         # nix
-        pkgs.nil
-        pkgs.nixd
-        pkgs.statix
-        pkgs.alejandra
-        pkgs.manix
-        pkgs.nix-inspect
+        nil
+        nixd
+        statix
+        alejandra
+        manix
+        nix-inspect
 
         # other
-        pkgs.file
-        pkgs.unzip
-        pkgs.zip
-        pkgs.p7zip
-        pkgs.wget
-        pkgs.killall
-        pkgs.openssh
-        pkgs.fzf
-        pkgs.htop
-        pkgs.btop
-        pkgs.zoxide
-        pkgs.ripgrep
-        pkgs.fastfetch
-        pkgs.tree-sitter
-        pkgs.lazygit
+        yazi
+        file
+        unzip
+        zip
+        p7zip
+        wget
+        killall
+        openssh
+        fzf
+        htop
+        btop
+        zoxide
+        ripgrep
+        fastfetch
+        tree-sitter
+        lazygit
 
         # wrapped
         self'.packages.neovimDynamic
