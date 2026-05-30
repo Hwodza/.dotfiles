@@ -114,6 +114,8 @@ in {
       extraPackages = [
         pkgs.ffmpeg-full
         pkgs.wl-clipboard
+        pkgs.fd
+        pkgs.ripgrep
       ];
 
       specs.init = {
