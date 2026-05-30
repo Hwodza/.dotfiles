@@ -143,7 +143,9 @@ hl.config({
 -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
 
 hl.config({
-  scrolling = {},
+  scrolling = {
+    column_width = 1.0,
+  },
 })
 
 -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
