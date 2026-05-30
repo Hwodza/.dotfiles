@@ -130,7 +130,7 @@ hl.config({
     resize_on_border = true,
     -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false,
-    layout = "dwindle",
+    layout = "scrolling",
   },
 })
 
@@ -188,21 +188,16 @@ hl.config({
 -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
 
 hl.config({
-  dwindle = {
-    -- pseudotile = true,
-    -- Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true,
-    -- You probably want this
-  },
+  scrolling = {},
 })
 
 -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
 
-hl.config({
-  master = {
-    new_status = "master",
-  },
-})
+-- hl.config({
+--   master = {
+--     new_status = "master",
+--   },
+-- })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#misc
 
@@ -318,6 +313,14 @@ hl.bind("SUPER" .. " + " .. "K", hl.dsp.focus({ direction = "up" }))
 
 hl.bind("SUPER" .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
 
+hl.bind(mainMod .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
+
+hl.bind(mainMod .. " + " .. "right", hl.dsp.focus({ direction = "right" }))
+
+hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
+
+hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
+
 -- Switch workspaces with mainMod + [0-9]
 
 hl.bind(mainMod .. " + " .. 1, hl.dsp.focus({ workspace = 1 }))
@@ -351,16 +354,19 @@ end
 -- Switch workspaces with workspace2d.sh
 
 -- Navigate workspaces in 2D
-local matrixSize = 8
-local maxScreens = 10
-for i = 1, 8 do
-  local navKey = { "Left", "Right", "Up", "Down", "H", "L", "K", "J"}
-  local workspace = hl.get_active_workspace().id
-  local x = workspace % matrixSize
-  local y = workspace // matrixSize
-  -- local x = hl.get_active_workspace() % matrixSize
-  -- local x = hl.get_active_workspace() % matr
-end
+-- local matrixSize = 8
+-- local maxScreens = 10
+-- for i = 1, 8 do
+--   local navKey = { "Left", "Up", "Right", "Down", "H", "K", "L", "J" }
+--   local workspace = hl.get_active_workspace().id
+--   local x = workspace % matrixSize
+--   local y = workspace // matrixSize
+--   if i % 2 == 0 then
+--     hl.animation({ leaf = "workspaces", enabled = true})
+--   end
+--   -- local x = hl.get_active_workspace() % matrixSize
+--   -- local x = hl.get_active_workspace() % matr
+-- end
 
 hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left"))
 
