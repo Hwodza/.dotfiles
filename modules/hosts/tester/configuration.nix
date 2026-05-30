@@ -16,7 +16,7 @@
       imports = [
         # Include the results of the hardware scan.
         self.nixosModules.testerHardware
-        self.nixosModules.niri
+        # self.nixosModules.niri
         self.nixosModules.base
         self.nixosModules.general
         self.nixosModules.desktop
