@@ -3,22 +3,23 @@
     selfpkgs = self.packages."${pkgs.system}";
   in {
     imports = [
-      self.nixosModules.hypr {
-              my.hyprland.package = self.packages.${pkgs.system}.myHyprland;
+      self.nixosModules.hypr
+      {
+        my.hyprland.package = self.packages.${pkgs.system}.myHyprland;
       }
     ];
 
-    # programs.niri.enable = true;
-    # programs.niri.package = selfpkgs.niri;
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
 
-    # # preferences.autostart = [selfpkgs.quickshellWrapped];
-    # preferences.autostart = [selfpkgs.myNoctalia]
-
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
       selfpkgs.terminal
-      pkgs.vscode
-      pkgs.tmux
+      vscode
+      tmux
     ];
+
+    # Install firefox.
+    programs.firefox.enable = true;
 
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -34,34 +35,22 @@
       monospace = ["JetBrainsMono Nerd Font"];
     };
 
-    # time.timeZone = "Europe/Kyiv";
-    # i18n.defaultLocale = "en_US.UTF-8";
-    # i18n.extraLocaleSettings = {
-    #   LC_ADDRESS = "uk_UA.UTF-8";
-    #   LC_IDENTIFICATION = "uk_UA.UTF-8";
-    #   LC_MEASUREMENT = "uk_UA.UTF-8";
-    #   LC_MONETARY = "uk_UA.UTF-8";
-    #   LC_NAME = "uk_UA.UTF-8";
-    #   LC_NUMERIC = "uk_UA.UTF-8";
-    #   LC_PAPER = "uk_UA.UTF-8";
-    #   LC_TELEPHONE = "uk_UA.UTF-8";
-    #   LC_TIME = "uk_UA.UTF-8";
-    # };
+    time.timeZone = "America/New_York";
 
-    # services.upower.enable = true;
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.UTF-8";
 
-    # security.polkit.enable = true;
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
 
-    # hardware = {
-    #   enableAllFirmware = true;
-
-    #   bluetooth.enable = true;
-    #   bluetooth.powerOnBoot = true;
-
-    #   opengl = {
-    #     enable = true;
-    #     driSupport32Bit = true;
-    #   };
-    # };
   };
 }
