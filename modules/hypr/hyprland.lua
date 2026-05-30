@@ -119,52 +119,52 @@ hl.env("TERM", "xterm-256color")
 -- https://wiki.hyprland.org/Configuring/Variables/#general
 
 hl.config({
-    general = {
-        gaps_in = 5,
-        gaps_out = 0,
-        border_size = 2,
-        -- https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg",
-        col.inactive_border = "rgba(595959aa)",
-        -- Set to true enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true,
-        -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
-        allow_tearing = false,
-        layout = "dwindle",
-    },
+  general = {
+    gaps_in = 5,
+    gaps_out = 0,
+    border_size = 2,
+    -- https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
+    -- ["col.active_border"] = "rgba(33ccffee) rgba(00ff99ee) 45deg",
+    ["col.inactive_border"] = "rgba(595959aa)",
+    -- Set to true enable resizing windows by clicking and dragging on borders and gaps
+    resize_on_border = true,
+    -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+    allow_tearing = false,
+    layout = "dwindle",
+  },
 })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#decoration
 
 hl.config({
-    decoration = {
-        rounding = 10,
-        -- Change transparency of focused and unfocused windows
-        active_opacity = 1,
-        inactive_opacity = 1,
-        shadow = {
-            enabled = true,
-            range = 4,
-            render_power = 3,
-            color = "rgba(1a1a1aee)",
-        },
-        -- https://wiki.hyprland.org/Configuring/Variables/#blur
-        blur = {
-            enabled = true,
-            size = 8,
-            passes = 3,
-            vibrancy = 0.1696,
-        },
+  decoration = {
+    rounding = 10,
+    -- Change transparency of focused and unfocused windows
+    active_opacity = 1,
+    inactive_opacity = 1,
+    shadow = {
+      enabled = true,
+      range = 4,
+      render_power = 3,
+      color = "rgba(1a1a1aee)",
     },
+    -- https://wiki.hyprland.org/Configuring/Variables/#blur
+    blur = {
+      enabled = true,
+      size = 8,
+      passes = 3,
+      vibrancy = 0.1696,
+    },
+  },
 })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#animations
 
 hl.config({
-    animations = {
-        enabled = { true, "please:)" },
-        -- Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-    },
+  animations = {
+    enabled = true,
+    -- Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+  },
 })
 
 -- Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
@@ -188,31 +188,31 @@ hl.config({
 -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
 
 hl.config({
-    dwindle = {
-        pseudotile = true,
-        -- Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = true,
-        -- You probably want this
-    },
+  dwindle = {
+    -- pseudotile = true,
+    -- Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+    preserve_split = true,
+    -- You probably want this
+  },
 })
 
 -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
 
 hl.config({
-    master = {
-        new_status = "master",
-    },
+  master = {
+    new_status = "master",
+  },
 })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#misc
 
 hl.config({
-    misc = {
-        force_default_wallpaper = 0,
-        -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false,
-        -- If true disables the random hyprland logo / anime girl background. :(
-    },
+  misc = {
+    force_default_wallpaper = 0,
+    -- Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = false,
+    -- If true disables the random hyprland logo / anime girl background. :(
+  },
 })
 
 --############
@@ -224,20 +224,20 @@ hl.config({
 -- https://wiki.hyprland.org/Configuring/Variables/#input
 
 hl.config({
-    input = {
-        kb_layout = "us",
-        kb_variant = {  },
-        kb_model = {  },
-        kb_options = "caps:numlock",
-        kb_rules = {  },
-        follow_mouse = 1,
-        sensitivity = 0,
-        -- -1.0 - 1.0, 0 means no modification.
-        touchpad = {
-            natural_scroll = true,
-            tap-to-click = true,
-        },
+  input = {
+    kb_layout = "us",
+    kb_variant = "",
+    kb_model = "",
+    kb_options = "caps:numlock",
+    kb_rules = "",
+    follow_mouse = 1,
+    sensitivity = 0,
+    -- -1.0 - 1.0, 0 means no modification.
+    touchpad = {
+      natural_scroll = true,
+      -- tap_to_click = true,
     },
+  },
 })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#gestures
@@ -252,12 +252,12 @@ hl.config({
 
 -- See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
 
-hl.config({
-    device = {
-        name = "epic-mouse-v1",
-        sensitivity = -0.5,
-    },
-})
+-- hl.config({
+--     device = {
+--         name = "epic-mouse-v1",
+--         sensitivity = -0.5,
+--     },
+-- })
 -- NOTE: Section 'device' may be a plugin or custom section; verify the output
 
 --##################
@@ -290,8 +290,8 @@ hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 
 -- bind = $mainMod, P, pseudo, # dwindle
 
-hl.bind(mainMod .. " + " .. "T", hl.dsp.layout(nil))
-
+-- bind = $mainMod, P, pseudo, # dwindle
+-- hl.bind(mainMod .. " + " .. "T", hl.dsp.pseudo())
 -- dwindle
 
 hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd("~/.config/waybar/scripts/launch.sh"))
@@ -342,33 +342,25 @@ hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
 
 -- Switch workspaces with workspace2d.sh
 
--- bind = $mainMod, H, 
-
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 1, hl.dsp.window.move(1))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 2, hl.dsp.window.move(2))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 3, hl.dsp.window.move(3))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 4, hl.dsp.window.move(4))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 5, hl.dsp.window.move(5))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 6, hl.dsp.window.move(6))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 7, hl.dsp.window.move(7))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 8, hl.dsp.window.move(8))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 9, hl.dsp.window.move(9))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 0, hl.dsp.window.move(10))
+for i = 1, 10 do
+  local key = i % 10
+  hl.bind(mainMod .. "+" .. key, hl.dsp.focus({ workspace = i }))
+  hl.bind(mainMod .. "+ SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+end
 
 -- Switch workspaces with workspace2d.sh
 
 -- Navigate workspaces in 2D
+local matrixSize = 8
+local maxScreens = 10
+for i = 1, 8 do
+  local navKey = { "Left", "Right", "Up", "Down", "H", "L", "K", "J"}
+  local workspace = hl.get_active_workspace().id
+  local x = workspace % matrixSize
+  local y = workspace // matrixSize
+  -- local x = hl.get_active_workspace() % matrixSize
+  -- local x = hl.get_active_workspace() % matr
+end
 
 hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left"))
 
@@ -410,23 +402,23 @@ hl.bind(mainMod .. " + " .. "CTRL + SHIFT" .. " + " .. "J", hl.dsp.exec_cmd("wor
 
 -- Monitor focus keybinds
 
-hl.bind(CAP .. " + " .. "H", hl.dsp.focus("l"))
-
-hl.bind(CAP .. " + " .. "J", hl.dsp.focus("d"))
-
-hl.bind(CAP .. " + " .. "K", hl.dsp.focus("u"))
-
-hl.bind(CAP .. " + " .. "L", hl.dsp.focus("r"))
-
--- Monitor Move window keybinds
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "H", { direction = "l" })
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "J", { direction = "d" })
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "K", { direction = "u" })
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "L", { direction = "r" })
+-- hl.bind(CAP .. " + " .. "H", hl.dsp.focus({direction = "left"}))
+--
+-- hl.bind(CAP .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
+--
+-- hl.bind(CAP .. " + " .. "K", hl.dsp.focus({ direction = "up" }))
+--
+-- hl.bind(CAP .. " + " .. "L", hl.dsp.focus({ direction = "left" }))
+--
+-- -- Monitor Move window keybinds
+--
+-- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "H", { direction = "left" })
+--
+-- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "J", { direction = "down" })
+--
+-- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "K", { direction = "up" })
+--
+-- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "L", { direction = "right" })
 
 -- Screenshot a region
 
@@ -444,9 +436,11 @@ hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("~/.config/scripts/specialWorks
 
 hl.bind(mainMod .. " + " .. "S", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh spotify spotify"))
 
-hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh yazi kitty --class=kitty-yazi  -e yazi"))
+hl.bind(mainMod .. " + " .. "E",
+  hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh yazi kitty --class=kitty-yazi  -e yazi"))
 
-hl.bind(mainMod .. " + " .. "B", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh btop kitty --class=kitty-btop  -e btop"))
+hl.bind(mainMod .. " + " .. "B",
+  hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh btop kitty --class=kitty-btop  -e btop"))
 
 -- Scroll through existing workspaces with mainMod + scroll
 
@@ -505,26 +499,26 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- Ignore maximize requests from apps. You'll probably like this.
 
 hl.window_rule({
-    name  = "suppressevent_maximi",
-    match = {
-        class = ".*",
-    },
-    suppress_event = "maximize",
+  name           = "suppressevent_maximi",
+  match          = {
+    class = ".*",
+  },
+  suppress_event = "maximize",
 })
 
 -- Fix some dragging issues with XWayland
 
 hl.window_rule({
-    name  = "nofocus",
-    match = {
-        class = "^$",
-        title = "^$",
-        xwayland = 1,
-        floating = 1,
-        fullscreen = 0,
-        pinned = 0,
-    },
-    no_focus = true,
+  name     = "nofocus",
+  match    = {
+    class = "^$",
+    title = "^$",
+    xwayland = 1,
+    -- floating = 1,
+    fullscreen = 0,
+    -- pinned = 0,
+  },
+  no_focus = true,
 })
 
 -- Make Firefox open to workspace 2
@@ -546,43 +540,43 @@ hl.window_rule({
 -- Special workspace rules
 
 hl.window_rule({
-    name  = "workspace_special_di",
-    match = {
-        class = "^(discord)$",
-    },
-    workspace = "special:discord",
+  name      = "workspace_special_di",
+  match     = {
+    class = "^(discord)$",
+  },
+  workspace = "special:discord",
 })
 
 hl.window_rule({
-    name  = "workspace_special_sp",
-    match = {
-        class = "^(spotify)$",
-    },
-    workspace = "special:spotify",
+  name      = "workspace_special_sp",
+  match     = {
+    class = "^(spotify)$",
+  },
+  workspace = "special:spotify",
 })
 
 hl.window_rule({
-    name  = "workspace_special_ya",
-    match = {
-        class = "^(kitty-yazi)$",
-    },
-    workspace = "special:yazi",
+  name      = "workspace_special_ya",
+  match     = {
+    class = "^(kitty-yazi)$",
+  },
+  workspace = "special:yazi",
 })
 
 hl.window_rule({
-    name  = "workspace_special_bt",
-    match = {
-        class = "^(kitty-btop)$",
-    },
-    workspace = "special:btop",
+  name      = "workspace_special_bt",
+  match     = {
+    class = "^(kitty-btop)$",
+  },
+  workspace = "special:btop",
 })
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("swww-daemon")
-    hl.exec_cmd("hypridle")
-    hl.exec_cmd("hyprpaper")
-    hl.exec_cmd("nm-applet")
-    hl.exec_cmd("blueman-applet")
+  hl.exec_cmd("waybar")
+  hl.exec_cmd("swww-daemon")
+  hl.exec_cmd("hypridle")
+  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("blueman-applet")
 end)

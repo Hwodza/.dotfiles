@@ -40,7 +40,7 @@
     packages.myHyprland = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
       package = pkgs.hyprland;
-      binName = "Hyprland";
+      # binName = "Hyprland";
       runtimeInputs = [self'.packages.myNoctalia];
       flags."--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
     };
