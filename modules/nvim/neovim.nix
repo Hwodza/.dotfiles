@@ -128,6 +128,7 @@ in {
           pkgs.vimPlugins.plenary-nvim
           pkgs.vimPlugins.nvim-lspconfig
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+          pkgs.vimPlugins.telescope-nvim
 
           # completion
           pkgs.vimPlugins.nvim-web-devicons
