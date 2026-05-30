@@ -13,9 +13,9 @@
 
 -- Set programs that you use
 
-local terminal = "kitty"
+local terminal = os.getenv("TERMINAL") or "kitty"
 
-local fileManager = "kitty -e yazi"
+local fileManager = terminal .. " -e yazi"
 
 local menu = "rofi -show drun"
 
@@ -230,7 +230,7 @@ local CAP = "MOD2"
 
 -- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 
-hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 
 hl.bind(mainMod .. " + " .. "X", hl.dsp.window.close())
 

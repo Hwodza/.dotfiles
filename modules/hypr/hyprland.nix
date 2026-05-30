@@ -34,6 +34,7 @@
 
   perSystem = {
     pkgs,
+    lib,
     self',
     ...
   }: {
@@ -42,6 +43,7 @@
       package = pkgs.hyprland;
       # binName = "Hyprland";
       runtimeInputs = [self'.packages.myNoctalia];
+      env.TERMINAL = lib.getExe self'.packages.terminal;
       flags."--config" = "/home/henry/.dotfiles/modules/hypr/hyprland.lua";
     };
   };

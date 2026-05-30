@@ -24,7 +24,9 @@
       (inputs.wrappers.wrapperModules.kitty.apply {
         inherit pkgs;
         imports = [self.wrappersModules.kitty];
-        shell = lib.getExe self'.packages.environment;
+        settings = {
+          shell = lib.getExe self'.packages.environment;
+        };
       }).wrapper;
 
     # My primary flake shell with all of it's packages
