@@ -13,8 +13,10 @@
       default = "";
     };
     config = {
-      args = lib.mkAfter (lib.optionals (config.shell != "") [config.shell]);
       settings = {
+        shell = lib.mkIf (config.shell != "") config.shell;
+
+        auto_reload_config = -1;
         enable_audio_bell = "no";
 
         font_size = 15;
