@@ -54,6 +54,7 @@
 
         # other
         yazi
+        tmux
         file
         unzip
         zip

@@ -28,7 +28,6 @@
     environment.systemPackages = with pkgs; [
       selfpkgs.terminal
       vscode
-      tmux
       google-chrome
     ];
 
