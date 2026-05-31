@@ -25,7 +25,7 @@
         cursor_text_color = "background";
 
         allow_remote_control = "yes";
-        shell_integration = "enabled";
+        shell_integration = "disabled";
 
         cursor_trail = 3;
 

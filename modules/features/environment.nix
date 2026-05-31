@@ -20,12 +20,24 @@
     # };
 
     # My primary flake terminal
-    packages.terminal =
-      (inputs.wrappers.wrapperModules.kitty.apply {
-        inherit pkgs;
-        imports = [self.wrappersModules.kitty];
-        shell = lib.getExe self'.packages.environment;
-      }).wrapper;
+    packages.terminal = let
+      shell = lib.getExe self'.packages.environment;
+      kitty =
+        (inputs.wrappers.wrapperModules.kitty.apply {
+          inherit pkgs shell;
+          imports = [self.wrappersModules.kitty];
+        }).wrapper;
+    in
+      pkgs.writeShellApplication {
+        name = "kitty";
+        text = ''
+          if [ "$#" -eq 0 ]; then
+            exec ${lib.getExe kitty} ${lib.escapeShellArg shell} -i
+          fi
+
+          exec ${lib.getExe kitty} "$@"
+        '';
+      };
 
     # My primary flake shell with all of it's packages
     packages.environment = inputs.wrappers.lib.wrapPackage {
