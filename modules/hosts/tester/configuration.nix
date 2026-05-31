@@ -18,11 +18,11 @@
         self.nixosModules.testerHardware
         # self.nixosModules.niri
         self.nixosModules.base
+        self.nixosModules.home-manager
         self.nixosModules.nix
         self.nixosModules.general
         self.nixosModules.desktop
       ];
-
 
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
