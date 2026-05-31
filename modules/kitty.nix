@@ -14,7 +14,7 @@
     };
     config = {
       settings = {
-        shell = lib.mkIf (config.shell != "") config.shell;
+        shell = lib.mkIf (config.shell != "") "${config.shell} -i";
 
         auto_reload_config = -1;
         enable_audio_bell = "no";
