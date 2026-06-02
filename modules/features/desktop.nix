@@ -1,7 +1,16 @@
 {self, ...}: {
   flake.homeModules.desktop = {pkgs, ...}: {
-    home.packages = [
-      pkgs.rofi
+    home.packages = with pkgs; [
+      rofi
+      nwg-displays
+      kdePackages.dolphin
+      tor-browser
+      obsidian
+      zathura
+      poppler
+      obs-studio
+      discord
+      spotify
     ];
 
     home.file.".config/rofi/config.rasi".source = ../hypr/rofi.config.rasi;
@@ -28,7 +37,6 @@
     environment.systemPackages = with pkgs; [
       selfpkgs.terminal
       vscode
-      google-chrome
     ];
 
     # Install firefox.

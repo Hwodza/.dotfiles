@@ -47,6 +47,7 @@
           unzip
           zip
           p7zip
+          jq
           wget
           killall
           openssh
