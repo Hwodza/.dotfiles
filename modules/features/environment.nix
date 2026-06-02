@@ -20,29 +20,16 @@
     # };
 
     # My primary flake terminal
-    packages.terminal = let
-      shell = lib.getExe self'.packages.environment;
-      kitty =
-        (inputs.wrappers.wrapperModules.kitty.apply {
-          inherit pkgs shell;
-          imports = [self.wrappersModules.kitty];
-        }).wrapper;
-    in
-      pkgs.writeShellApplication {
-        name = "kitty";
-        text = ''
-          if [ "$#" -eq 0 ]; then
-            exec ${lib.getExe kitty} ${lib.escapeShellArg shell} -i
-          fi
-
-          exec ${lib.getExe kitty} "$@"
-        '';
-      };
+    packages.terminal =
+      (inputs.wrappers.wrapperModules.kitty.apply {
+        inherit pkgs;
+        imports = [self.wrappersModules.kitty];
+        shell = lib.getExe self'.packages.environment;
+      }).wrapper;
 
     # My primary flake shell with all of it's packages
-    packages.environment = inputs.wrappers.lib.wrapPackage {
-      inherit pkgs;
-      package = self'.packages.bash;
+    packages.environment = pkgs.writeShellApplication {
+      name = "environment";
       runtimeInputs = with pkgs; [
         # nix
         nil
@@ -80,9 +67,10 @@
         # self'.packages.jjui
         # self'.packages.nix-check-bin
       ];
-      env = {
-        EDITOR = lib.getExe self'.packages.neovimDynamic;
-      };
+      text = ''
+        export EDITOR=${lib.escapeShellArg (lib.getExe self'.packages.neovimDynamic)}
+        exec ${lib.getExe self'.packages.bash} "$@"
+      '';
     };
 
     # packages.nix-check-bin = pkgs.writeShellApplication {
