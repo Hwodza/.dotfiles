@@ -28,50 +28,56 @@
       }).wrapper;
 
     # My primary flake shell with all of it's packages
-    packages.environment = pkgs.writeShellApplication {
-      name = "environment";
-      runtimeInputs = with pkgs; [
-        # nix
-        nil
-        nixd
-        statix
-        alejandra
-        manix
-        nix-inspect
+    packages.environment =
+      (pkgs.writeShellApplication {
+        name = "environment";
+        runtimeInputs = with pkgs; [
+          # nix
+          nil
+          nixd
+          statix
+          alejandra
+          manix
+          nix-inspect
 
-        # other
-        yazi
-        tmux
-        file
-        unzip
-        zip
-        p7zip
-        wget
-        killall
-        openssh
-        fzf
-        htop
-        btop
-        zoxide
-        ripgrep
-        fastfetch
-        tree-sitter
-        lazygit
+          # other
+          yazi
+          tmux
+          file
+          unzip
+          zip
+          p7zip
+          wget
+          killall
+          openssh
+          fzf
+          htop
+          btop
+          zoxide
+          ripgrep
+          fastfetch
+          tree-sitter
+          lazygit
 
-        # wrapped
-        self'.packages.neovimDynamic
-        # self'.packages.qalc
-        # self'.packages.lf
-        self'.packages.git
-        # self'.packages.jujutsu
-        # self'.packages.jjui
-        # self'.packages.nix-check-bin
-      ];
-      text = ''
-        export EDITOR=${lib.escapeShellArg (lib.getExe self'.packages.neovimDynamic)}
-        exec ${lib.getExe self'.packages.bash} "$@"
-      '';
-    };
+          # wrapped
+          self'.packages.neovimDynamic
+          # self'.packages.qalc
+          # self'.packages.lf
+          self'.packages.git
+          # self'.packages.jujutsu
+          # self'.packages.jjui
+          # self'.packages.nix-check-bin
+        ];
+        text = ''
+          export EDITOR=${lib.escapeShellArg (lib.getExe self'.packages.neovimDynamic)}
+          exec ${lib.getExe self'.packages.bash} "$@"
+        '';
+      })
+      .overrideAttrs (old: {
+        passthru = (old.passthru or {}) // {
+          shellPath = "/bin/environment";
+        };
+      });
 
     # packages.nix-check-bin = pkgs.writeShellApplication {
     #   name = "nix-check-bin";
