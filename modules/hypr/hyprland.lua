@@ -19,33 +19,13 @@ local fileManager = terminal .. " -e yazi"
 
 local menu = "rofi -show drun"
 
+-- require("monitors")
 --################
 
 --## AUTOSTART ###
 
 --################
 
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
-
--- Or execute your favorite apps at launch like this:
-
--- exec-once = $terminal
-
--- exec-once = nm-applet &
-
-
--- exec-once = hyprpaper & firefox
-
-
-
-
-
-
--- exec-once = hyprctl hyprpaper wallpaper , $WALLPAPER_PATH
-
--- exec-once = bash -c 'sleep .2; hyprctl hyprpaper wallpaper , "$WALLPAPER_PATH"'
-
--- exec-once = hyprctl hyprpaper wallpaper ",$WALLPAPER_PATH"
 
 --############################
 
@@ -122,25 +102,6 @@ hl.config({
   },
 })
 
--- Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
-
--- "Smart gaps" / "No gaps when only"
-
--- uncomment all if you wish to use that.
-
--- workspace = w[tv1], gapsout:0, gapsin:0
-
--- workspace = f[1], gapsout:0, gapsin:0
-
--- windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-
--- windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-
--- windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-
--- windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
-
--- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
 
 hl.config({
   scrolling = {
@@ -300,6 +261,8 @@ hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
 
 hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
 
+-- hl.bind(mainMod .. " + " .. "k", hl.dsp.focus({ workspace = hl.get_active_workspace().id - 1}))
+
 -- Switch workspaces with workspace2d.sh
 
 for i = 1, 10 do
@@ -415,17 +378,21 @@ local function toggle_special_workspace(workspace_name, app_command)
   hl.dispatch(hl.dsp.workspace.toggle_special(workspace_name))
 end
 
-hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh discord Discord"))
+hl.bind(mainMod .. " + " .. "D", function ()
+  toggle_special_workspace("discord", "Discord")
+end)
 
-hl.bind(mainMod .. " + " .. "S", hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh spotify spotify"))
+hl.bind(mainMod .. " + " .. "S", function ()
+  toggle_special_workspace("spotify", "spotify")
+end)
+
 hl.bind(mainMod .. " + " .. "E", function ()
   toggle_special_workspace("yazi", "kitty --class=kitty-yazi -e yazi")
 end)
--- hl.bind(mainMod .. " + " .. "E",
---   hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh yazi kitty --class=kitty-yazi  -e yazi"))
 
-hl.bind(mainMod .. " + " .. "B",
-  hl.dsp.exec_cmd("~/.config/scripts/specialWorkspaces.sh btop kitty --class=kitty-btop  -e btop"))
+hl.bind(mainMod .. " + " .. "B", function ()
+  toggle_special_workspace("btop", "kitty --class=kitty-btop -e btop")
+end)
 
 -- Scroll through existing workspaces with mainMod + scroll
 
