@@ -34,8 +34,8 @@
     environment.sessionVariables.TERMINAL = lib.getExe selfpkgs.terminal;
     environment.systemPackages = with pkgs; [
       selfpkgs.terminal
-      selfpkgs.environment
       vscode
+      git
     ];
 
     services.upower.enable = true;
