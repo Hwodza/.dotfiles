@@ -111,7 +111,7 @@ in {
         then config.dynamicInitLua
         else config.initLua;
 
-      extraPackages = [
+      runtimePkgs = [
         pkgs.ffmpeg-full
         pkgs.wl-clipboard
         pkgs.fd
