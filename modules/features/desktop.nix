@@ -10,12 +10,12 @@
       discord
       spotify
     ];
-
   };
 
   flake.nixosModules.desktop = {
     config,
     pkgs,
+    lib,
     ...
   }: let
     selfpkgs = self.packages."${pkgs.system}";
@@ -31,7 +31,7 @@
       self.homeModules.desktop
       self.homeModules.hypr
     ];
-
+    environment.sessionVariables.TERMINAL = lib.getExe selfpkgs.terminal;
     environment.systemPackages = with pkgs; [
       selfpkgs.terminal
       vscode
