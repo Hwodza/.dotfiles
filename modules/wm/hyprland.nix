@@ -6,20 +6,24 @@
   flake.homeModules.hypr = {
     pkgs,
     config,
-    self',
     ...
   }: let
     hyprPath = "${config.home.homeDirectory}/.dotfiles/modules/wm/hypr";
+    selfPkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
   in {
     home.packages = with pkgs; [
       rofi
       nwg-displays
       hyprland
-      self'.packages.myNoctalia
+      selfPkgs.myNoctalia
     ];
     home.file.".config/rofi/config.rasi".source = ./rofi.config.rasi;
-    wayland.windowManager.hyprland.enable = true;
-    xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprPath;
+    wayland.windowManager.hyprland = {
+      enable = true;
+      extraConfig = ''
+        dofile("${hyprPath}/hyprland.lua")
+      '';
+    };
   };
   # flake.nixosModules.hypr = {
   #   pkgs,
