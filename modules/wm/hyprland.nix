@@ -10,10 +10,14 @@
   }: let
     hyprPath = "${config.home.homeDirectory}/.dotfiles/modules/wm/hypr";
     selfPkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
+    unstablePkgs = import inputs.nixpkgs-unstable {
+      system = pkgs.stdenv.hostPlatform.system;
+      config = pkgs.config;
+    };
   in {
     home.packages = with pkgs; [
       rofi
-      nwg-displays
+      unstablePkgs.nwg-displays
       hyprland
       selfPkgs.myNoctalia
     ];
