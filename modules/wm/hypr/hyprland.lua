@@ -256,8 +256,8 @@ hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
 
 hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
 
-hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
-hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 11) % 10 }))
+-- hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
+-- hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 11) % 10 }))
 
 -- hl.bind(mainMod .. "+ SHIFT + " .. "k", hl.dsp.window.move({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
 -- Switch workspaces with workspace2d.sh
