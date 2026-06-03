@@ -38,7 +38,17 @@
       git
     ];
 
-    services.upower.enable = true;
+    services = {
+      upower.enable = true;
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.greetd}/bin/agreety --cmd start-hyprland";
+          };
+        };
+      };
+    };
 
     # Install firefox.
     programs.firefox.enable = true;
