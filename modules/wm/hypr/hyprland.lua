@@ -255,10 +255,8 @@ local function focus_workspace_delta(delta)
     current = 1
   end
 
-  local target = math.max(1, math.min(workspaceCount, current + delta))
-  if target ~= current then
-    focus_workspace(target)
-  end
+  local target = ((current - 1 + delta) % workspaceCount) + 1
+  focus_workspace(target)
 end
 
 for workspace = 1, workspaceCount do
