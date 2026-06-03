@@ -102,6 +102,13 @@ hl.config({
   },
 })
 
+hl.animation({
+  leaf = "workspaces",
+  enabled = true,
+  speed = 5,
+  bezier = "default",
+  style = "slidevert",
+})
 
 hl.config({
   scrolling = {
@@ -234,30 +241,45 @@ hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
 
 hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
 
--- Switch workspaces with mainMod + [0-9]
+-- Switch workspaces with mainMod + [0-9]. Workspace 1 is the top of the stack, 10 is the bottom.
+local workspaceCount = 10
 
-hl.bind(mainMod .. " + " .. 1, hl.dsp.focus({ workspace = 1 }))
+local function focus_workspace(workspace)
+  hl.dispatch(hl.dsp.focus({ workspace = workspace }))
+end
 
-hl.bind(mainMod .. " + " .. 2, hl.dsp.focus({ workspace = 2 }))
+local function focus_workspace_delta(delta)
+  local active_workspace = hl.get_active_workspace()
+  local current = active_workspace and active_workspace.id or 1
+  if current < 1 or current > workspaceCount then
+    current = 1
+  end
 
-hl.bind(mainMod .. " + " .. 3, hl.dsp.focus({ workspace = 3 }))
+  local target = math.max(1, math.min(workspaceCount, current + delta))
+  if target ~= current then
+    focus_workspace(target)
+  end
+end
 
-hl.bind(mainMod .. " + " .. 4, hl.dsp.focus({ workspace = 4 }))
+for workspace = 1, workspaceCount do
+  local key = workspace % workspaceCount
 
-hl.bind(mainMod .. " + " .. 5, hl.dsp.focus({ workspace = 5 }))
+  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = workspace }))
+  hl.workspace_rule({
+    workspace = tostring(workspace),
+    persistent = true,
+    layout = "scrolling",
+    animation = "slidevert",
+  })
+end
 
-hl.bind(mainMod .. " + " .. 6, hl.dsp.focus({ workspace = 6 }))
+hl.bind(mainMod .. " + " .. "J", function()
+  focus_workspace_delta(1)
+end)
 
-hl.bind(mainMod .. " + " .. 7, hl.dsp.focus({ workspace = 7 }))
-
-hl.bind(mainMod .. " + " .. 8, hl.dsp.focus({ workspace = 8 }))
-
-hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
-
-hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
-
--- hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
--- hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 11) % 10 }))
+hl.bind(mainMod .. " + " .. "K", function()
+  focus_workspace_delta(-1)
+end)
 
 -- hl.bind(mainMod .. "+ SHIFT + " .. "k", hl.dsp.window.move({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
 -- Switch workspaces with workspace2d.sh
