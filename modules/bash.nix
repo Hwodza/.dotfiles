@@ -14,8 +14,8 @@ inputs,
       fi
       ssh-add ~/.ssh/id_github
       clear
-      # fastfetch --structure-disabled Battery:PowerAdapter
-      fastfetch
+      fastfetch --structure-disabled Battery:PowerAdapter
+      # fastfetch
     '';
     in {
       packages.bash = inputs.wrappers.lib.wrapPackage {
