@@ -202,7 +202,7 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 
 hl.bind(mainMod .. " + " .. "R",
-  hl.dsp.exec_cmd("noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json && hyprctl reload"))
+  hl.dsp.exec_cmd("hyprctl reload && noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json"))
 
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock"))
 
@@ -254,7 +254,7 @@ hl.bind(mainMod .. " + " .. 8, hl.dsp.focus({ workspace = 8 }))
 
 hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
 
--- hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 0 }))
+hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
 
 hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 11) % 10 }))
