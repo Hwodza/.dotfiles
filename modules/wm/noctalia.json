@@ -5,11 +5,11 @@
       "barType": "simple",
       "position": "left",
       "monitors": [],
-      "density": "default",
+      "density": "comfortable",
       "showOutline": false,
       "showCapsule": true,
-      "capsuleOpacity": 1,
-      "capsuleColorKey": "none",
+      "capsuleOpacity": 0.16,
+      "capsuleColorKey": "primary",
       "widgetSpacing": 6,
       "contentPadding": 2,
       "fontScale": 1,
@@ -295,7 +295,7 @@
       ]
     },
     "wallpaper": {
-      "enabled": true,
+      "enabled": false,
       "overviewEnabled": false,
       "directory": "/home/henry/Pictures/Wallpapers",
       "monitorDirectories": [],
@@ -456,7 +456,7 @@
       "disableDesktopWidgets": true
     },
     "dock": {
-      "enabled": true,
+      "enabled": false,
       "position": "bottom",
       "displayMode": "auto_hide",
       "dockType": "floating",
@@ -604,13 +604,13 @@
       "backlightDeviceMappings": []
     },
     "colorSchemes": {
-      "useWallpaperColors": false,
+      "useWallpaperColors": true,
       "predefinedScheme": "Tokyo Night",
       "darkMode": true,
       "schedulingMode": "off",
       "manualSunrise": "06:30",
       "manualSunset": "18:30",
-      "generationMethod": "tonal-spot",
+      "generationMethod": "fruit-salad",
       "monitorForColors": "",
       "syncGsettings": true
     },
@@ -669,27 +669,24 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-eDP-1",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/nix/store/ayjfjcqxz83mq19a9gpnn5zpw8lc452i-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
-      "winit": {
-        "connected": true,
-        "height": 1016,
-        "name": "winit",
-        "physical_height": 0,
-        "physical_width": 0,
-        "refresh_rate": 60000,
+      "eDP-1": {
+        "name": "eDP-1",
         "scale": 1,
-        "transform": "Flipped180",
-        "vrr_enabled": false,
-        "vrr_supported": false,
-        "width": 1912,
+        "width": 1920,
+        "height": 1080,
+        "refresh_rate": 60,
         "x": 0,
-        "y": 0
+        "y": 0,
+        "active_workspace": 1,
+        "vrr": false,
+        "focused": true
       }
     },
     "notificationsState": {
