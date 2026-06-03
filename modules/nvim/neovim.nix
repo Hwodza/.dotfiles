@@ -4,7 +4,7 @@
   ...
 }: let
   lua = {pkgs, ...}: {
-    extraPackages = [
+    runtimePkgs = [
       pkgs.lua-language-server
     ];
 
@@ -18,7 +18,7 @@
   };
 
   astro = {pkgs, ...}: {
-    extraPackages = [pkgs.astro-language-server];
+    runtimePkgs = [pkgs.astro-language-server];
 
     specs.astro = {
       data = [pkgs.vimPlugins.nvim-lspconfig];
@@ -38,7 +38,7 @@
   };
 
   rust = {pkgs, ...}: {
-    extraPackages = [pkgs.rust-analyzer];
+    runtimePkgs = [pkgs.rust-analyzer];
 
     specs.rust = {
       data = [pkgs.vimPlugins.nvim-lspconfig];
@@ -51,7 +51,7 @@
   };
 
   nix = {pkgs, ...}: {
-    extraPackages = [
+    runtimePkgs = [
       pkgs.nixd
       pkgs.alejandra
     ];
@@ -205,4 +205,3 @@ in {
     };
   };
 }
-
