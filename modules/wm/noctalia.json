@@ -5,11 +5,11 @@
       "barType": "simple",
       "position": "left",
       "monitors": [],
-      "density": "comfortable",
+      "density": "default",
       "showOutline": false,
       "showCapsule": true,
-      "capsuleOpacity": 0.16,
-      "capsuleColorKey": "primary",
+      "capsuleOpacity": 1,
+      "capsuleColorKey": "none",
       "widgetSpacing": 6,
       "contentPadding": 2,
       "fontScale": 1,
@@ -263,7 +263,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Cleveland",
+      "name": "Kalamazoo",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -295,7 +295,7 @@
       ]
     },
     "wallpaper": {
-      "enabled": false,
+      "enabled": true,
       "overviewEnabled": false,
       "directory": "/home/henry/Pictures/Wallpapers",
       "monitorDirectories": [],
@@ -456,7 +456,7 @@
       "disableDesktopWidgets": true
     },
     "dock": {
-      "enabled": false,
+      "enabled": true,
       "position": "bottom",
       "displayMode": "auto_hide",
       "dockType": "floating",
@@ -604,13 +604,13 @@
       "backlightDeviceMappings": []
     },
     "colorSchemes": {
-      "useWallpaperColors": true,
+      "useWallpaperColors": false,
       "predefinedScheme": "Tokyo Night",
       "darkMode": true,
       "schedulingMode": "off",
       "manualSunrise": "06:30",
       "manualSunset": "18:30",
-      "generationMethod": "fruit-salad",
+      "generationMethod": "tonal-spot",
       "monitorForColors": "",
       "syncGsettings": true
     },
@@ -669,10 +669,10 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "settingsPanel-eDP-1",
+    "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "eDP-1": "/home/henry/Pictures/Wallpapers/NASA-APOD/2026-06-03.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {

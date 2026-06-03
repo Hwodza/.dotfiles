@@ -201,7 +201,8 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 
-hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd("noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json && hyprctl reload"))
+hl.bind(mainMod .. " + " .. "R",
+  hl.dsp.exec_cmd("noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json && hyprctl reload"))
 
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock"))
 
@@ -253,17 +254,19 @@ hl.bind(mainMod .. " + " .. 8, hl.dsp.focus({ workspace = 8 }))
 
 hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
 
-hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
+-- hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 0 }))
 
--- hl.bind(mainMod .. " + " .. "k", hl.dsp.focus({ workspace = hl.get_active_workspace().id - 1}))
+hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
+hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ workspace = (hl.get_active_workspace().id + 11) % 10 }))
 
+-- hl.bind(mainMod .. "+ SHIFT + " .. "k", hl.dsp.window.move({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
 -- Switch workspaces with workspace2d.sh
 
-for i = 1, 10 do
-  local key = i % 10
-  hl.bind(mainMod .. "+" .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mainMod .. "+ SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
-end
+-- for i = 1, 10 do
+--   local key = i % 10
+--   hl.bind(mainMod .. "+" .. key, hl.dsp.focus({ workspace = i }))
+--   hl.bind(mainMod .. "+ SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+-- end
 
 -- Switch workspaces with workspace2d.sh
 
@@ -282,13 +285,13 @@ end
 --   -- local x = hl.get_active_workspace() % matr
 -- end
 
-hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left"))
-
-hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("workspace2d right"))
-
-hl.bind(mainMod .. " + " .. "K", hl.dsp.exec_cmd("workspace2d up"))
-
-hl.bind(mainMod .. " + " .. "J", hl.dsp.exec_cmd("workspace2d down"))
+-- hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left"))
+--
+-- hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("workspace2d right"))
+--
+-- hl.bind(mainMod .. " + " .. "K", hl.dsp.exec_cmd("workspace2d up"))
+--
+-- hl.bind(mainMod .. " + " .. "J", hl.dsp.exec_cmd("workspace2d down"))
 
 -- Move windows instead of focus
 
@@ -372,19 +375,19 @@ local function toggle_special_workspace(workspace_name, app_command)
   hl.dispatch(hl.dsp.workspace.toggle_special(workspace_name))
 end
 
-hl.bind(mainMod .. " + " .. "D", function ()
+hl.bind(mainMod .. " + " .. "D", function()
   toggle_special_workspace("discord", "Discord")
 end)
 
-hl.bind(mainMod .. " + " .. "S", function ()
+hl.bind(mainMod .. " + " .. "S", function()
   toggle_special_workspace("spotify", "spotify")
 end)
 
-hl.bind(mainMod .. " + " .. "E", function ()
+hl.bind(mainMod .. " + " .. "E", function()
   toggle_special_workspace("yazi", "kitty --class=kitty-yazi -e yazi")
 end)
 
-hl.bind(mainMod .. " + " .. "B", function ()
+hl.bind(mainMod .. " + " .. "B", function()
   toggle_special_workspace("btop", "kitty --class=kitty-btop -e btop")
 end)
 
