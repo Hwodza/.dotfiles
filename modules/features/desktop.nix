@@ -1,8 +1,6 @@
 {self, ...}: {
   flake.homeModules.desktop = {pkgs, ...}: {
     home.packages = with pkgs; [
-      rofi
-      nwg-displays
       kdePackages.dolphin
       tor-browser
       obsidian
