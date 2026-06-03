@@ -19,7 +19,7 @@ local fileManager = terminal .. " -e yazi"
 
 local menu = "rofi -show drun"
 
--- require("monitors")
+require("monitors")
 --################
 
 --## AUTOSTART ###
@@ -201,13 +201,7 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 
--- bind = $mainMod, P, pseudo, # dwindle
-
--- bind = $mainMod, P, pseudo, # dwindle
--- hl.bind(mainMod .. " + " .. "T", hl.dsp.pseudo())
--- dwindle
-
-hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd("~/.config/waybar/scripts/launch.sh"))
+hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd("noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json && hyprctl reload"))
 
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock"))
 
