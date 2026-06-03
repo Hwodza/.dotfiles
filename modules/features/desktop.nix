@@ -11,7 +11,6 @@
       spotify
     ];
 
-    home.file.".config/rofi/config.rasi".source = ../hypr/rofi.config.rasi;
   };
 
   flake.nixosModules.desktop = {
@@ -21,15 +20,16 @@
   }: let
     selfpkgs = self.packages."${pkgs.system}";
   in {
-    imports = [
-      self.nixosModules.hypr
-      {
-        my.hyprland.package = self.packages.${pkgs.system}.myHyprland;
-      }
-    ];
+    # imports = [
+    #   self.nixosModules.hypr
+    #   {
+    #     my.hyprland.package = self.packages.${pkgs.system}.myHyprland;
+    #   }
+    # ];
 
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.desktop
+      self.homeModules.hypr
     ];
 
     environment.systemPackages = with pkgs; [
