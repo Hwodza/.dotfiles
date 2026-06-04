@@ -255,12 +255,16 @@ hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
 -- Workspace 1 is the top of each stack, 10 is the bottom.
 local workspaceCount = 10
 
-local function workspace_prefix(monitor)
-  return ((monitor and monitor.id or 0) + 1) * 100
+local function workspace_base(monitor)
+  if not monitor or monitor.id == 0 then
+    return 0
+  end
+
+  return (monitor.id + 1) * 100
 end
 
 local function workspace_id(monitor, slot)
-  return workspace_prefix(monitor) + slot
+  return workspace_base(monitor) + slot
 end
 
 local function workspace_slot(monitor, workspace)
@@ -268,7 +272,7 @@ local function workspace_slot(monitor, workspace)
     return 1
   end
 
-  local slot = workspace.id - workspace_prefix(monitor)
+  local slot = workspace.id - workspace_base(monitor)
   if slot < 1 or slot > workspaceCount then
     return 1
   end
