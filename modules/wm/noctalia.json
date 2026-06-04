@@ -672,7 +672,8 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/home/henry/Pictures/Wallpapers/NASA-APOD/2026-06-03.png"
+      "eDP-1": "/home/henry/Pictures/Wallpapers/NASA-APOD/2026-06-03.png",
+      "HDMI-A-1": "/home/henry/Pictures/Wallpapers/NASA-APOD/2026-06-03.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -687,6 +688,18 @@
         "active_workspace": 1,
         "vrr": false,
         "focused": true
+      },
+      "HDMI-A-1": {
+        "name": "HDMI-A-1",
+        "scale": 1,
+        "width": 1920,
+        "height": 1080,
+        "refresh_rate": 60,
+        "x": 1920,
+        "y": 0,
+        "active_workspace": 3,
+        "vrr": false,
+        "focused": false
       }
     },
     "notificationsState": {

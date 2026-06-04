@@ -20,12 +20,23 @@ local fileManager = terminal .. " -e yazi"
 local menu = "rofi -show drun"
 
 require("monitors")
+
 --################
 
 --## AUTOSTART ###
 
 --################
 
+-- Autostart
+hl.on("hyprland.start", function()
+  -- hl.exec_cmd("waybar")
+  -- hl.exec_cmd("swww-daemon")
+  -- hl.exec_cmd("hypridle")
+  -- hl.exec_cmd("hyprpaper")
+  -- hl.exec_cmd("nm-applet")
+  -- hl.exec_cmd("blueman-applet")
+  hl.exec_cmd("noctalia-shell")
+end)
 
 --############################
 
@@ -190,10 +201,9 @@ hl.config({
 
 -- $mainMod = SUPER # Sets "Windows" key as main modifier
 
-local mainMod = "ALT"
 
 -- Sets Alt key as main modifer
-
+local mainMod = "ALT"
 local CAP = "MOD2"
 
 -- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
@@ -215,7 +225,7 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock")
 
 hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
 
--- Move focus with mainMod + arrow keys
+-- Move focus with super + arrow keys or vim motions, also allow for mainMod right/left H/L
 
 hl.bind("SUPER" .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
 
@@ -241,34 +251,103 @@ hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
 
 hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
 
--- Switch workspaces with mainMod + [0-9]. Workspace 1 is the top of the stack, 10 is the bottom.
+-- Switch per-monitor workspace stacks with mainMod + [0-9].
+-- Workspace 1 is the top of each stack, 10 is the bottom.
 local workspaceCount = 10
 
-local function focus_workspace(workspace)
-  hl.dispatch(hl.dsp.focus({ workspace = workspace }))
+local function workspace_prefix(monitor)
+  return ((monitor and monitor.id or 0) + 1) * 100
+end
+
+local function workspace_id(monitor, slot)
+  return workspace_prefix(monitor) + slot
+end
+
+local function workspace_slot(monitor, workspace)
+  if not monitor or not workspace then
+    return 1
+  end
+
+  local slot = workspace.id - workspace_prefix(monitor)
+  if slot < 1 or slot > workspaceCount then
+    return 1
+  end
+
+  return slot
+end
+
+local function active_workspace_slot(monitor)
+  return workspace_slot(monitor, hl.get_active_workspace(monitor) or monitor.active_workspace)
+end
+
+local function workspace_delta(monitor, delta)
+  return ((active_workspace_slot(monitor) - 1 + delta) % workspaceCount) + 1
+end
+
+local function focus_workspace_id(workspace)
+  hl.dispatch(hl.dsp.focus({
+    workspace = workspace,
+    on_current_monitor = true,
+  }))
+end
+
+local function focus_workspace_slot(slot)
+  local monitor = hl.get_active_monitor()
+  if monitor then
+    focus_workspace_id(workspace_id(monitor, slot))
+  end
 end
 
 local function focus_workspace_delta(delta)
-  local active_workspace = hl.get_active_workspace()
-  local current = active_workspace and active_workspace.id or 1
-  if current < 1 or current > workspaceCount then
-    current = 1
+  local monitor = hl.get_active_monitor()
+  if monitor then
+    focus_workspace_id(workspace_id(monitor, workspace_delta(monitor, delta)))
   end
-
-  local target = ((current - 1 + delta) % workspaceCount) + 1
-  focus_workspace(target)
 end
 
-for workspace = 1, workspaceCount do
-  local key = workspace % workspaceCount
+local function move_window_to_workspace_id(workspace)
+  hl.dispatch(hl.dsp.window.move({
+    workspace = workspace,
+    follow = true,
+  }))
+end
 
-  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = workspace }))
-  hl.workspace_rule({
-    workspace = tostring(workspace),
-    persistent = true,
-    layout = "scrolling",
-    animation = "slidevert",
-  })
+local function move_window_to_workspace_slot(slot)
+  local monitor = hl.get_active_monitor()
+  if monitor then
+    move_window_to_workspace_id(workspace_id(monitor, slot))
+  end
+end
+
+local function move_window_to_workspace_delta(delta)
+  local monitor = hl.get_active_monitor()
+  if monitor then
+    move_window_to_workspace_id(workspace_id(monitor, workspace_delta(monitor, delta)))
+  end
+end
+
+for _, monitor in ipairs(hl.get_monitors()) do
+  for slot = 1, workspaceCount do
+    hl.workspace_rule({
+      workspace = tostring(workspace_id(monitor, slot)),
+      monitor = monitor.name,
+      persistent = true,
+      layout = "scrolling",
+      animation = "slidevert",
+    })
+  end
+end
+
+for slot = 1, workspaceCount do
+  local key = slot % workspaceCount
+
+  hl.bind(mainMod .. " + " .. key, function()
+    focus_workspace_slot(slot)
+  end)
+
+  hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. key, function()
+    move_window_to_workspace_slot(slot)
+  end)
 end
 
 hl.bind(mainMod .. " + " .. "J", function()
@@ -279,89 +358,113 @@ hl.bind(mainMod .. " + " .. "K", function()
   focus_workspace_delta(-1)
 end)
 
--- hl.bind(mainMod .. "+ SHIFT + " .. "k", hl.dsp.window.move({ workspace = (hl.get_active_workspace().id + 9) % 10 }))
--- Switch workspaces with workspace2d.sh
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "J", function()
+  move_window_to_workspace_delta(1)
+end)
 
--- for i = 1, 10 do
---   local key = i % 10
---   hl.bind(mainMod .. "+" .. key, hl.dsp.focus({ workspace = i }))
---   hl.bind(mainMod .. "+ SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
--- end
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "K", function()
+  move_window_to_workspace_delta(-1)
+end)
 
--- Switch workspaces with workspace2d.sh
+-- Move between monitors with CapsLock vim motions.
 
--- Navigate workspaces in 2D
--- local matrixSize = 8
--- local maxScreens = 10
--- for i = 1, 8 do
---   local navKey = { "Left", "Up", "Right", "Down", "H", "K", "L", "J" }
---   local workspace = hl.get_active_workspace().id
---   local x = workspace % matrixSize
---   local y = workspace // matrixSize
---   if i % 2 == 0 then
---     hl.animation({ leaf = "workspaces", enabled = true})
---   end
---   -- local x = hl.get_active_workspace() % matrixSize
---   -- local x = hl.get_active_workspace() % matr
--- end
+local function monitor_center(monitor)
+  return {
+    x = monitor.x + monitor.width / 2,
+    y = monitor.y + monitor.height / 2,
+  }
+end
 
--- hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left"))
---
--- hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("workspace2d right"))
---
--- hl.bind(mainMod .. " + " .. "K", hl.dsp.exec_cmd("workspace2d up"))
---
--- hl.bind(mainMod .. " + " .. "J", hl.dsp.exec_cmd("workspace2d down"))
+local function monitor_in_direction(direction)
+  local active = hl.get_active_monitor()
+  if not active then
+    return nil
+  end
 
--- Move windows instead of focus
+  local active_center = monitor_center(active)
+  local best_monitor = nil
+  local best_score = nil
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "H", hl.dsp.exec_cmd("workspace2d move_left"))
+  for _, monitor in ipairs(hl.get_monitors()) do
+    if monitor.id ~= active.id then
+      local center = monitor_center(monitor)
+      local dx = center.x - active_center.x
+      local dy = center.y - active_center.y
+      local primary = nil
+      local secondary = nil
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "L", hl.dsp.exec_cmd("workspace2d move_right"))
+      if direction == "l" then
+        primary = -dx
+        secondary = dy
+      elseif direction == "r" then
+        primary = dx
+        secondary = dy
+      elseif direction == "u" then
+        primary = -dy
+        secondary = dx
+      elseif direction == "d" then
+        primary = dy
+        secondary = dx
+      end
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "K", hl.dsp.exec_cmd("workspace2d move_up"))
+      if primary and primary > 0 then
+        local score = primary * primary + secondary * secondary
+        if not best_score or score < best_score then
+          best_monitor = monitor
+          best_score = score
+        end
+      end
+    end
+  end
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "J", hl.dsp.exec_cmd("workspace2d move_down"))
+  return best_monitor
+end
 
--- Apply moves to all monitors
+local function focus_monitor(direction)
+  local monitor = monitor_in_direction(direction)
+  if monitor then
+    hl.dispatch(hl.dsp.focus({ monitor = monitor.name }))
+  end
+end
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left all"))
+local function move_window_to_monitor_workspace(direction)
+  local monitor = monitor_in_direction(direction)
+  if monitor then
+    move_window_to_workspace_id(workspace_id(monitor, active_workspace_slot(monitor)))
+  end
+end
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "L", hl.dsp.exec_cmd("workspace2d right all"))
+hl.bind(CAP .. " + " .. "H", function()
+  focus_monitor("l")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "K", hl.dsp.exec_cmd("workspace2d up all"))
+hl.bind(CAP .. " + " .. "J", function()
+  focus_monitor("d")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "J", hl.dsp.exec_cmd("workspace2d down all"))
+hl.bind(CAP .. " + " .. "K", function()
+  focus_monitor("u")
+end)
 
--- Sync all monitors
+hl.bind(CAP .. " + " .. "L", function()
+  focus_monitor("r")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL + SHIFT" .. " + " .. "H", hl.dsp.exec_cmd("workspace2d left all sync"))
+hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "H", function()
+  move_window_to_monitor_workspace("l")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL + SHIFT" .. " + " .. "L", hl.dsp.exec_cmd("workspace2d right all sync"))
+hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "J", function()
+  move_window_to_monitor_workspace("d")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL + SHIFT" .. " + " .. "K", hl.dsp.exec_cmd("workspace2d up all sync"))
+hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "K", function()
+  move_window_to_monitor_workspace("u")
+end)
 
-hl.bind(mainMod .. " + " .. "CTRL + SHIFT" .. " + " .. "J", hl.dsp.exec_cmd("workspace2d down all sync"))
-
--- Monitor focus keybinds
-
--- hl.bind(CAP .. " + " .. "H", hl.dsp.focus({direction = "left"}))
---
--- hl.bind(CAP .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
---
--- hl.bind(CAP .. " + " .. "K", hl.dsp.focus({ direction = "up" }))
---
--- hl.bind(CAP .. " + " .. "L", hl.dsp.focus({ direction = "left" }))
---
--- -- Monitor Move window keybinds
---
--- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "H", { direction = "left" })
---
--- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "J", { direction = "down" })
---
--- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "K", { direction = "up" })
---
--- hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "L", { direction = "right" })
+hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "L", function()
+  move_window_to_monitor_workspace("r")
+end)
 
 -- Screenshot a region
 
@@ -411,11 +514,15 @@ hl.bind(mainMod .. " + " .. "B", function()
   toggle_special_workspace("btop", "kitty --class=kitty-btop -e btop")
 end)
 
--- Scroll through existing workspaces with mainMod + scroll
+-- Scroll through the active monitor's workspace stack with mainMod + scroll
 
-hl.bind(mainMod .. " + " .. "mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + " .. "mouse_down", function()
+  focus_workspace_delta(1)
+end)
 
-hl.bind(mainMod .. " + " .. "mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + " .. "mouse_up", function()
+  focus_workspace_delta(-1)
+end)
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 
@@ -539,14 +646,3 @@ hl.window_rule({
   },
   workspace = "special:btop",
 })
-
--- Autostart
-hl.on("hyprland.start", function()
-  -- hl.exec_cmd("waybar")
-  -- hl.exec_cmd("swww-daemon")
-  -- hl.exec_cmd("hypridle")
-  -- hl.exec_cmd("hyprpaper")
-  -- hl.exec_cmd("nm-applet")
-  -- hl.exec_cmd("blueman-applet")
-  hl.exec_cmd("noctalia-shell")
-end)
