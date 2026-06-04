@@ -9,7 +9,6 @@
       obs-studio
       discord
       spotify
-      google-chrome
     ];
   };
 
