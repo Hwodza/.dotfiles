@@ -179,6 +179,10 @@ hl.config({
       -- tap_to_click = true,
     },
   },
+  cursor = {
+    no_hardware_cursors = true,
+    no_break_fs_vrr     = false,
+  },
 })
 
 -- https://wiki.hyprland.org/Configuring/Variables/#gestures
