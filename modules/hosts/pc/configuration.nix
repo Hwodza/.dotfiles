@@ -56,6 +56,14 @@
       # Enable CUPS to print documents.
       services.printing.enable = true;
 
+      hardware.nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = true;
+        open = true;
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+      };
+
       # Enable sound with pipewire.
       services.pulseaudio.enable = false;
       security.rtkit.enable = true;
