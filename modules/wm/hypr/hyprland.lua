@@ -103,7 +103,14 @@ hl.config({
     },
   },
 })
-
+hl.layer_rule({
+  name  = "blur_noctalia_bar",
+  match = {
+    namespace = "^noctalia-bar-content-.*",
+  },
+  blur  = true,
+  xray  = true,
+})
 -- https://wiki.hyprland.org/Configuring/Variables/#animations
 
 hl.config({
@@ -123,7 +130,10 @@ hl.animation({
 
 hl.config({
   scrolling = {
+    fullscreen_on_one_column = true,
     column_width = 1.0,
+    focus_fit_method = 0,
+    follow_min_visible = 0.0,
   },
 })
 

@@ -14,8 +14,8 @@
       "contentPadding": 2,
       "fontScale": 1,
       "enableExclusionZoneInset": true,
-      "backgroundOpacity": 0.93,
-      "useSeparateOpacity": false,
+      "backgroundOpacity": 0.04,
+      "useSeparateOpacity": true,
       "marginVertical": 4,
       "marginHorizontal": 4,
       "frameThickness": 8,
@@ -672,25 +672,38 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/home/henry/Pictures/Wallpapers/NASA-APOD/2026-06-03.png"
+      "DP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
+      "HDMI-A-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
-      "eDP-1": {
-        "name": "eDP-1",
+      "DP-1": {
+        "name": "DP-1",
+        "scale": 1,
+        "width": 1920,
+        "height": 1080,
+        "refresh_rate": 143.981,
+        "x": 0,
+        "y": 0,
+        "active_workspace": 2,
+        "vrr": false,
+        "focused": false
+      },
+      "HDMI-A-1": {
+        "name": "HDMI-A-1",
         "scale": 1,
         "width": 1920,
         "height": 1080,
         "refresh_rate": 60,
-        "x": 0,
+        "x": 1920,
         "y": 0,
-        "active_workspace": 101,
+        "active_workspace": 201,
         "vrr": false,
         "focused": true
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1778786137000
+      "lastSeenTs": 0
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
