@@ -9,21 +9,24 @@
     ...
   }: let
     hyprPath = "${config.home.homeDirectory}/.dotfiles/modules/wm/hypr";
-    selfPkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
+    system = pkgs.stdenv.hostPlatform.system;
+    selfPkgs = self.packages.${system};
+    hyprlandPkgs = inputs.hyprland.packages.${system};
     unstablePkgs = import inputs.nixpkgs-unstable {
-      system = pkgs.stdenv.hostPlatform.system;
+      inherit system;
       config = pkgs.config;
     };
   in {
     home.packages = with pkgs; [
       rofi
       unstablePkgs.nwg-displays
-      hyprland
       selfPkgs.myNoctalia
     ];
     home.file.".config/rofi/config.rasi".source = ./rofi.config.rasi;
     wayland.windowManager.hyprland = {
       enable = true;
+      package = hyprlandPkgs.hyprland;
+      portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
       extraConfig = ''
         dofile("${hyprPath}/hyprland.lua")
       '';
