@@ -9,7 +9,7 @@
       description = "${config.preferences.user.name}'s account";
       home = config.preferences.user.homeDirectory;
       extraGroups = ["wheel" "networkmanager"];
-      shell = self.packages.${pkgs.system}.environment;
+      shell = self.packages.${pkgs.stdenv.hostPlatform.system}.environment;
     };
   };
 }
