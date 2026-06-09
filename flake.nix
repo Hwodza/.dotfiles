@@ -10,18 +10,15 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # Allows for dendritic pattern
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
     };
-    import-tree = {
-      url = "github:vic/import-tree";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    import-tree.url = "github:vic/import-tree";
 
     wrappers = {
       url = "github:Lassulus/wrappers";
