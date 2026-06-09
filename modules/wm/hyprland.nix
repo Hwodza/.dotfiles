@@ -11,7 +11,10 @@
     hyprPath = "${config.home.homeDirectory}/.dotfiles/modules/wm/hypr";
     system = pkgs.stdenv.hostPlatform.system;
     selfPkgs = self.packages.${system};
-    hyprlandPkgs = inputs.hyprland.packages.${system};
+    hyprlandPkgs = import inputs.nixpkgs-hyprland {
+      inherit system;
+      config = pkgs.config;
+    };
     unstablePkgs = import inputs.nixpkgs-unstable {
       inherit system;
       config = pkgs.config;
