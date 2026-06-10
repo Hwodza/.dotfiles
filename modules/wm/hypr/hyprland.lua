@@ -239,7 +239,8 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock")
 
 hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
 
--- Move focus with super + arrow keys or vim motions, also allow for mainMod right/left H/L
+-- Move focus with super + arrow keys or vim motions.
+-- Use mainMod right/left to move across scrolling columns.
 
 hl.bind("SUPER" .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
 
@@ -257,13 +258,70 @@ hl.bind("SUPER" .. " + " .. "K", hl.dsp.focus({ direction = "up" }))
 
 hl.bind("SUPER" .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
 
-hl.bind(mainMod .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + " .. "left", hl.dsp.layout("focus l"))
 
-hl.bind(mainMod .. " + " .. "right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + " .. "right", hl.dsp.layout("focus r"))
 
-hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + " .. "H", hl.dsp.layout("focus l"))
 
-hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + " .. "L", hl.dsp.layout("focus r"))
+
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "left", hl.dsp.layout("consume_or_expel prev"))
+
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "right", hl.dsp.layout("consume_or_expel next"))
+
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "H", hl.dsp.layout("consume_or_expel prev"))
+
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "L", hl.dsp.layout("consume_or_expel next"))
+
+-- Scrolling layout controls.
+hl.bind(mainMod .. " + " .. "G", hl.dsp.submap("layoutctl"))
+
+local function layout_sequence(messages)
+  return function()
+    for _, message in ipairs(messages) do
+      hl.dispatch(hl.dsp.layout(message))
+    end
+  end
+end
+
+local promote_and_fit_all = layout_sequence({ "promote", "fit all" })
+
+local function all_columns_width(width, fit)
+  return layout_sequence({ "colresize all " .. width, "fit " .. fit })
+end
+
+hl.define_submap("layoutctl", "reset", function()
+  hl.bind("escape", hl.dsp.submap("reset"))
+  hl.bind("Q", hl.dsp.submap("reset"))
+  hl.bind("Return", hl.dsp.submap("reset"))
+
+  hl.bind("T", promote_and_fit_all)
+  hl.bind("O", promote_and_fit_all)
+  hl.bind("H", hl.dsp.layout("consume_or_expel prev"))
+  hl.bind("L", hl.dsp.layout("consume_or_expel next"))
+  hl.bind("P", promote_and_fit_all)
+
+  hl.bind("J", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
+  hl.bind("K", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
+  hl.bind("SHIFT" .. " + " .. "J", hl.dsp.window.move({ direction = "down" }))
+  hl.bind("SHIFT" .. " + " .. "K", hl.dsp.window.move({ direction = "up" }))
+
+  hl.bind("bracketleft", hl.dsp.layout("colresize -0.05"), { repeating = true })
+  hl.bind("bracketright", hl.dsp.layout("colresize +0.05"), { repeating = true })
+
+  hl.bind("F", hl.dsp.layout("fit active"))
+  hl.bind("A", hl.dsp.layout("fit all"))
+  hl.bind("V", hl.dsp.layout("fit visible"))
+
+  hl.bind("1", all_columns_width("1.0", "active"))
+  hl.bind("2", all_columns_width("0.5", "all"))
+  hl.bind("3", all_columns_width("0.333", "all"))
+  hl.bind("4", all_columns_width("0.25", "all"))
+
+  hl.bind("S", hl.dsp.layout("swapcol r"))
+  hl.bind("SHIFT" .. " + " .. "S", hl.dsp.layout("swapcol l"))
+end)
 
 -- Switch per-monitor workspace stacks with mainMod + [0-9].
 -- Workspace 1 is the top of each stack, 10 is the bottom.
