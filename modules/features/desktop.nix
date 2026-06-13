@@ -9,6 +9,7 @@
       obs-studio
       discord
       spotify
+      stirling-pdf-desktop
     ];
   };
 
