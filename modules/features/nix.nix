@@ -14,6 +14,7 @@
         alejandra
         manix
         nix-inspect
+        sops
     ];
   };
 }
