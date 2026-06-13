@@ -1,91 +1,70 @@
 ---@module 'hl'
 
--- https://wiki.hyprland.org/Configuring/
-
-
---##################
-
---## MY PROGRAMS ###
-
---##################
-
--- See https://wiki.hyprland.org/Configuring/Keywords/
-
--- Set programs that you use
+-- Hyprland is configured through the Lua DSL exposed as the global `hl`.
+-- This file is loaded by modules/wm/hyprland.nix using Hyprland's `dofile`.
 
 local terminal = os.getenv("TERMINAL") or "kitty"
+local app_launcher = "rofi -show drun"
+local main_mod = "ALT"
+local caps_mod = "MOD2"
+local workspace_count = 10
 
-local fileManager = terminal .. " -e yazi"
+local reload_noctalia_state =
+"hyprctl reload && noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json"
 
-local menu = "rofi -show drun"
+local function chord(...)
+  local parts = { ... }
+  for index, part in ipairs(parts) do
+    parts[index] = tostring(part)
+  end
+
+  return table.concat(parts, " + ")
+end
 
 require("monitors")
 
---################
+-- --------------------------------------------------------------------------------
+-- Startup
+-- --------------------------------------------------------------------------------
 
---## AUTOSTART ###
-
---################
-
--- Autostart
 hl.on("hyprland.start", function()
-  -- hl.exec_cmd("waybar")
-  -- hl.exec_cmd("swww-daemon")
-  -- hl.exec_cmd("hypridle")
-  -- hl.exec_cmd("hyprpaper")
-  -- hl.exec_cmd("nm-applet")
-  -- hl.exec_cmd("blueman-applet")
+  -- Optional local daemons intentionally stay disabled here:
+  -- waybar, swww-daemon, hypridle, hyprpaper, nm-applet, blueman-applet.
   hl.exec_cmd("noctalia-shell")
 end)
 
---############################
+-- --------------------------------------------------------------------------------
+-- Environment
+-- --------------------------------------------------------------------------------
 
---## ENVIRONMENT VARIABLES ###
+for _, env in ipairs({
+  { "XCURSOR_SIZE",                 24 },
+  { "HYPRCURSOR_SIZE",              24 },
+  { "ELECTRON_OZONE_PLATFORM_HINT", "auto" },
+  { "TERM",                         "xterm-256color" },
+}) do
+  hl.env(env[1], env[2])
+end
 
---############################
-
--- See https://wiki.hyprland.org/Configuring/Environment-variables/
-
-hl.env("XCURSOR_SIZE", 24)
-
-hl.env("HYPRCURSOR_SIZE", 24)
-
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
-
-hl.env("TERM", "xterm-256color")
-
---####################
-
---## LOOK AND FEEL ###
-
---####################
-
--- Refer to https://wiki.hyprland.org/Configuring/Variables/
-
--- https://wiki.hyprland.org/Configuring/Variables/#general
+-- --------------------------------------------------------------------------------
+-- Appearance and layout
+-- --------------------------------------------------------------------------------
 
 hl.config({
   general = {
     gaps_in = 5,
     gaps_out = 0,
     border_size = 2,
-    -- https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-    -- ["col.active_border"] = "rgba(33ccffee) rgba(00ff99ee) 45deg",
     ["col.inactive_border"] = "rgba(595959aa)",
-    -- Set to true enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = true,
-    -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false,
     layout = "scrolling",
   },
 })
 
--- https://wiki.hyprland.org/Configuring/Variables/#decoration
-
 hl.config({
   decoration = {
     rounding = 10,
-    -- Change transparency of focused and unfocused windows
     active_opacity = 1,
     inactive_opacity = 1,
     shadow = {
@@ -94,7 +73,6 @@ hl.config({
       render_power = 3,
       color = "rgba(1a1a1aee)",
     },
-    -- https://wiki.hyprland.org/Configuring/Variables/#blur
     blur = {
       enabled = true,
       size = 8,
@@ -103,20 +81,19 @@ hl.config({
     },
   },
 })
+
 hl.layer_rule({
-  name  = "blur_noctalia_bar",
+  name = "blur_noctalia_bar",
   match = {
     namespace = "^noctalia-bar-content-.*",
   },
-  blur  = true,
-  xray  = true,
+  blur = true,
+  xray = true,
 })
--- https://wiki.hyprland.org/Configuring/Variables/#animations
 
 hl.config({
   animations = {
     enabled = true,
-    -- Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
   },
 })
 
@@ -132,37 +109,27 @@ hl.config({
   scrolling = {
     fullscreen_on_one_column = true,
     column_width = 1.0,
-    focus_fit_method = 0,
+    focus_fit_method = 1,
     follow_min_visible = 0.0,
   },
 })
 
--- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-
--- hl.config({
---   master = {
---     new_status = "master",
---   },
--- })
-
--- https://wiki.hyprland.org/Configuring/Variables/#misc
+hl.config({
+  binds = {
+    window_direction_monitor_fallback = false,
+  },
+})
 
 hl.config({
   misc = {
     force_default_wallpaper = 0,
-    -- Set to 0 or 1 to disable the anime mascot wallpapers
     disable_hyprland_logo = false,
-    -- If true disables the random hyprland logo / anime girl background. :(
   },
 })
 
---############
-
---## INPUT ###
-
---############
-
--- https://wiki.hyprland.org/Configuring/Variables/#input
+-- --------------------------------------------------------------------------------
+-- Input
+-- --------------------------------------------------------------------------------
 
 hl.config({
   input = {
@@ -173,160 +140,140 @@ hl.config({
     kb_rules = "",
     follow_mouse = 1,
     sensitivity = 0,
-    -- -1.0 - 1.0, 0 means no modification.
     touchpad = {
       natural_scroll = true,
-      -- tap_to_click = true,
     },
   },
   cursor = {
     no_hardware_cursors = true,
-    no_break_fs_vrr     = false,
+    no_break_fs_vrr = false,
   },
 })
 
--- https://wiki.hyprland.org/Configuring/Variables/#gestures
+-- --------------------------------------------------------------------------------
+-- Core keybindings
+-- --------------------------------------------------------------------------------
 
--- gestures {
+hl.bind(chord(main_mod, "Q"), hl.dsp.exec_cmd(terminal))
+hl.bind(chord(main_mod, "X"), hl.dsp.window.close())
+hl.bind(chord(main_mod, "M"), hl.dsp.exit())
+hl.bind(chord(main_mod, "V"), hl.dsp.window.float())
+hl.bind(chord(main_mod, "SPACE"), hl.dsp.exec_cmd(app_launcher))
+hl.bind(chord(main_mod, "R"), hl.dsp.exec_cmd(reload_noctalia_state))
+-- hl.bind(chord(main_mod, "SHIFT", "S"), hl.dsp.exec_cmd("hyprlock"))
+-- hl.bind(chord(main_mod, "W"), hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
 
--- 		workspace_swipe = false
+for _, bind in ipairs({
+  { "left",  "left" },
+  { "right", "right" },
+  { "up",    "up" },
+  { "down",  "down" },
+  { "H",     "left" },
+  { "L",     "right" },
+  { "K",     "up" },
+  { "J",     "down" },
+}) do
+  hl.bind(chord("SUPER", bind[1]), hl.dsp.focus({ direction = bind[2] }))
+end
 
--- }
+for _, bind in ipairs({
+  { "left",  "focus l" },
+  { "right", "focus r" },
+  { "H",     "focus l" },
+  { "L",     "focus r" },
+}) do
+  hl.bind(chord(main_mod, bind[1]), hl.dsp.layout(bind[2]))
+end
 
--- Example per-device config
+-- --------------------------------------------------------------------------------
+-- Scrolling layout helpers
+-- --------------------------------------------------------------------------------
 
--- See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
+local column_width_toggles = {}
 
--- hl.config({
---     device = {
---         name = "epic-mouse-v1",
---         sensitivity = -0.5,
---     },
--- })
--- NOTE: Section 'device' may be a plugin or custom section; verify the output
+local function active_column_key()
+  local window = hl.get_active_window()
+  if not window then
+    return nil
+  end
 
---##################
+  local workspace = window.workspace or hl.get_active_workspace()
+  local monitor = window.monitor or hl.get_active_monitor()
 
---## KEYBINDINGS ###
+  return table.concat({
+    window.address or window.stable_id or "unknown",
+    workspace and workspace.id or "unknown",
+    monitor and monitor.id or "unknown",
+  }, ":")
+end
 
---##################
+local function toggle_active_column_width()
+  local key = active_column_key()
+  if not key then
+    return
+  end
 
--- See https://wiki.hyprland.org/Configuring/Keywords/
-
--- $mainMod = SUPER # Sets "Windows" key as main modifier
-
-
--- Sets Alt key as main modifer
-local mainMod = "ALT"
-local CAP = "MOD2"
-
--- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-
-hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
-
-hl.bind(mainMod .. " + " .. "X", hl.dsp.window.close())
-
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exit())
-
-hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
-
-hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun"))
-
-hl.bind(mainMod .. " + " .. "R",
-  hl.dsp.exec_cmd("hyprctl reload && noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json"))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd("hyprlock"))
-
-hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
-
--- Move focus with super + arrow keys or vim motions.
--- Use mainMod right/left to move across scrolling columns.
-
-hl.bind("SUPER" .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
-
-hl.bind("SUPER" .. " + " .. "right", hl.dsp.focus({ direction = "right" }))
-
-hl.bind("SUPER" .. " + " .. "up", hl.dsp.focus({ direction = "up" }))
-
-hl.bind("SUPER" .. " + " .. "down", hl.dsp.focus({ direction = "down" }))
-
-hl.bind("SUPER" .. " + " .. "H", hl.dsp.focus({ direction = "left" }))
-
-hl.bind("SUPER" .. " + " .. "L", hl.dsp.focus({ direction = "right" }))
-
-hl.bind("SUPER" .. " + " .. "K", hl.dsp.focus({ direction = "up" }))
-
-hl.bind("SUPER" .. " + " .. "J", hl.dsp.focus({ direction = "down" }))
-
-hl.bind(mainMod .. " + " .. "left", hl.dsp.layout("focus l"))
-
-hl.bind(mainMod .. " + " .. "right", hl.dsp.layout("focus r"))
-
-hl.bind(mainMod .. " + " .. "H", hl.dsp.layout("focus l"))
-
-hl.bind(mainMod .. " + " .. "L", hl.dsp.layout("focus r"))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "left", hl.dsp.layout("consume_or_expel prev"))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "right", hl.dsp.layout("consume_or_expel next"))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "H", hl.dsp.layout("consume_or_expel prev"))
-
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "L", hl.dsp.layout("consume_or_expel next"))
-
--- Scrolling layout controls.
-hl.bind(mainMod .. " + " .. "G", hl.dsp.submap("layoutctl"))
-
-local function layout_sequence(messages)
-  return function()
-    for _, message in ipairs(messages) do
-      hl.dispatch(hl.dsp.layout(message))
-    end
+  -- Hyprscroll does not expose a toggle, so remember each active column state
+  -- locally and alternate between half width and full width.
+  if column_width_toggles[key] then
+    hl.dispatch(hl.dsp.layout("colresize 1.0"))
+    column_width_toggles[key] = false
+  else
+    hl.dispatch(hl.dsp.layout("colresize 0.5"))
+    column_width_toggles[key] = true
   end
 end
 
-local promote_and_fit_all = layout_sequence({ "promote", "fit all" })
+hl.bind(chord(main_mod, "C"), toggle_active_column_width)
+hl.bind(chord(main_mod, "SHIFT", "H"), hl.dsp.layout("swapcol l"))
+hl.bind(chord(main_mod, "SHIFT", "L"), hl.dsp.layout("swapcol r"))
 
-local function all_columns_width(width, fit)
-  return layout_sequence({ "colresize all " .. width, "fit " .. fit })
-end
+hl.define_submap("layout", function()
+  for _, bind in ipairs({
+    { "H", -80, 0 },
+    { "J", 0,   80 },
+    { "K", 0,   -80 },
+    { "L", 80,  0 },
+  }) do
+    hl.bind(
+      bind[1],
+      hl.dsp.window.resize({ x = bind[2], y = bind[3], relative = true }),
+      { repeating = true }
+    )
+  end
 
-hl.define_submap("layoutctl", "reset", function()
+  for _, bind in ipairs({
+    { "SHIFT + H", "colresize -0.1" },
+    { "SHIFT + L", "colresize +0.1" },
+    { "SHIFT + K", "colresize -conf" },
+    { "SHIFT + J", "colresize +conf" },
+  }) do
+    hl.bind(bind[1], hl.dsp.layout(bind[2]), { repeating = true })
+  end
+
+  for _, bind in ipairs({
+    { "C", "consume" },
+    { "E", "expel" },
+    { "P", "promote" },
+    { "5", "colresize 0.5" },
+    { "0", "colresize 1.0" },
+    { "A", "colresize all 1.0" },
+  }) do
+    hl.bind(bind[1], hl.dsp.layout(bind[2]))
+  end
+
   hl.bind("escape", hl.dsp.submap("reset"))
   hl.bind("Q", hl.dsp.submap("reset"))
-  hl.bind("Return", hl.dsp.submap("reset"))
-
-  hl.bind("T", promote_and_fit_all)
-  hl.bind("O", promote_and_fit_all)
-  hl.bind("H", hl.dsp.layout("consume_or_expel prev"))
-  hl.bind("L", hl.dsp.layout("consume_or_expel next"))
-  hl.bind("P", promote_and_fit_all)
-
-  hl.bind("J", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
-  hl.bind("K", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
-  hl.bind("SHIFT" .. " + " .. "J", hl.dsp.window.move({ direction = "down" }))
-  hl.bind("SHIFT" .. " + " .. "K", hl.dsp.window.move({ direction = "up" }))
-
-  hl.bind("bracketleft", hl.dsp.layout("colresize -0.05"), { repeating = true })
-  hl.bind("bracketright", hl.dsp.layout("colresize +0.05"), { repeating = true })
-
-  hl.bind("F", hl.dsp.layout("fit active"))
-  hl.bind("A", hl.dsp.layout("fit all"))
-  hl.bind("V", hl.dsp.layout("fit visible"))
-
-  hl.bind("1", all_columns_width("1.0", "active"))
-  hl.bind("2", all_columns_width("0.5", "all"))
-  hl.bind("3", all_columns_width("0.333", "all"))
-  hl.bind("4", all_columns_width("0.25", "all"))
-
-  hl.bind("S", hl.dsp.layout("swapcol r"))
-  hl.bind("SHIFT" .. " + " .. "S", hl.dsp.layout("swapcol l"))
 end)
 
--- Switch per-monitor workspace stacks with mainMod + [0-9].
--- Workspace 1 is the top of each stack, 10 is the bottom.
-local workspaceCount = 10
+hl.bind(chord(main_mod, "A"), hl.dsp.submap("layout"))
 
+-- --------------------------------------------------------------------------------
+-- Workspace stack helpers
+-- --------------------------------------------------------------------------------
+
+-- Each monitor gets its own ten-workspace stack. Monitor 0 uses workspaces
+-- 1-10; other monitors use offset ranges based on their Hyprland monitor id.
 local function workspace_base(monitor)
   if not monitor or monitor.id == 0 then
     return 0
@@ -345,7 +292,7 @@ local function workspace_slot(monitor, workspace)
   end
 
   local slot = workspace.id - workspace_base(monitor)
-  if slot < 1 or slot > workspaceCount then
+  if slot < 1 or slot > workspace_count then
     return 1
   end
 
@@ -357,7 +304,7 @@ local function active_workspace_slot(monitor)
 end
 
 local function workspace_delta(monitor, delta)
-  return ((active_workspace_slot(monitor) - 1 + delta) % workspaceCount) + 1
+  return ((active_workspace_slot(monitor) - 1 + delta) % workspace_count) + 1
 end
 
 local function focus_workspace_id(workspace)
@@ -402,8 +349,20 @@ local function move_window_to_workspace_delta(delta)
   end
 end
 
+local function focus_workspace_slot_action(slot)
+  return function()
+    focus_workspace_slot(slot)
+  end
+end
+
+local function move_window_to_workspace_slot_action(slot)
+  return function()
+    move_window_to_workspace_slot(slot)
+  end
+end
+
 for _, monitor in ipairs(hl.get_monitors()) do
-  for slot = 1, workspaceCount do
+  for slot = 1, workspace_count do
     hl.workspace_rule({
       workspace = tostring(workspace_id(monitor, slot)),
       monitor = monitor.name,
@@ -414,35 +373,32 @@ for _, monitor in ipairs(hl.get_monitors()) do
   end
 end
 
-for slot = 1, workspaceCount do
-  local key = slot % workspaceCount
+for slot = 1, workspace_count do
+  local key = slot % workspace_count
 
-  hl.bind(mainMod .. " + " .. key, function()
-    focus_workspace_slot(slot)
-  end)
-
-  hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. key, function()
-    move_window_to_workspace_slot(slot)
-  end)
+  hl.bind(chord(main_mod, key), focus_workspace_slot_action(slot))
+  hl.bind(chord(main_mod, "SHIFT", key), move_window_to_workspace_slot_action(slot))
 end
 
-hl.bind(mainMod .. " + " .. "J", function()
+hl.bind(chord(main_mod, "J"), function()
   focus_workspace_delta(1)
 end)
 
-hl.bind(mainMod .. " + " .. "K", function()
+hl.bind(chord(main_mod, "K"), function()
   focus_workspace_delta(-1)
 end)
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "J", function()
+hl.bind(chord(main_mod, "SHIFT", "J"), function()
   move_window_to_workspace_delta(1)
 end)
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "K", function()
+hl.bind(chord(main_mod, "SHIFT", "K"), function()
   move_window_to_workspace_delta(-1)
 end)
 
--- Move between monitors with CapsLock vim motions.
+-- --------------------------------------------------------------------------------
+-- Monitor helpers
+-- --------------------------------------------------------------------------------
 
 local function monitor_center(monitor)
   return {
@@ -461,6 +417,8 @@ local function monitor_in_direction(direction)
   local best_monitor = nil
   local best_score = nil
 
+  -- Pick the nearest monitor whose center is actually in the requested
+  -- direction, so diagonal layouts still behave predictably.
   for _, monitor in ipairs(hl.get_monitors()) do
     if monitor.id ~= active.id then
       local center = monitor_center(monitor)
@@ -510,49 +468,34 @@ local function move_window_to_monitor_workspace(direction)
   end
 end
 
-hl.bind(CAP .. " + " .. "H", function()
-  focus_monitor("l")
-end)
+local function focus_monitor_action(direction)
+  return function()
+    focus_monitor(direction)
+  end
+end
 
-hl.bind(CAP .. " + " .. "J", function()
-  focus_monitor("d")
-end)
+local function move_window_to_monitor_workspace_action(direction)
+  return function()
+    move_window_to_monitor_workspace(direction)
+  end
+end
 
-hl.bind(CAP .. " + " .. "K", function()
-  focus_monitor("u")
-end)
+for _, bind in ipairs({
+  { "H", "l" },
+  { "J", "d" },
+  { "K", "u" },
+  { "L", "r" },
+}) do
+  hl.bind(chord(caps_mod, bind[1]), focus_monitor_action(bind[2]))
+  hl.bind(chord(caps_mod, "SHIFT", bind[1]), move_window_to_monitor_workspace_action(bind[2]))
+end
 
-hl.bind(CAP .. " + " .. "L", function()
-  focus_monitor("r")
-end)
+-- --------------------------------------------------------------------------------
+-- Scratchpads
+-- --------------------------------------------------------------------------------
 
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "H", function()
-  move_window_to_monitor_workspace("l")
-end)
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "J", function()
-  move_window_to_monitor_workspace("d")
-end)
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "K", function()
-  move_window_to_monitor_workspace("u")
-end)
-
-hl.bind(CAP .. " + " .. "SHIFT" .. " + " .. "L", function()
-  move_window_to_monitor_workspace("r")
-end)
-
--- Screenshot a region
-
-hl.bind(mainMod .. " + " .. "P", hl.dsp.exec_cmd("hyprshot -m region"))
-
--- Example special workspace (scratchpad)
-
--- bind = $mainMod, S, togglespecialworkspace, magic
-
--- bind = $mainMod SHIFT, S, movetoworkspace, special:magic
-
--- Special workspaces
+-- Special workspaces act like app-specific scratchpads. If a target workspace
+-- has no windows yet, launch its app before toggling the workspace into view.
 local function toggle_special_workspace(workspace_name, app_command)
   local active_ws = hl.get_active_workspace()
   if active_ws ~= nil and active_ws.name == "special:" .. workspace_name then
@@ -571,153 +514,110 @@ local function toggle_special_workspace(workspace_name, app_command)
   if not ws_exists then
     hl.dispatch(hl.dsp.exec_cmd("/usr/bin/env sh -c '" .. app_command .. "'"))
   end
+
   hl.dispatch(hl.dsp.workspace.toggle_special(workspace_name))
 end
 
-hl.bind(mainMod .. " + " .. "D", function()
-  toggle_special_workspace("discord", "Discord")
-end)
+local function toggle_special_workspace_action(workspace_name, app_command)
+  return function()
+    toggle_special_workspace(workspace_name, app_command)
+  end
+end
 
-hl.bind(mainMod .. " + " .. "S", function()
-  toggle_special_workspace("spotify", "spotify")
-end)
+for _, scratchpad in ipairs({
+  { key = "D", workspace = "discord", command = "Discord" },
+  { key = "S", workspace = "spotify", command = "spotify" },
+  { key = "E", workspace = "yazi",    command = "kitty --class=kitty-yazi -e yazi" },
+  { key = "B", workspace = "btop",    command = "kitty --class=kitty-btop -e btop" },
+}) do
+  hl.bind(
+    chord(main_mod, scratchpad.key),
+    toggle_special_workspace_action(scratchpad.workspace, scratchpad.command)
+  )
+end
 
-hl.bind(mainMod .. " + " .. "E", function()
-  toggle_special_workspace("yazi", "kitty --class=kitty-yazi -e yazi")
-end)
+hl.bind(chord(main_mod, "P"), hl.dsp.exec_cmd("hyprshot -m region"))
 
-hl.bind(mainMod .. " + " .. "B", function()
-  toggle_special_workspace("btop", "kitty --class=kitty-btop -e btop")
-end)
+-- --------------------------------------------------------------------------------
+-- Mouse and media
+-- --------------------------------------------------------------------------------
 
--- Scroll through the active monitor's workspace stack with mainMod + scroll
-
-hl.bind(mainMod .. " + " .. "mouse_down", function()
+hl.bind(chord(main_mod, "mouse_down"), function()
   focus_workspace_delta(1)
 end)
 
-hl.bind(mainMod .. " + " .. "mouse_up", function()
+hl.bind(chord(main_mod, "mouse_up"), function()
   focus_workspace_delta(-1)
 end)
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
+hl.bind(chord(main_mod, "mouse:272"), hl.dsp.window.drag(), { mouse = true })
+hl.bind(chord(main_mod, "mouse:273"), hl.dsp.window.resize(), { mouse = true })
 
-hl.bind(mainMod .. " + " .. "mouse:272", hl.dsp.window.drag(), { mouse = true })
+for _, bind in ipairs({
+  { "XF86AudioRaiseVolume",  "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+" },
+  { "XF86AudioLowerVolume",  "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" },
+  { "XF86AudioMute",         "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" },
+  { "XF86AudioMicMute",      "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" },
+  { "XF86MonBrightnessUp",   "brightnessctl s 10%+" },
+  { "XF86MonBrightnessDown", "brightnessctl s 10%-" },
+  { "XF86AudioNext",         "playerctl next" },
+  { "XF86AudioPause",        "playerctl play-pause" },
+  { "XF86AudioPlay",         "playerctl play-pause" },
+  { "XF86AudioPrev",         "playerctl previous" },
+}) do
+  hl.bind(bind[1], hl.dsp.exec_cmd(bind[2]), { locked = true })
+end
 
-hl.bind(mainMod .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
-
--- Laptop multimedia keys for volume and LCD brightness
-
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true })
-
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true })
-
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { locked = true })
-
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { locked = true })
-
--- Requires playerctl
-
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
-
---#############################
-
---## WINDOWS AND WORKSPACES ###
-
---#############################
-
--- See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-
--- See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
-
--- Example windowrule v1
-
--- windowrule = float, ^(kitty)$
-
--- Example windowrule v2
-
--- windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-
--- Ignore maximize requests from apps. You'll probably like this.
+-- --------------------------------------------------------------------------------
+-- Window rules
+-- --------------------------------------------------------------------------------
 
 hl.window_rule({
-  name           = "suppressevent_maximi",
-  match          = {
+  name = "suppressevent_maximi",
+  match = {
     class = ".*",
   },
   suppress_event = "maximize",
 })
 
--- Fix some dragging issues with XWayland
-
 hl.window_rule({
-  name     = "nofocus",
-  match    = {
+  name = "nofocus",
+  match = {
     class = "^$",
     title = "^$",
     xwayland = 1,
-    -- floating = 1,
     fullscreen = 0,
-    -- pinned = 0,
   },
   no_focus = true,
 })
 
--- Make Firefox open to workspace 2
-
--- windowrulev2 = workspace 2, class:firefox
-
--- Make Discord open to workspace 3
-
--- windowrulev2 = workspace 3, class:discord
-
--- Make Spotify open to workspace 4
-
--- windowrulev2 = workspace 4, class:spotify
-
--- Make Obsidian open to workspace 6
-
--- windowrulev2 = workspace 6, class:obsidian
-
--- Special workspace rules
-
 hl.window_rule({
-  name      = "workspace_special_di",
-  match     = {
+  name = "workspace_special_di",
+  match = {
     class = "^(discord)$",
   },
   workspace = "special:discord",
 })
 
 hl.window_rule({
-  name      = "workspace_special_sp",
-  match     = {
+  name = "workspace_special_sp",
+  match = {
     class = "^(spotify)$",
   },
   workspace = "special:spotify",
 })
 
 hl.window_rule({
-  name      = "workspace_special_ya",
-  match     = {
+  name = "workspace_special_ya",
+  match = {
     class = "^(kitty-yazi)$",
   },
   workspace = "special:yazi",
 })
 
 hl.window_rule({
-  name      = "workspace_special_bt",
-  match     = {
+  name = "workspace_special_bt",
+  match = {
     class = "^(kitty-btop)$",
   },
   workspace = "special:btop",
