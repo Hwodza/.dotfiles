@@ -42,6 +42,7 @@ for _, env in ipairs({
   { "HYPRCURSOR_SIZE",              24 },
   { "ELECTRON_OZONE_PLATFORM_HINT", "auto" },
   { "TERM",                         "xterm-256color" },
+  { "GDK_BACKEND",                  "x11"},
 }) do
   hl.env(env[1], env[2])
 end
