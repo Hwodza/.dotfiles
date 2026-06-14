@@ -5,16 +5,24 @@
       inputs.sops-nix.nixosModules.sops
     ];
     programs.nix-index-database.comma.enable = true;
-    nix.settings.experimental-features = ["nix-command" "flakes"];
+    nix = {
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+      optimise.automatic = true;
+      settings.experimental-features = ["nix-command" "flakes"];
+    };
     nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [
-        nil
-        nixd
-        statix
-        alejandra
-        manix
-        nix-inspect
-        sops
+      nil
+      nixd
+      statix
+      alejandra
+      manix
+      nix-inspect
+      sops
     ];
   };
 }
