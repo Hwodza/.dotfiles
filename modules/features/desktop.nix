@@ -10,6 +10,7 @@
       discord
       spotify
       stirling-pdf-desktop
+      thunderbird
     ];
   };
 
