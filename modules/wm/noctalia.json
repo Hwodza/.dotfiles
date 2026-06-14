@@ -456,7 +456,7 @@
       "disableDesktopWidgets": true
     },
     "dock": {
-      "enabled": true,
+      "enabled": false,
       "position": "bottom",
       "displayMode": "auto_hide",
       "dockType": "floating",
@@ -685,9 +685,9 @@
         "refresh_rate": 143.981,
         "x": 0,
         "y": 0,
-        "active_workspace": 2,
+        "active_workspace": 1,
         "vrr": false,
-        "focused": false
+        "focused": true
       },
       "HDMI-A-1": {
         "name": "HDMI-A-1",
@@ -699,11 +699,11 @@
         "y": 0,
         "active_workspace": 201,
         "vrr": false,
-        "focused": true
+        "focused": false
       }
     },
     "notificationsState": {
-      "lastSeenTs": 0
+      "lastSeenTs": 1781371244000
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
