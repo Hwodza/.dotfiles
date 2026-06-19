@@ -2,6 +2,7 @@
   flake.homeModules.desktop = {pkgs, ...}: {
     home.packages = with pkgs; [
       kdePackages.dolphin
+      kdePackages.kio-extras
       tor-browser
       obsidian
       zathura
@@ -12,6 +13,12 @@
       stirling-pdf-desktop
       thunderbird
     ];
+
+    services.udiskie = {
+      enable = true;
+      automount = true;
+      tray = "auto";
+    };
   };
 
   flake.nixosModules.desktop = {
@@ -42,6 +49,7 @@
 
     services = {
       upower.enable = true;
+      udisks2.enable = true;
       greetd = {
         enable = true;
         settings = {
