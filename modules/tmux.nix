@@ -1,11 +1,5 @@
-{
-  inputs,
-  ...
-}: {
-  perSystem = {
-    pkgs,
-    ...
-  }: {
+{inputs, ...}: {
+  perSystem = {pkgs, ...}: {
     packages.tmux = inputs.wrapper-modules.wrappers.tmux.wrap {
       inherit pkgs;
 
@@ -27,9 +21,21 @@
       allowPassthrough = true;
       disableConfirmationPrompt = false;
 
+      plugins = with pkgs.tmuxPlugins; [
+        resurrect
+        {
+          plugin = continuum;
+          after = ["tmuxplugin-resurrect"];
+        }
+        yank
+        tmux-fzf
+      ];
+
       configBefore = ''
         set -g renumber-windows on
         setw -g automatic-rename on
+        set -g @continuum-restore 'on'
+        set -g @continuum-save-interval '15'
       '';
 
       configAfter = ''
