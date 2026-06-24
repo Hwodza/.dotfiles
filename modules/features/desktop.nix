@@ -12,6 +12,7 @@
       spotify
       stirling-pdf-desktop
       thunderbird
+      pomodoro-gtk
     ];
 
     services.udiskie = {
