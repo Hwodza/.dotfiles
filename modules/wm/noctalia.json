@@ -72,29 +72,15 @@
           {
             "colorizeIcons": false,
             "hideMode": "hidden",
-            "id": "ActiveWindow",
-            "maxWidth": 145,
-            "scrollingMode": "hover",
-            "showIcon": true,
-            "showText": true,
-            "textColor": "none",
-            "useFixedWidth": false
-          },
-          {
-            "compactMode": false,
-            "hideMode": "hidden",
-            "hideWhenIdle": false,
-            "id": "MediaMini",
-            "maxWidth": 145,
-            "panelShowAlbumArt": true,
-            "scrollingMode": "hover",
-            "showAlbumArt": true,
-            "showArtistFirst": true,
-            "showProgressRing": true,
-            "showVisualizer": false,
-            "textColor": "none",
-            "useFixedWidth": false,
-            "visualizerType": "linear"
+            "iconScale": 0.8,
+            "id": "Taskbar",
+            "maxTaskbarWidth": 40,
+            "onlyActiveWorkspaces": true,
+            "onlySameOutput": true,
+            "showPinnedApps": true,
+            "showTitle": false,
+            "smartWidth": true,
+            "titleWidth": 120
           }
         ],
         "center": [
@@ -134,6 +120,22 @@
             "iconColor": "none",
             "id": "KeepAwake",
             "textColor": "none"
+          },
+          {
+            "compactMode": false,
+            "hideMode": "hidden",
+            "hideWhenIdle": false,
+            "id": "MediaMini",
+            "maxWidth": 145,
+            "panelShowAlbumArt": true,
+            "scrollingMode": "hover",
+            "showAlbumArt": true,
+            "showArtistFirst": true,
+            "showProgressRing": true,
+            "showVisualizer": false,
+            "textColor": "none",
+            "useFixedWidth": false,
+            "visualizerType": "linear"
           },
           {
             "hideWhenZero": false,
@@ -555,10 +557,10 @@
       "location": "top_right",
       "overlayLayer": true,
       "backgroundOpacity": 1,
-      "respectExpireTimeout": false,
+      "respectExpireTimeout": true,
       "lowUrgencyDuration": 3,
-      "normalUrgencyDuration": 8,
-      "criticalUrgencyDuration": 15,
+      "normalUrgencyDuration": 5,
+      "criticalUrgencyDuration": 10,
       "clearDismissed": true,
       "saveToHistory": {
         "low": true,
@@ -674,7 +676,7 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "settingsPanel-HDMI-A-1",
+    "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
       "DP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
@@ -690,7 +692,7 @@
         "refresh_rate": 143.981,
         "x": 0,
         "y": 0,
-        "active_workspace": 2,
+        "active_workspace": 1,
         "vrr": false,
         "focused": false
       },
