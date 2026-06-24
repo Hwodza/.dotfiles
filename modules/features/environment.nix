@@ -42,7 +42,7 @@
 
           # other
           yazi
-          tmux
+          self'.packages.tmux
           file
           unzip
           zip
