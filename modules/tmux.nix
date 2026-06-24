@@ -28,6 +28,7 @@
           after = ["tmuxplugin-resurrect"];
         }
         yank
+        vim-tmux-navigator
         tmux-fzf
       ];
 
