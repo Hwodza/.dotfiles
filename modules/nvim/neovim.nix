@@ -125,26 +125,27 @@ in {
       };
 
       specs.plugins = {
-        data = [
-          pkgs.vimPlugins.lz-n
-          pkgs.vimPlugins.plenary-nvim
-          pkgs.vimPlugins.nvim-lspconfig
-          pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-          pkgs.vimPlugins.telescope-nvim
+        data = with pkgs.vimPlugins; [
+          lz-n
+          plenary-nvim
+          nvim-lspconfig
+          nvim-treesitter.withAllGrammars
+          telescope-nvim
 
           # completion
-          pkgs.vimPlugins.nvim-web-devicons
-          pkgs.vimPlugins.lspkind-nvim
-          pkgs.vimPlugins.colorful-menu-nvim
-          pkgs.vimPlugins.blink-cmp
+          nvim-web-devicons
+          lspkind-nvim
+          colorful-menu-nvim
+          blink-cmp
 
           # misc
-          pkgs.vimPlugins.which-key-nvim
-          pkgs.vimPlugins.mini-comment
-          pkgs.vimPlugins.snacks-nvim
-          pkgs.vimPlugins.oil-nvim
-          pkgs.vimPlugins.lualine-nvim
-          pkgs.vimPlugins.luasnip
+          which-key-nvim
+          mini-comment
+          snacks-nvim
+          oil-nvim
+          lualine-nvim
+          luasnip
+          vim-tmux-navigator
         ];
       };
 

@@ -42,6 +42,10 @@
       configAfter = ''
         bind-key | split-window -h
         bind-key - split-window -v
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R 
       '';
     };
   };
