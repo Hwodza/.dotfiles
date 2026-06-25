@@ -13,6 +13,7 @@
       stirling-pdf-desktop
       thunderbird
       pomodoro-gtk
+      localsend
     ];
 
     services.udiskie = {
