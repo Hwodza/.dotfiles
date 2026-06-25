@@ -13,7 +13,6 @@
       stirling-pdf-desktop
       thunderbird
       pomodoro-gtk
-      localsend
     ];
 
     services.udiskie = {
@@ -63,7 +62,13 @@
     };
 
     # Install firefox.
-    programs.firefox.enable = true;
+    programs = {
+      firefox.enable = true;
+      localsend = {
+        enable = true;
+        openFirewall = true;
+      };
+    };
 
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
