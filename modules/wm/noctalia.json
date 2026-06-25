@@ -622,7 +622,48 @@
       "syncGsettings": true
     },
     "templates": {
-      "activeTemplates": [],
+      "activeTemplates": [
+        {
+          "enabled": true,
+          "id": "btop"
+        },
+        {
+          "enabled": true,
+          "id": "discord"
+        },
+        {
+          "enabled": true,
+          "id": "gtk"
+        },
+        {
+          "enabled": true,
+          "id": "hyprland"
+        },
+        {
+          "enabled": true,
+          "id": "hyprtoolkit"
+        },
+        {
+          "enabled": true,
+          "id": "kcolorscheme"
+        },
+        {
+          "enabled": true,
+          "id": "kitty"
+        },
+        {
+          "enabled": true,
+          "id": "qt"
+        },
+        {
+          "enabled": true,
+          "id": "starship"
+        },
+        {
+          "enabled": true,
+          "id": "yazi"
+        }
+      ],
       "enableUserTheming": false
     },
     "nightLight": {
@@ -676,7 +717,7 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-DP-1",
     "lockScreenActive": false,
     "wallpapers": {
       "DP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
@@ -694,7 +735,7 @@
         "y": 0,
         "active_workspace": 1,
         "vrr": false,
-        "focused": false
+        "focused": true
       },
       "HDMI-A-1": {
         "name": "HDMI-A-1",
@@ -704,9 +745,9 @@
         "refresh_rate": 60,
         "x": 1920,
         "y": 0,
-        "active_workspace": 202,
+        "active_workspace": 11,
         "vrr": false,
-        "focused": true
+        "focused": false
       }
     },
     "notificationsState": {
