@@ -112,7 +112,6 @@ in {
         else config.initLua;
 
       runtimePkgs = [
-        pkgs.ffmpeg-full
         pkgs.wl-clipboard
         pkgs.fd
         pkgs.ripgrep
@@ -127,7 +126,6 @@ in {
       specs.plugins = {
         data = with pkgs.vimPlugins; [
           lz-n
-          plenary-nvim
           nvim-lspconfig
           nvim-treesitter.withAllGrammars
           telescope-nvim
@@ -141,7 +139,6 @@ in {
           # misc
           which-key-nvim
           mini-comment
-          snacks-nvim
           oil-nvim
           lualine-nvim
           luasnip
