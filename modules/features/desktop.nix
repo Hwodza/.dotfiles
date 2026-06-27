@@ -13,6 +13,7 @@
       stirling-pdf-desktop
       thunderbird
       pomodoro-gtk
+      simple-mtpfs
     ];
 
     services.udiskie = {
@@ -49,6 +50,7 @@
     ];
 
     services = {
+      gvfs.enable = true;
       upower.enable = true;
       udisks2.enable = true;
       greetd = {
