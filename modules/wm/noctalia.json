@@ -717,7 +717,7 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "settingsPanel-DP-1",
+    "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
       "DP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
@@ -745,7 +745,7 @@
         "refresh_rate": 60,
         "x": 1920,
         "y": 0,
-        "active_workspace": 11,
+        "active_workspace": 201,
         "vrr": false,
         "focused": false
       }

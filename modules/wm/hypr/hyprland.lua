@@ -591,7 +591,12 @@ hl.window_rule({
   },
   no_focus = true,
 })
-
+hl.window_rule({
+  match = { class = "kitty" },
+  opacity = "0.75",
+  -- xray = true,
+  no_blur = true,
+})
 hl.window_rule({
   name = "workspace_special_di",
   match = {
@@ -613,6 +618,9 @@ hl.window_rule({
   match = {
     class = "^(kitty-yazi)$",
   },
+  opacity = "0.8 0.8",
+  xray = true,
+  -- no_blur = true,
   workspace = "special:yazi",
 })
 
@@ -621,5 +629,8 @@ hl.window_rule({
   match = {
     class = "^(kitty-btop)$",
   },
+  opacity = "0.8",
+  xray = true,
+  -- no_blur = true,
   workspace = "special:btop",
 })
