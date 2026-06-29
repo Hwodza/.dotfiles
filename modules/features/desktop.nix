@@ -45,7 +45,11 @@
       self.homeModules.kitty
       self.homeModules.hypr
     ];
-    environment.sessionVariables.TERMINAL = lib.getExe pkgs.kitty;
+    environment.sessionVariables = {
+      TERMINAL = lib.getExe pkgs.kitty;
+      EDITOR = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
+      VISUAL = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
+    };
     environment.systemPackages = with pkgs; [
       kitty
       vscode
