@@ -28,6 +28,10 @@
     lib,
     ...
   }: {
+    imports = [
+      self.nixosModules.theme
+    ];
+
     # imports = [
     #   self.nixosModules.hypr
     #   {
@@ -37,6 +41,7 @@
 
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.desktop
+      self.homeModules.theme
       self.homeModules.kitty
       self.homeModules.hypr
     ];
