@@ -8,13 +8,13 @@
       "density": "default",
       "showOutline": false,
       "showCapsule": true,
-      "capsuleOpacity": 1,
+      "capsuleOpacity": 0.7000000000000001,
       "capsuleColorKey": "none",
       "widgetSpacing": 6,
       "contentPadding": 2,
       "fontScale": 1,
       "enableExclusionZoneInset": true,
-      "backgroundOpacity": 0.04,
+      "backgroundOpacity": 0,
       "useSeparateOpacity": true,
       "marginVertical": 4,
       "marginHorizontal": 4,
@@ -692,7 +692,7 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-eDP-1",
     "lockScreenActive": false,
     "wallpapers": {
       "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
@@ -707,7 +707,7 @@
         "refresh_rate": 59.999,
         "x": 0,
         "y": 0,
-        "active_workspace": 1,
+        "active_workspace": 2,
         "vrr": false,
         "focused": true
       }
