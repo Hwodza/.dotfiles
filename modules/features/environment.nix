@@ -9,23 +9,15 @@
     self',
     ...
   }: {
-    # My whole desktop in one package, includes kityy terminal
+    # My whole desktop in one package, includes kitty terminal
     # packages.desktop = inputs.wrapper-modules.wrappers.niri.wrap {
     #   inherit pkgs;
     #   imports = [self.wrappersModules.niri];
-    #   terminal = lib.getExe self'.packages.terminal;
+    #   terminal = lib.getExe pkgs.kitty;
     #   env = {
     #     EDITOR = lib.getExe self'.packages.neovim;
     #   };
     # };
-
-    # My primary flake terminal
-    packages.terminal =
-      (inputs.wrappers.wrapperModules.kitty.apply {
-        inherit pkgs;
-        imports = [self.wrappersModules.kitty];
-        shell = lib.getExe self'.packages.environment;
-      }).wrapper;
 
     # My primary flake shell with all of it's packages
     packages.environment =
@@ -75,9 +67,11 @@
         '';
       })
       .overrideAttrs (old: {
-        passthru = (old.passthru or {}) // {
-          shellPath = "/bin/environment";
-        };
+        passthru =
+          (old.passthru or {})
+          // {
+            shellPath = "/bin/environment";
+          };
       });
 
     # packages.nix-check-bin = pkgs.writeShellApplication {

@@ -1,20 +1,17 @@
-{
-  self,
-  inputs,
-  ...
-}: {
-  flake.wrappersModules.kitty = {
-    config,
+{self, ...}: {
+  flake.homeModules.kitty = {
+    pkgs,
     lib,
     ...
-  }: {
-    options.shell = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-    };
-    config = {
+  }: let
+    selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
+  in {
+    programs.kitty = {
+      enable = true;
+      package = null;
+      shellIntegration.mode = null;
       settings = {
-        shell = lib.mkIf (config.shell != "") config.shell;
+        shell = lib.getExe selfpkgs.environment;
 
         auto_reload_config = -1;
         enable_audio_bell = "no";
@@ -28,21 +25,6 @@
         shell_integration = "disabled";
 
         cursor_trail = 3;
-
-        map = [
-          "alt+1 goto_tab 1"
-          "alt+2 goto_tab 2"
-          "alt+3 goto_tab 3"
-          "alt+4 goto_tab 4"
-          "alt+5 goto_tab 5"
-          "alt+6 goto_tab 6"
-          "alt+7 goto_tab 7"
-          "alt+8 goto_tab 8"
-          "alt+9 goto_tab 9"
-          "ctrl+shift+w close_tab"
-          "ctrl+t new_tab_with_cwd"
-          "ctrl+shift+t new_tab"
-        ];
 
         # background = self.theme.base00;
         # foreground = self.theme.base07;
@@ -73,14 +55,21 @@
         # color7 = self.theme.base03;
         # color15 = self.theme.base03;
       };
-    };
-  };
 
-  perSystem = {pkgs, ...}: {
-    packages.kitty =
-      (inputs.wrappers.wrapperModules.kitty.apply {
-        inherit pkgs;
-        imports = [self.wrappersModules.kitty];
-      }).wrapper;
+      keybindings = {
+        "alt+1" = "goto_tab 1";
+        "alt+2" = "goto_tab 2";
+        "alt+3" = "goto_tab 3";
+        "alt+4" = "goto_tab 4";
+        "alt+5" = "goto_tab 5";
+        "alt+6" = "goto_tab 6";
+        "alt+7" = "goto_tab 7";
+        "alt+8" = "goto_tab 8";
+        "alt+9" = "goto_tab 9";
+        "ctrl+shift+w" = "close_tab";
+        "ctrl+t" = "new_tab_with_cwd";
+        "ctrl+shift+t" = "new_tab";
+      };
+    };
   };
 }

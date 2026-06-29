@@ -27,9 +27,7 @@
     pkgs,
     lib,
     ...
-  }: let
-    selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
-  in {
+  }: {
     # imports = [
     #   self.nixosModules.hypr
     #   {
@@ -39,11 +37,12 @@
 
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.desktop
+      self.homeModules.kitty
       self.homeModules.hypr
     ];
-    environment.sessionVariables.TERMINAL = lib.getExe selfpkgs.terminal;
+    environment.sessionVariables.TERMINAL = lib.getExe pkgs.kitty;
     environment.systemPackages = with pkgs; [
-      selfpkgs.terminal
+      kitty
       vscode
       git
     ];
