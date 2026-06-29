@@ -72,8 +72,18 @@
           {
             "displayMode": "onhover",
             "iconColor": "none",
+            "id": "Bluetooth",
+            "textColor": "none"
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
             "id": "Network",
             "textColor": "none"
+          },
+          {
+            "iconColor": "none",
+            "id": "Settings"
           },
           {
             "colorizeIcons": false,
@@ -117,8 +127,8 @@
             "blacklist": [],
             "chevronColor": "none",
             "colorizeIcons": false,
-            "drawerEnabled": false,
-            "hidePassive": true,
+            "drawerEnabled": true,
+            "hidePassive": false,
             "id": "Tray",
             "pinned": []
           },
@@ -173,10 +183,6 @@
             "iconColor": "none",
             "id": "Brightness",
             "textColor": "none"
-          },
-          {
-            "iconColor": "none",
-            "id": "Settings"
           },
           {
             "colorizeDistroLogo": false,
@@ -727,7 +733,7 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-eDP-1",
     "lockScreenActive": false,
     "wallpapers": {
       "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
