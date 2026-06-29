@@ -60,7 +60,10 @@
         };
       };
       services.blueman.enable = true;
-      services.miniflux.enable = true;
+      services.miniflux = {
+        enable = true;
+        adminCredentialsFile = "/etc/nixos/miniflux-admin-credentials";
+      };
       # Set your time zone.
 
       # Enable the X11 windowing system.
