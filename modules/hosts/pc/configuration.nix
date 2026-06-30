@@ -16,12 +16,12 @@
       imports = [
         # Include the results of the hardware scan.
         self.nixosModules.pcHardware
-        # self.nixosModules.niri
         self.nixosModules.base
         self.nixosModules.home-manager
         self.nixosModules.nix
         self.nixosModules.general
         self.nixosModules.desktop
+        self.nixosModules.ssh
       ];
 
       # Bootloader.
