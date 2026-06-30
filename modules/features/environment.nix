@@ -64,7 +64,7 @@
         ];
         text = ''
           export EDITOR=${lib.escapeShellArg (lib.getExe self'.packages.neovimDynamic)}
-          exec ${lib.getExe self'.packages.bash} "$@"
+          exec ${lib.getExe self'.packages.fish} "$@"
         '';
       })
       .overrideAttrs (old: {
