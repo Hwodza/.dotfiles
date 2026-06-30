@@ -148,12 +148,13 @@ in {
 
       specs.lazyPlugins = {
         lazy = true;
-        data = [
-          pkgs.vimPlugins.lazydev-nvim
-          pkgs.vimPlugins.gitsigns-nvim
-          pkgs.vimPlugins.nvim-autopairs
-          pkgs.vimPlugins.fastaction-nvim
-          pkgs.vimPlugins.codecompanion-nvim
+        data = with pkgs.vimPlugins; [
+          lazydev-nvim
+          gitsigns-nvim
+          nvim-autopairs
+          fastaction-nvim
+          codecompanion-nvim
+          obsidian-nvim
         ];
       };
 
