@@ -49,6 +49,7 @@
       TERMINAL = lib.getExe pkgs.kitty;
       EDITOR = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
       VISUAL = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
+      NH_FLAKE = "/home/henry/dotfiles";
     };
     environment.systemPackages = with pkgs; [
       kitty
