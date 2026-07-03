@@ -1,7 +1,13 @@
 {inputs, ...}: {
-  flake.nixosModules.cloudAI = {pkgs, ...}: {
+  flake.nixosModules.cloudAI = {pkgs, ...}: let
+    system = pkgs.stdenv.hostPlatform.system;
+    unstablePkgs = import inputs.nixpkgs-unstable {
+      inherit system;
+      config = pkgs.config;
+    };
+  in {
     environment.systemPackages = [
-      inputs.nixpkgs-unstable.antigravity-cli
+      unstablePkgs.antigravity-cli
     ];
   };
 }
