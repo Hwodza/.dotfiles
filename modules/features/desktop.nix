@@ -31,6 +31,7 @@
   }: {
     imports = [
       self.nixosModules.theme
+      self.nixosModules.cloudAI
     ];
 
     # imports = [
