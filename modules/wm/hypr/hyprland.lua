@@ -34,6 +34,18 @@ local function chord(...)
   return table.concat(parts, " + ")
 end
 
+local configured_monitors = {}
+local original_hl_monitor = hl.monitor
+hl.monitor = function(config)
+  if config and config.output then
+    table.insert(configured_monitors, {
+      name = config.output,
+      id = #configured_monitors,
+    })
+  end
+  return original_hl_monitor(config)
+end
+
 require("monitors")
 
 -- --------------------------------------------------------------------------------
@@ -393,14 +405,18 @@ local function register_monitor_workspaces(monitor)
   end
 end
 
--- Register workspace rules for any monitors already detected
+-- Register workspace rules for statically configured monitors (at load time)
+for _, monitor in ipairs(configured_monitors) do
+  register_monitor_workspaces(monitor)
+end
+
+-- Register workspace rules for any currently active monitors
 for _, monitor in ipairs(hl.get_monitors()) do
   register_monitor_workspaces(monitor)
 end
 
 -- Register workspace rules dynamically when monitors are added/plugged in
 hl.on("monitor.added", register_monitor_workspaces)
--- hl.on("monitorAdded", register_monitor_workspaces)
 
 for slot = 1, workspace_count do
   local key = slot % workspace_count
