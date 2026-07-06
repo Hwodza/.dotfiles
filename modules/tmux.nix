@@ -37,6 +37,8 @@
         setw -g automatic-rename on
         set -g @continuum-restore 'on'
         set -g @continuum-save-interval '15'
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
       '';
 
       configAfter = ''
