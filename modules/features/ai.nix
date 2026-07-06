@@ -8,6 +8,7 @@
   in {
     environment.systemPackages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       antigravity-cli
+      codex
       pkgs.pi-coding-agent
     ];
   };
