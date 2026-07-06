@@ -6,8 +6,9 @@
       config = pkgs.config;
     };
   in {
-    environment.systemPackages = [
-      unstablePkgs.antigravity-cli
+    environment.systemPackages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+      antigravity-cli
+      pkgs.pi-coding-agent
     ];
   };
 }
