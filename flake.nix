@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Allows for dendritic pattern
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

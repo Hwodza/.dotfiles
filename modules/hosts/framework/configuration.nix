@@ -16,12 +16,12 @@
       imports = [
         # Include the results of the hardware scan.
         self.nixosModules.frameworkHardware
-        # self.nixosModules.niri
         self.nixosModules.base
         self.nixosModules.home-manager
         self.nixosModules.nix
         self.nixosModules.general
         self.nixosModules.desktop
+        self.nixosModules.ssh
       ];
 
       # Bootloader.
@@ -38,6 +38,32 @@
       # Enable networking
       networking.networkmanager.enable = true;
 
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings = {
+          General = {
+            # Shows battery charge of connected devices on supported
+            # Bluetooth adapters. Defaults to 'false'.
+            Experimental = true;
+            # When enabled other devices can connect faster to us, however
+            # the tradeoff is increased power consumption. Defaults to
+            # 'false'.
+            FastConnectable = false;
+          };
+          Policy = {
+            # Enable all controllers when they are found. This includes
+            # adapters present on start as well as adapters that are plugged
+            # in later on. Defaults to 'true'.
+            AutoEnable = true;
+          };
+        };
+      };
+      services.blueman.enable = true;
+      services.miniflux = {
+        enable = true;
+        adminCredentialsFile = "/etc/nixos/miniflux-admin-credentials";
+      };
       # Set your time zone.
 
       # Enable the X11 windowing system.
@@ -122,4 +148,3 @@
       system.stateVersion = "25.11"; # Did you read the comment?
     };
 }
-

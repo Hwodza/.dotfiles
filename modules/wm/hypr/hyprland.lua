@@ -8,6 +8,19 @@ local app_launcher = "rofi -show drun"
 local main_mod = "ALT"
 local caps_mod = "MOD2"
 local workspace_count = 10
+local runtime_theme_path = (os.getenv("HOME") or "/home/henry") .. "/.local/state/theme/current/hyprland.lua"
+local runtime_theme = {
+  active_border = "rgba(7aa2f7ff)",
+  inactive_border = "rgba(565f89aa)",
+  shadow = "rgba(000000ee)",
+}
+
+local ok, loaded_theme = pcall(dofile, runtime_theme_path)
+if ok and type(loaded_theme) == "table" then
+  for key, value in pairs(loaded_theme) do
+    runtime_theme[key] = value
+  end
+end
 
 local reload_noctalia_state =
 "hyprctl reload && noctalia-shell ipc call state all > /home/henry/.dotfiles/modules/wm/noctalia.json"
@@ -29,7 +42,8 @@ require("monitors")
 
 hl.on("hyprland.start", function()
   -- Optional local daemons intentionally stay disabled here:
-  -- waybar, swww-daemon, hypridle, hyprpaper, nm-applet, blueman-applet.
+  -- waybar, hypridle, hyprpaper, nm-applet, blueman-applet.
+  hl.exec_cmd("systemctl --user start awww.service")
   hl.exec_cmd("noctalia-shell")
 end)
 
@@ -56,7 +70,8 @@ hl.config({
     gaps_in = 5,
     gaps_out = 0,
     border_size = 2,
-    ["col.inactive_border"] = "rgba(595959aa)",
+    ["col.active_border"] = runtime_theme.active_border,
+    ["col.inactive_border"] = runtime_theme.inactive_border,
     resize_on_border = true,
     allow_tearing = false,
     layout = "scrolling",
@@ -72,13 +87,16 @@ hl.config({
       enabled = true,
       range = 4,
       render_power = 3,
-      color = "rgba(1a1a1aee)",
+      color = runtime_theme.shadow,
     },
     blur = {
       enabled = true,
-      size = 8,
-      passes = 3,
+      size = 3,
+      passes = 2,
+      noise = 0.023,
+      contrast = 0.9,
       vibrancy = 0.1696,
+      new_optimizations = true,
     },
   },
 })

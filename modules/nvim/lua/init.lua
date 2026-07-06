@@ -1,5 +1,6 @@
 require("opts")
 require("keymap")
+require("theme")
 require('lz.n').load('plugins')
 
 vim.api.nvim_create_autocmd('TextYankPost', {

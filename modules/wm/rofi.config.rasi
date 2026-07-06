@@ -16,6 +16,8 @@
     w-padding: 12px;
 }
 
+@import "~/.local/state/theme/current/rofi.rasi"
+
 configuration {
     modi: "window,run,drun";
     show-icons: true;

@@ -3,6 +3,7 @@
     home.packages = with pkgs; [
       kdePackages.dolphin
       kdePackages.kio-extras
+      vscode
       tor-browser
       obsidian
       zathura
@@ -28,9 +29,12 @@
     pkgs,
     lib,
     ...
-  }: let
-    selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
-  in {
+  }: {
+    imports = [
+      self.nixosModules.theme
+      self.nixosModules.cloudAI
+    ];
+
     # imports = [
     #   self.nixosModules.hypr
     #   {
@@ -40,12 +44,18 @@
 
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.desktop
+      self.homeModules.theme
+      self.homeModules.kitty
       self.homeModules.hypr
     ];
-    environment.sessionVariables.TERMINAL = lib.getExe selfpkgs.terminal;
+    environment.sessionVariables = {
+      TERMINAL = lib.getExe pkgs.kitty;
+      EDITOR = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
+      VISUAL = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.neovimDynamic;
+      NH_FLAKE = "/home/henry/dotfiles";
+    };
     environment.systemPackages = with pkgs; [
-      selfpkgs.terminal
-      vscode
+      kitty
       git
     ];
 

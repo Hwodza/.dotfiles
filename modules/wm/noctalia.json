@@ -8,13 +8,13 @@
       "density": "default",
       "showOutline": false,
       "showCapsule": true,
-      "capsuleOpacity": 1,
+      "capsuleOpacity": 0.7000000000000001,
       "capsuleColorKey": "none",
       "widgetSpacing": 6,
       "contentPadding": 2,
       "fontScale": 1,
       "enableExclusionZoneInset": true,
-      "backgroundOpacity": 0.04,
+      "backgroundOpacity": 0,
       "useSeparateOpacity": true,
       "marginVertical": 4,
       "marginHorizontal": 4,
@@ -68,6 +68,22 @@
             "textColor": "none",
             "useMonospaceFont": true,
             "usePadding": false
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Bluetooth",
+            "textColor": "none"
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Network",
+            "textColor": "none"
+          },
+          {
+            "iconColor": "none",
+            "id": "Settings"
           },
           {
             "colorizeIcons": false,
@@ -270,7 +286,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Kalamazoo",
+      "name": "Dayton",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -611,7 +627,7 @@
       "backlightDeviceMappings": []
     },
     "colorSchemes": {
-      "useWallpaperColors": true,
+      "useWallpaperColors": false,
       "predefinedScheme": "Tokyo Night",
       "darkMode": true,
       "schedulingMode": "off",
@@ -622,48 +638,7 @@
       "syncGsettings": true
     },
     "templates": {
-      "activeTemplates": [
-        {
-          "enabled": true,
-          "id": "btop"
-        },
-        {
-          "enabled": true,
-          "id": "discord"
-        },
-        {
-          "enabled": true,
-          "id": "gtk"
-        },
-        {
-          "enabled": true,
-          "id": "hyprland"
-        },
-        {
-          "enabled": true,
-          "id": "hyprtoolkit"
-        },
-        {
-          "enabled": true,
-          "id": "kcolorscheme"
-        },
-        {
-          "enabled": true,
-          "id": "kitty"
-        },
-        {
-          "enabled": true,
-          "id": "qt"
-        },
-        {
-          "enabled": true,
-          "id": "starship"
-        },
-        {
-          "enabled": true,
-          "id": "yazi"
-        }
-      ],
+      "activeTemplates": [],
       "enableUserTheming": false
     },
     "nightLight": {
@@ -717,41 +692,28 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-eDP-1",
     "lockScreenActive": false,
     "wallpapers": {
-      "DP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
-      "HDMI-A-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
-      "DP-1": {
-        "name": "DP-1",
+      "eDP-1": {
+        "name": "eDP-1",
         "scale": 1,
-        "width": 1920,
-        "height": 1080,
-        "refresh_rate": 143.981,
+        "width": 2256,
+        "height": 1504,
+        "refresh_rate": 59.999,
         "x": 0,
         "y": 0,
-        "active_workspace": 1,
+        "active_workspace": 2,
         "vrr": false,
         "focused": true
-      },
-      "HDMI-A-1": {
-        "name": "HDMI-A-1",
-        "scale": 1,
-        "width": 1920,
-        "height": 1080,
-        "refresh_rate": 60,
-        "x": 1920,
-        "y": 0,
-        "active_workspace": 201,
-        "vrr": false,
-        "focused": false
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1781371244000
+      "lastSeenTs": 0
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
