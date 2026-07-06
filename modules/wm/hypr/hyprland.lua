@@ -380,17 +380,27 @@ local function move_window_to_workspace_slot_action(slot)
   end
 end
 
-for _, monitor in ipairs(hl.get_monitors()) do
+local function register_monitor_workspaces(monitor)
   for slot = 1, workspace_count do
     hl.workspace_rule({
       workspace = tostring(workspace_id(monitor, slot)),
       monitor = monitor.name,
+      default = slot == 1,
       persistent = true,
       layout = "scrolling",
       animation = "slidevert",
     })
   end
 end
+
+-- Register workspace rules for any monitors already detected
+for _, monitor in ipairs(hl.get_monitors()) do
+  register_monitor_workspaces(monitor)
+end
+
+-- Register workspace rules dynamically when monitors are added/plugged in
+hl.on("monitor.added", register_monitor_workspaces)
+-- hl.on("monitorAdded", register_monitor_workspaces)
 
 for slot = 1, workspace_count do
   local key = slot % workspace_count
