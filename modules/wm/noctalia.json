@@ -286,7 +286,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Dayton",
+      "name": "Kalamazoo",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -692,28 +692,41 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "settingsPanel-eDP-1",
+    "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/nix/store/qj7950jbdqhg3w1kmifd3wbghli5x9gm-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "DP-1": "/nix/store/7pw3mnnyilkvifj68ngsg36831i23k9c-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
+      "HDMI-A-1": "/nix/store/7pw3mnnyilkvifj68ngsg36831i23k9c-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
-      "eDP-1": {
-        "name": "eDP-1",
+      "DP-1": {
+        "name": "DP-1",
         "scale": 1,
-        "width": 2256,
-        "height": 1504,
-        "refresh_rate": 59.999,
+        "width": 1920,
+        "height": 1080,
+        "refresh_rate": 143.981,
         "x": 0,
         "y": 0,
-        "active_workspace": 2,
+        "active_workspace": 1,
         "vrr": false,
         "focused": true
+      },
+      "HDMI-A-1": {
+        "name": "HDMI-A-1",
+        "scale": 1,
+        "width": 1920,
+        "height": 1080,
+        "refresh_rate": 60,
+        "x": 1920,
+        "y": 0,
+        "active_workspace": 201,
+        "vrr": false,
+        "focused": false
       }
     },
     "notificationsState": {
-      "lastSeenTs": 0
+      "lastSeenTs": 1781371244000
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
