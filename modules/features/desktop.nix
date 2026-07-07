@@ -3,7 +3,6 @@
     home.packages = with pkgs; [
       kdePackages.dolphin
       kdePackages.kio-extras
-      vscode
       tor-browser
       obsidian
       zathura
