@@ -115,6 +115,7 @@ in {
         pkgs.wl-clipboard
         pkgs.fd
         pkgs.ripgrep
+        (pkgs.callPackage ../../pkgs/obsidian-headless {})
       ];
 
       specs.init = {
