@@ -56,7 +56,7 @@ hl.on("hyprland.start", function()
   -- Optional local daemons intentionally stay disabled here:
   -- waybar, hypridle, hyprpaper, nm-applet, blueman-applet.
   hl.exec_cmd("systemctl --user start awww.service")
-  hl.exec_cmd("noctalia-shell")
+  hl.exec_cmd("jq .settings /home/henry/.dotfiles/modules/wm/noctalia.json > /home/henry/.config/noctalia/settings.json && noctalia-shell")
 end)
 
 -- --------------------------------------------------------------------------------
