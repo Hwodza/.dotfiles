@@ -4,6 +4,7 @@
     nixpkgs-hyprland.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    self-hosted-AI-pkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
