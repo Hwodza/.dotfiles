@@ -24,6 +24,7 @@
       rofi
       unstablePkgs.nwg-displays
       selfPkgs.myNoctalia
+      jq
     ];
     home.file.".config/rofi/config.rasi".source = ./rofi.config.rasi;
     wayland.windowManager.hyprland = {
