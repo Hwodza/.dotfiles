@@ -169,7 +169,6 @@
             "openrouter": {
                 "options": {
                   "baseURL": "https://openrouter.ai/api/v1",
-                  "apiKey": "{env:OpenRouterDataRetention}"
                 }
               },
             "openrouter_zdr": {
