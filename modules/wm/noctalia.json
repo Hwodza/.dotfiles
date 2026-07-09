@@ -642,8 +642,8 @@
       "enableUserTheming": false
     },
     "nightLight": {
-      "enabled": true,
-      "forced": true,
+      "enabled": false,
+      "forced": false,
       "autoSchedule": true,
       "nightTemp": "4000",
       "dayTemp": "6500",
