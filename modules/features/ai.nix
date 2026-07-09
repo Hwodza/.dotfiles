@@ -28,7 +28,8 @@
       inherit system;
       config = pkgs.config;
     };
-      llama-cpp = (AIpkgs.llama-cpp.override {
+    llama-cpp =
+      (AIpkgs.llama-cpp.override {
         cudaSupport = true;
         rocmSupport = false;
         metalSupport = false;
@@ -64,13 +65,30 @@
       package = pkgs.llama-swap; # or your custom-flags override, if you still need one
 
       settings = {
-        models."qwen2.5:0.5b" = {
-          cmd = ''
-            ${pkgs.llama-cpp}/bin/llama-server
-            --hf-repo bartowski/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
-            --port ''${PORT}
-            --ctx-size 0
-          '';
+        healthCheckTimeout = 1800;
+        models = {
+          "qwen2.5:0.5b" = {
+            cmd = ''
+              ${llama-cpp}/bin/llama-server
+              --hf-repo bartowski/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
+              --port ''${PORT}
+              --ctx-size 0
+            '';
+          };
+          "qwen3.6-35b-a3b" = {
+            cmd = ''
+              ${llama-cpp}/bin/llama-server
+              --port ''${PORT}
+              --hf-repo unsloth/Qwen3.6-35B-A3B-GGUF:Q4_K_M
+              -ngl 999
+              --n-cpu-moe 35
+              --no-mmap
+              --mlock
+              --cache-type-k q4_0
+              --cache-type-v q4_0
+              -c 8192
+            '';
+          };
         };
       };
     };
@@ -80,11 +98,14 @@
       Environment = [
         "PATH=/run/current-system/sw/bin"
         "LD_LIBRARY_PATH=/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+        "LLAMA_CACHE=/var/lib/llama-swap/cache"
+        "HF_HOME=/var/lib/llama-swap/cache"
       ];
       # Only uncomment/add these if you actually need a fixed user instead of
       # whatever the module defaults to — see caveat below.
       # User = "basnijholt";
       # Group = "users";
+      StateDirectory = "llama-swap";
     };
   };
 
