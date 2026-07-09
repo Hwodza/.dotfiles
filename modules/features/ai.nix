@@ -86,7 +86,7 @@
               --mlock
               --cache-type-k q4_0
               --cache-type-v q4_0
-              -c 8192
+              -c 131072
             '';
           };
         };
@@ -208,6 +208,19 @@
             }
           },
           "provider": {
+            "local-llama": {
+              "npm": "@ai-sdk/openai-compatible",
+              "name": "Llama Swap (Local)",
+              "options": {
+                "baseURL": "http://127.0.0.1:8080/v1",
+                "apiKey": "sk-no-key-required"
+              },
+              "models": {
+                "qwen3.6-35b-a3b": {
+                  "name": "qwen3.6-35b-a3b"
+                }
+              }
+            },
             "google": {
               "options": {
                 "safetySettings": [
