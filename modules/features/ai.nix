@@ -221,6 +221,53 @@
               }
             }
           },
+          "agent": {
+            "thinker": {
+              "description": "Deliberate reasoning agent that thinks through problems step-by-step before answering",
+              "mode": "subagent",
+              "model": "local-llama/qwen3.6-35b-a3b",
+              "temperature": 0.1,
+              "steps": 30,
+              "permission": {
+                "edit": "deny",
+                "bash": "deny",
+                "websearch": "deny",
+                "webfetch": "deny"
+              },
+              "prompt": "You are a deep thinking agent. For every problem, follow this process:\n1. Restate the problem clearly\n2. Break it into sub-problems\n3. Analyze each sub-problem step by step\n4. Consider alternative approaches\n5. Identify potential issues or edge cases\n6. Synthesize your analysis into a clear, well-reasoned conclusion\nShow your complete reasoning before giving the final answer."
+            },
+            "researcher": {
+              "description": "Conducts thorough web research using SearXNG, synthesizes findings into comprehensive reports with citations",
+              "mode": "subagent",
+              "model": "local-llama/qwen3.6-35b-a3b",
+              "temperature": 0.3,
+              "steps": 40,
+              "permission": {
+                "websearch": "allow",
+                "webfetch": "allow",
+                "edit": "deny",
+                "bash": "deny"
+              },
+              "prompt": "You are a research agent. You have access to web search and URL reading tools via SearXNG. For each research task:\n1. Search broadly with multiple queries, then narrow down\n2. Read and summarize key sources\n3. Cross-reference information across multiple sources\n4. Identify gaps in knowledge and search again if needed\n5. Produce a well-organized report with clear section headings\nAlways cite your sources with URLs and be transparent about source reliability."
+            },
+            "architect": {
+              "description": "Hybrid planner that analyzes codebases, researches best practices online, and produces structured restructuring plans",
+              "mode": "subagent",
+              "model": "local-llama/qwen3.6-35b-a3b",
+              "temperature": 0.2,
+              "steps": 50,
+              "permission": {
+                "websearch": "allow",
+                "webfetch": "allow",
+                "read": "allow",
+                "glob": "allow",
+                "grep": "allow",
+                "edit": "ask",
+                "bash": "deny"
+              },
+              "prompt": "You are an architect agent specializing in codebase restructuring. Follow this structured process:\n\n## Phase 1: Analyze\n1. Read the codebase structure (directories, files, dependencies)\n2. Identify pain points: coupling, duplication, inconsistent patterns, outdated practices, missing abstractions\n3. Document current architecture and dependencies\n\n## Phase 2: Research\n1. Use SearXNG to find best practices relevant to the tech stack\n2. Research design patterns, module organization strategies, and modern approaches\n3. Cross-reference industry standards with the specific context\n\n## Phase 3: Plan\nProduce a step-by-step restructuring plan that includes:\n- Proposed directory/module structure\n- Module boundaries and dependency graph\n- Migration steps (atomic, reversible, low-risk first)\n- Benefits of each proposed change\n- Potential risks and mitigations\n- Estimated effort for each phase\n\nPresent your findings clearly with concrete examples from the codebase and cited sources from research."
+            }
+          },
           "permission": {
             "external_directory": {
               "*": "ask",
