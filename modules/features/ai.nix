@@ -22,7 +22,11 @@
     ];
   };
 
-  flake.nixosModules.selfHostedAI = {pkgs, ...}: let
+  flake.nixosModules.selfHostedAI = {
+    pkgs,
+    config,
+    ...
+  }: let
     system = pkgs.stdenv.hostPlatform.system;
     AIpkgs = import inputs.self-hosted-AI-pkgs {
       inherit system;
@@ -60,34 +64,93 @@
       llama-cpp
       AIpkgs.llama-swap
     ];
-    services.llama-swap = {
-      enable = true;
-      package = pkgs.llama-swap; # or your custom-flags override, if you still need one
+    sops.secrets."searx" = {};
+    services = {
+      searx = {
+        enable = true;
+        # Utilize the maintained SearXNG fork rather than the deprecated Searx
+        package = pkgs.searxng;
+        redisCreateLocally = true;
 
-      settings = {
-        healthCheckTimeout = 1800;
-        models = {
-          "qwen2.5:0.5b" = {
-            cmd = ''
-              ${llama-cpp}/bin/llama-server
-              --hf-repo bartowski/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
-              --port ''${PORT}
-              --ctx-size 0
-            '';
+        settings = {
+          server = {
+            # Bind exclusively to the local loopback interface for security
+            bind_address = "127.0.0.1";
+            port = 8888;
+            # The secret key should ideally be managed via sops-nix in production
+            secret_key = "$(cat ${config.sops.secrets."searx".path})";
+            image_proxy = true;
+            method = "GET";
           };
-          "qwen3.6-35b-a3b" = {
-            cmd = ''
-              ${llama-cpp}/bin/llama-server
-              --port ''${PORT}
-              --hf-repo unsloth/Qwen3.6-35B-A3B-GGUF:Q4_K_M
-              -ngl 999
-              --n-cpu-moe 35
-              --no-mmap
-              --mlock
-              --cache-type-k q4_0
-              --cache-type-v q4_0
-              -c 131072
-            '';
+          search = {
+            # The JSON format is strictly required for MCP server parsing
+            formats = ["html" "json"];
+            safe_search = 1;
+            autocomplete = "duckduckgo";
+            ban_time_on_fail = 5;
+          };
+          engines = [
+            {
+              name = "google";
+              disabled = false;
+              weight = 2;
+            }
+            {
+              name = "duckduckgo";
+              disabled = false;
+              weight = 1;
+            }
+            {
+              name = "bing";
+              disabled = false;
+              weight = 1;
+            }
+            {
+              name = "arch linux wiki";
+              disabled = false;
+            }
+            {
+              name = "github";
+              disabled = false;
+            }
+          ];
+          outgoing = {
+            request_timeout = 5.0;
+            max_request_timeout = 15.0;
+            pool_connections = 100;
+          };
+        };
+      };
+
+      llama-swap = {
+        enable = true;
+        package = pkgs.llama-swap; # or your custom-flags override, if you still need one
+
+        settings = {
+          healthCheckTimeout = 1800;
+          models = {
+            "qwen2.5:0.5b" = {
+              cmd = ''
+                ${llama-cpp}/bin/llama-server
+                --hf-repo bartowski/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
+                --port ''${PORT}
+                --ctx-size 0
+              '';
+            };
+            "qwen3.6-35b-a3b" = {
+              cmd = ''
+                ${llama-cpp}/bin/llama-server
+                --port ''${PORT}
+                --hf-repo unsloth/Qwen3.6-35B-A3B-GGUF:Q4_K_M
+                -ngl 999
+                --n-cpu-moe 35
+                --no-mmap
+                --mlock
+                --cache-type-k q4_0
+                --cache-type-v q4_0
+                -c 131072
+              '';
+            };
           };
         };
       };
@@ -126,7 +189,10 @@
       "OpenRouterDataRetention" = {};
     };
 
-    environment.systemPackages = [opencodeWrapper];
+    environment.systemPackages = [
+      pkgs.nodejs_22
+      opencodeWrapper
+    ];
 
     home-manager.users.${config.preferences.user.name} = {
       xdg.configFile."opencode/opencode.jsonc".text = ''
@@ -135,11 +201,32 @@
           "plugin": [
             "opencode-antigravity-auth@latest"
           ],
+          "mcp": {
+            "searxng-research": {
+              "type": "local",
+              "command": [
+                "npx",
+                "-y",
+                "mcp-searxng"
+              ],
+              "enabled": true,
+              "environment": {
+                "SEARXNG_URL": "http://localhost:8888",
+                "SEARXNG_MAX_RESULTS": "6",
+                "SEARXNG_MAX_RESULT_CHARS": "500",
+                "URL_READ_MAX_CHARS": "4000",
+                "CACHE_TTL_MS": "86400000",
+                "URL_READ_MAX_CONTENT_LENGTH_BYTES": "5242880",
+                "USER_AGENT": "NixOS-Agentic-Research/1.0"
+              }
+            }
+          },
           "permission": {
             "external_directory": {
               "*": "ask",
               "/nix/store/**": "allow"
             },
+            "searxng-research_*": "allow",
 
             "bash": {
               // 1. Catch-all
