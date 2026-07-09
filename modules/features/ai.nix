@@ -28,8 +28,64 @@
       inherit system;
       config = pkgs.config;
     };
+      llama-cpp = (AIpkgs.llama-cpp.override {
+        cudaSupport = true;
+        rocmSupport = false;
+        metalSupport = false;
+        # Enable BLAS for optimized CPU layer performance (OpenBLAS)
+        # This is crucial for models using split-mode or CPU offloading
+        blasSupport = true;
+      }).overrideAttrs
+      (oldAttrs: {
+        # Enable native CPU optimizations for massively better CPU performance
+        # This enables AVX, AVX2, AVX-512, FMA, etc. for your specific CPU
+        # NOTE: This is intentionally opposite of nixpkgs (which uses -DGGML_NATIVE=off
+        # for reproducible builds). We sacrifice portability for faster CPU layers.
+        cmakeFlags =
+          (oldAttrs.cmakeFlags or [])
+          ++ [
+            "-DGGML_NATIVE=ON"
+          ];
+        # Disable Nix's NIX_ENFORCE_NO_NATIVE which strips -march=native flags
+        # See: https://github.com/NixOS/nixpkgs/issues/357736
+        # See: https://github.com/NixOS/nixpkgs/pull/377484 (intentionally contradicts this)
+        preConfigure = ''
+          export NIX_ENFORCE_NO_NATIVE=0
+          ${oldAttrs.preConfigure or ""}
+        '';
+      });
   in {
-    environment.systemPackages = [(AIpkgs.llama-cpp.override {cudaSupport = true;})];
+    environment.systemPackages = [
+      llama-cpp
+      AIpkgs.llama-swap
+    ];
+    services.llama-swap = {
+      enable = true;
+      package = pkgs.llama-swap; # or your custom-flags override, if you still need one
+
+      settings = {
+        models."qwen2.5:0.5b" = {
+          cmd = ''
+            ${pkgs.llama-cpp}/bin/llama-server
+            --hf-repo bartowski/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
+            --port ''${PORT}
+            --ctx-size 0
+          '';
+        };
+      };
+    };
+
+    # Layered on top of whatever the module already generates for this unit.
+    systemd.services.llama-swap.serviceConfig = {
+      Environment = [
+        "PATH=/run/current-system/sw/bin"
+        "LD_LIBRARY_PATH=/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+      ];
+      # Only uncomment/add these if you actually need a fixed user instead of
+      # whatever the module defaults to — see caveat below.
+      # User = "basnijholt";
+      # Group = "users";
+    };
   };
 
   flake.nixosModules.opencode = {
