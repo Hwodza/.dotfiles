@@ -35,10 +35,22 @@
       configBefore = ''
         set -g renumber-windows on
         setw -g automatic-rename on
+
+        # Restore neovim sessions
+        set -g @resurrect-strategy-nvim 'session'
+
+        # Restore pane contents
+        set -g @resurrect-capture-pane-contents 'on'
+
+        # Restore additional programs (space-separated list)
+        set -g @resurrect-processes 'ssh psql mysql' 
+
         set -g @continuum-restore 'on'
-        set -g @continuum-save-interval '15'
+        set -g @continuum-save-interval '1'
+        set -g status-right 'Continuum: #{continuum_status}'
         set -g extended-keys on
         set -g extended-keys-format csi-u
+        set -g status-position top
       '';
 
       configAfter = ''
