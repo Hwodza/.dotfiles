@@ -4,5 +4,7 @@
     "@gotgenes/pi-permission-system"
   ],
   "defaultProjectTrust": "ask",
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "lastChangelogVersion": "0.80.3",
+  "theme": "dark"
 }

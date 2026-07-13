@@ -1,2 +1,4 @@
 monitors.conf
 tmux-client-*.log
+**/agent/auth.json
+**/agent/sessions/
