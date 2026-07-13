@@ -1,0 +1,22 @@
+{
+  "settings": {
+    "toolPrefix": "mcp",
+    "idleTimeout": 10
+  },
+  "mcpServers": {
+    "searxng-research": {
+      "command": "npx",
+      "args": ["-y", "mcp-searxng"],
+      "lifecycle": "lazy",
+      "env": {
+        "SEARXNG_URL": "http://localhost:8888",
+        "SEARXNG_MAX_RESULTS": "6",
+        "SEARXNG_MAX_RESULT_CHARS": "500",
+        "URL_READ_MAX_CHARS": "4000",
+        "CACHE_TTL_MS": "86400000",
+        "URL_READ_MAX_CONTENT_LENGTH_BYTES": "5242880",
+        "USER_AGENT": "NixOS-Agentic-Research/1.0"
+      }
+    }
+  }
+}

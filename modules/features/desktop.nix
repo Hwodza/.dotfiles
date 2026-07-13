@@ -31,7 +31,7 @@
   }: {
     imports = [
       self.nixosModules.theme
-      self.nixosModules.cloudAI
+      self.nixosModules.aiHarness
     ];
 
     # imports = [
@@ -46,6 +46,7 @@
       self.homeModules.theme
       self.homeModules.kitty
       self.homeModules.hypr
+      self.homeModules.pi
     ];
     environment.sessionVariables = {
       TERMINAL = lib.getExe pkgs.kitty;
