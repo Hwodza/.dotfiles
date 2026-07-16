@@ -1,7 +1,7 @@
 {
   "packages": [
-    "pi-mcp-adapter",
-    "@gotgenes/pi-permission-system"
+    "npm:pi-mcp-adapter",
+    "npm:@gotgenes/pi-permission-system"
   ],
   "defaultProjectTrust": "ask",
   "enableInstallTelemetry": false,

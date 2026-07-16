@@ -1,12 +1,58 @@
 {
   "$schema": "https://raw.githubusercontent.com/gotgenes/pi-permission-system/main/schemas/permissions.schema.json",
 
-  "debugLog": false,
+  "debugLog": true,
   "permissionReviewLog": true,
   "yoloMode": false,
 
   "permission": {
     "*": "allow",
+
+    "ls": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "tree": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "read": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "write": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "edit": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "find": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "grep": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "rg": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
+    "cat": {
+      "/*": "ask",
+      "~/**": "ask",
+      "*..*": "ask"
+    },
 
     "external_directory": {
       "*": "ask",
@@ -26,13 +72,6 @@
 
     "bash": {
       "*": "ask",
-
-      "ls *": "allow",
-      "tree *": "allow",
-      "cat *": "allow",
-      "rg *": "allow",
-      "grep *": "allow",
-      "find *": "allow",
 
       "* /*": "ask",
       "* ~*": "ask",
