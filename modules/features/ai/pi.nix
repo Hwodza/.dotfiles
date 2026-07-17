@@ -52,7 +52,9 @@ PKGJSON
       ".pi/agent/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/settings.json";
       ".pi/agent/mcp.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/mcp.json";
       ".pi/agent/models.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/models.json";
-      ".pi/agent/extensions/pi-permission-system/config.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/extensions/pi-permission-system/config.json";
+      ".pi/agent/skills".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/skills";
+      ".pi/agent/extensions".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/extensions";
+      # ".pi/agent/extensions/pi-permission-system/config.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/extensions/pi-permission-system/config.json";
     };
   };
 }
