@@ -1,8 +1,4 @@
 {
-  "packages": [
-    "npm:pi-mcp-adapter",
-    "npm:@gotgenes/pi-permission-system"
-  ],
   "defaultProjectTrust": "ask",
   "enableInstallTelemetry": false,
   "lastChangelogVersion": "0.80.3",
