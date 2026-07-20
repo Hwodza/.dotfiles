@@ -182,7 +182,11 @@
               },
               "models": {
                 "qwen3.6-35b-a3b": {
-                  "name": "qwen3.6-35b-a3b"
+                  "name": "qwen3.6-35b-a3b",
+                  "limit": {
+                    "context": 131072,
+                    "output": 131072,
+                  }
                 }
               }
             },
