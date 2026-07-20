@@ -48,7 +48,6 @@ end
 
 return {
   "obsidian.nvim",
-  cmd = "Obsidian",
   event = {
     {
       event = { "BufReadPre", "BufNewFile" },
@@ -57,19 +56,6 @@ return {
         vault .. "/**/*.md",
       },
     },
-  },
-  keys = {
-    { "<leader>oo", "<cmd>Obsidian<cr>",              desc = "Obsidian" },
-    { "<leader>on", "<cmd>Obsidian new<cr>",          desc = "Obsidian new note" },
-    { "<leader>oq", "<cmd>Obsidian quick_switch<cr>", desc = "Obsidian quick switch" },
-    { "<leader>os", "<cmd>Obsidian search<cr>",       desc = "Obsidian search" },
-    { "<leader>od", "<cmd>Obsidian today<cr>",        desc = "Obsidian today" },
-    { "<leader>oD", "<cmd>Obsidian dailies<cr>",      desc = "Obsidian dailies" },
-    { "<leader>ob", "<cmd>Obsidian backlinks<cr>",    desc = "Obsidian backlinks" },
-    { "<leader>ol", "<cmd>Obsidian links<cr>",        desc = "Obsidian links" },
-    { "<leader>ol", ":Obsidian link<cr>",             mode = "v",                    desc = "Obsidian link selection" },
-    { "<leader>ot", "<cmd>Obsidian template<cr>",     desc = "Obsidian template" },
-    { "<leader>op", "<cmd>Obsidian paste_img<cr>",    desc = "Obsidian paste image" },
   },
   after = function()
     require("obsidian").setup({
@@ -118,6 +104,7 @@ return {
       },
       ui = {
         ignore_conceal_warn = true,
+        enable = false,
       },
       callbacks = {
         enter_note = function()
@@ -125,5 +112,42 @@ return {
         end,
       },
     })
+
+    local group = vim.api.nvim_create_augroup("ObsidianVaultKeys", { clear = true })
+
+    local function set_vault_keymaps()
+      local bufname = vim.api.nvim_buf_get_name(0)
+      local abs_path = vim.fn.fnamemodify(bufname, ":p")
+      if abs_path == "" or abs_path:find(vault .. "/", 1, true) ~= 1 then
+        return
+      end
+
+      local keys = {
+        { "n", "<leader>oo", "<cmd>Obsidian<cr>", "Obsidian" },
+        { "n", "<leader>on", "<cmd>Obsidian new<cr>", "Obsidian new note" },
+        { "n", "<leader>oq", "<cmd>Obsidian quick_switch<cr>", "Obsidian quick switch" },
+        { "n", "<leader>os", "<cmd>Obsidian search<cr>", "Obsidian search" },
+        { "n", "<leader>od", "<cmd>Obsidian today<cr>", "Today's daily note" },
+        { "n", "<leader>oD", "<cmd>Obsidian dailies<cr>", "List dailies" },
+        { "n", "<leader>ob", "<cmd>Obsidian backlinks<cr>", "Backlinks" },
+        { "n", "<leader>ol", "<cmd>Obsidian links<cr>", "Obsidian links" },
+        { "v", "<leader>ol", ":Obsidian link<cr>", "Obsidian link selection" },
+        { "n", "<leader>ot", "<cmd>Obsidian template<cr>", "Obsidian template" },
+        { "n", "<leader>op", "<cmd>Obsidian paste_img<cr>", "Obsidian paste image" },
+      }
+
+      for _, key in ipairs(keys) do
+        vim.keymap.set(key[1], key[2], key[3], { buffer = 0, desc = key[4] })
+      end
+    end
+
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+      group = group,
+      callback = function()
+        set_vault_keymaps()
+      end,
+    })
+
+    set_vault_keymaps()
   end,
 }
