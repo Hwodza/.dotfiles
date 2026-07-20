@@ -140,6 +140,8 @@ in {
           # misc
           which-key-nvim
           mini-comment
+          mini-surround
+          mini-ai
           oil-nvim
           lualine-nvim
           luasnip
@@ -156,6 +158,10 @@ in {
           fastaction-nvim
           codecompanion-nvim
           obsidian-nvim
+          render-markdown-nvim
+          outline-nvim
+          autosave-nvim
+          markdown-preview-nvim
         ];
       };
 
