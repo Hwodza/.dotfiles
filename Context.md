@@ -84,8 +84,8 @@ The Framework laptop. Baseline desktop + Bluetooth with experimental battery rep
 **`pc`**
 The desktop. Baseline desktop + NVIDIA stable driver + selfHostedAI (local LLM stack). The only host running the self-hosted AI services.
 
-**`tester`**
-A VM / test machine. Baseline desktop only — no host-specific extras. Used for validating config changes before applying to the main machines.
+**`homeLab`**
+A dedicated headless home server running on an old laptop. SSH-only access with cloudflared tunnel and rclone WebDAV. Lid closed support for always-on operation.
 
 **baseline desktop**
 The set of modules every host imports: `base`, `home-manager`, `nix`, `general`, `desktop`, `ssh`. All three hosts share this baseline; `pc` additionally imports `selfHostedAI`.
