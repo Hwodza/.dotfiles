@@ -10,19 +10,15 @@
 
     config.sops.secrets.server1-pubKey = {};
 
-    users.users.server1 = {
+    config.users.users.server1 = {
       isNormalUser = true;
       description = "server1's account";
       home = "/home/server1";
-      extraGroups = [ "wheel" ];
+      extraGroups = ["wheel"];
       shell = self.packages.${pkgs.stdenv.hostPlatform.system}.environment;
       openssh.authorizedKeys.keys = [
-        (builtins.readFile config.sops.secrets.server1-pubKey.path)
+        "$(cat ${config.sops.secrets.server1-pubKey.path})"
       ];
-    };
-
-    home-manager.users.server1 = {
-      home.stateVersion = "26.05";
     };
   };
 }
