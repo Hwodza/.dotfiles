@@ -63,13 +63,13 @@
         Group = "rclone-webdav";
         LoadCredential = ["rclonepass:${config.sops.secrets."rclonePass".path}"];
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav /home/henry/HomeLab/Supernote/ \
+          ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav /home/${config.preferences.user.name}/HomeLab/Supernote/ \
             --addr 127.0.0.1:8080 \
             --user supernote \
             --pass "$(cat ''${CREDENTIALS_DIRECTORY}/rclonepass)"'
         '';
         Restart = "on-failure";
-        ReadWritePaths = ["/home/henry/HomeLab/Supernote/"];
+        ReadWritePaths = ["/home/${config.preferences.user.name}/HomeLab/Supernote/"];
       };
     };
   };

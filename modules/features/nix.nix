@@ -1,12 +1,16 @@
 {inputs, ...}: {
-  flake.nixosModules.nix = {pkgs, ...}: {
+  flake.nixosModules.nix = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = [
       inputs.nix-index-database.nixosModules.nix-index
       inputs.sops-nix.nixosModules.sops
     ];
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
-      age.keyFile = "/home/henry/.config/sops/age/keys.txt";
+      age.keyFile = "/home/${config.preferences.user.name}/.config/sops/age/keys.txt";
     };
     programs.nix-index-database.comma.enable = true;
     nix = {
