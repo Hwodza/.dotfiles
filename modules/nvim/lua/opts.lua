@@ -28,6 +28,8 @@ o.textwidth = 0
 o.undofile = true
 o.updatetime = 100
 o.wrap = true
+o.spell = true
+o.spelllang = 'en_us'
 
 g.mapleader = ' '
 g.maplocalleader = ' '
