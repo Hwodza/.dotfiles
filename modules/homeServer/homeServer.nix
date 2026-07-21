@@ -3,8 +3,18 @@
     imports = [
       self.nixosModules.cloudflare
       self.nixosModules.rclone
+      self.nixosModules.miniflux
     ];
   };
+
+  flake.nixosModules.miniflux = {config, ...}: {
+    sops.secrets."miniflux" = {};
+    services.miniflux = {
+      enable = true;
+      adminCredentialsFile = "${config.sops.secrets."miniflux".path}";
+    };
+  };
+
   flake.nixosModules.cloudflare = {
     inputs,
     config,
@@ -19,7 +29,8 @@
           credentialsFile = "${config.sops.secrets."cloudflareTunnelhomeLab1".path}";
           default = "http_status:404";
           ingress = {
-            "supernote.odza.dev" = "http://127.0.0.1:8080";
+            "supernote.odza.dev" = "http://127.0.0.1:8081";
+            "miniflux.odza.dev" = "http://127.0.0.1:8080";
           };
         };
       };
@@ -64,7 +75,7 @@
         LoadCredential = ["rclonepass:${config.sops.secrets."rclonePass".path}"];
         ExecStart = ''
           ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav /home/${config.preferences.user.name}/HomeLab/Supernote/ \
-            --addr 127.0.0.1:8080 \
+            --addr 127.0.0.1:8081 \
             --user supernote \
             --pass "$(cat ''${CREDENTIALS_DIRECTORY}/rclonepass)"'
         '';
