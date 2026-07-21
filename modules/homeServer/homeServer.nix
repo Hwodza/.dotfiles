@@ -1,0 +1,76 @@
+{self, ...}: {
+  flake.nixosModules.homeServer = {pkgs, ...}: {
+    imports = [
+      self.nixosModules.cloudflare
+      self.nixosModules.rclone
+    ];
+  };
+  flake.nixosModules.cloudflare = {
+    inputs,
+    config,
+    pkgs,
+    ...
+  }: {
+    sops.secrets."cloudflareTunnelhomeLab1" = {};
+    services.cloudflared = {
+      enable = true;
+      tunnels = {
+        "7fa77531-bf82-4583-818d-51a588c68614" = {
+          credentialsFile = "${config.sops.secrets."cloudflareTunnelhomeLab1".path}";
+          default = "http_status:404";
+          ingress = {
+            "supernote.odza.dev" = "http://127.0.0.1:8080";
+          };
+        };
+      };
+    };
+  };
+  # flake.nixosModules.caddy = {...}: {
+  #   services.caddy = {
+  #     enable = true;
+  #     virtualHosts = {
+  #       "supernote.odza.dev" = {
+  #         extraConfig = ''
+  #           reverse_proxy http://127.0.0.1:8080
+  #         '';
+  #       };
+  #     };
+  #   };
+  # };
+  flake.nixosModules.rclone = {
+    config,
+    pkgs,
+    ...
+  }: {
+    users.users.rclone-webdav = {
+      isSystemUser = true;
+      group = "rclone-webdav";
+    };
+    users.groups.rclone-webdav = {};
+
+    sops.secrets."rclonePass" = {
+      owner = "rclone-webdav";
+      group = "rclone-webdav";
+    };
+    systemd.services.rclone-webdav = {
+      description = "rclone WebDAV server for Supernote sync";
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "simple";
+        User = "rclone-webdav";
+        Group = "rclone-webdav";
+        LoadCredential = ["rclonepass:${config.sops.secrets."rclonePass".path}"];
+        ExecStart = ''
+          ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav /home/henry/HomeLab/Supernote/ \
+            --addr 127.0.0.1:8080 \
+            --user supernote \
+            --pass "$(cat ''${CREDENTIALS_DIRECTORY}/rclonepass)"'
+        '';
+        Restart = "on-failure";
+        ReadWritePaths = ["/home/henry/HomeLab/Supernote/"];
+      };
+    };
+  };
+}

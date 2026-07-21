@@ -22,6 +22,7 @@
         self.nixosModules.general
         self.nixosModules.desktop
         self.nixosModules.ssh
+        self.nixosModules.homeServer
       ];
 
       # Bootloader.
