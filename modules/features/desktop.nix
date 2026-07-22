@@ -1,6 +1,7 @@
 {self, ...}: {
   flake.homeModules.desktop = {pkgs, ...}: {
     home.packages = with pkgs; [
+      cloudflared
       kdePackages.dolphin
       kdePackages.kio-extras
       tor-browser
