@@ -48,8 +48,8 @@
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [22 443];
 
-    # Keep the lid from suspending when closed.
-    services.logind.lidSwitch = "ignore";
+    # Keep the lid from suspending when closed.'
+    services.logind.settings.Login.HandleLidSwitch = "ignore";
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
