@@ -43,6 +43,7 @@
           jq
           wget
           killall
+          cloudflared
           openssh
           fzf
           htop
