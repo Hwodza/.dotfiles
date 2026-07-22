@@ -36,7 +36,14 @@
     networking.networkmanager.enable = true;
 
     # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
+    };
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [22 443];
