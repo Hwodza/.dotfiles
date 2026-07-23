@@ -25,6 +25,8 @@
       unstablePkgs.nwg-displays
       selfPkgs.myNoctalia
       jq
+      hypridle
+      hyprlock
     ];
     home.file.".config/rofi/config.rasi".source = ./rofi.config.rasi;
     wayland.windowManager.hyprland = {
