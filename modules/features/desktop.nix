@@ -47,6 +47,8 @@
       self.homeModules.theme
       self.homeModules.kitty
       self.homeModules.hypr
+      # self.homeModules.hypridle
+      # self.homeModules.hyprlock
       self.homeModules.pi
     ];
     environment.sessionVariables = {
