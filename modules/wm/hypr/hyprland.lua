@@ -191,7 +191,7 @@ hl.bind(chord(main_mod, "M"), hl.dsp.exit())
 hl.bind(chord(main_mod, "V"), hl.dsp.window.float())
 hl.bind(chord(main_mod, "SPACE"), hl.dsp.exec_cmd(app_launcher))
 hl.bind(chord(main_mod, "R"), hl.dsp.exec_cmd(reload_noctalia_state))
--- hl.bind(chord(main_mod, "SHIFT", "S"), hl.dsp.exec_cmd("hyprlock"))
+hl.bind(chord(main_mod, "SHIFT", "S"), hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
 -- hl.bind(chord(main_mod, "W"), hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
 
 for _, bind in ipairs({

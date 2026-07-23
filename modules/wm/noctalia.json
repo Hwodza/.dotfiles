@@ -530,7 +530,7 @@
       "powerOptions": [
         {
           "action": "lock",
-          "command": "",
+          "command": "pidof hyprlock || hyprlock",
           "countdownEnabled": true,
           "enabled": true,
           "keybind": "1"
@@ -716,8 +716,8 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "DP-1": "/nix/store/7pw3mnnyilkvifj68ngsg36831i23k9c-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
-      "HDMI-A-1": "/nix/store/7pw3mnnyilkvifj68ngsg36831i23k9c-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "DP-1": "/nix/store/sl3xk4awai1fa8j9y5c62iy938ylgxbh-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png",
+      "HDMI-A-1": "/nix/store/sl3xk4awai1fa8j9y5c62iy938ylgxbh-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
