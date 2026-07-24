@@ -27,7 +27,7 @@
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
           ignore_systemd_inhibit = false;
-          inhibit_sleep = 3;
+          inhibit_sleep = 2;
         };
 
         listener = [
