@@ -1,0 +1,41 @@
+{
+  "debugLog": false,
+  "scope_definitions": {
+    "nix_store": "/nix/store"
+  },
+  "templates": {
+    "diagnostics": [
+      { "regex": ".*", "action": "deny" },
+      { "regex": "^(ls|find|tree|cat|head|tail|stat|echo|grep|rg|head|tail|wc|file|filetype|du|df)\\b", "action": "allow" },
+      { "regex": "^(pwd|echo)\\b", "action": "allow" }
+    ]
+  },
+  "scopes": {
+    "cwd": {
+      "read": "allow",
+      "write": "allow",
+      "edit": "allow",
+      "bash": [
+        { "regex": ".*", "action": "deny" },
+        { "regex": "\\bcd\\b", "action": "deny" },
+        { "regex": "^pwd\\b", "action": "allow" },
+        "$diagnostics"
+      ]
+    },
+    "nix_store": {
+      "read": "allow",
+      "write": "deny",
+      "edit": "deny",
+      "bash": ["$diagnostics"]
+    },
+    "outside": {
+      "read": "deny",
+      "write": "deny",
+      "edit": "deny",
+      "bash": [
+        { "regex": "\\bcd\\b", "action": "deny" },
+        { "regex": ".*", "action": "deny" }
+      ]
+    }
+  }
+}
