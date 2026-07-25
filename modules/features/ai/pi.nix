@@ -29,25 +29,6 @@
       pkgs.nodejs
     ];
 
-    home.activation = {
-      installPiPlugins = config.lib.dag.entryAfter ["writeBoundary"] ''
-        export PATH="${pkgs.nodejs}/bin:$PATH"
-        mkdir -p "${pluginsStateDir}"
-        cd "${pluginsStateDir}"
-        cat << 'PKGJSON' > package.json
-        {
-          "name": "pi-plugins",
-          "version": "1.0.0",
-          "dependencies": {
-            "pi-mcp-adapter": "latest",
-            "@gotgenes/pi-permission-system": "latest"
-          }
-        }
-PKGJSON
-        npm install
-      '';
-    };
-
     home.file = {
       ".pi/agent/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/settings.json";
       ".pi/agent/mcp.json".source = config.lib.file.mkOutOfStoreSymlink "${piPath}/mcp.json";

@@ -2,5 +2,8 @@
   "defaultProjectTrust": "ask",
   "enableInstallTelemetry": false,
   "lastChangelogVersion": "0.81.1",
-  "theme": "dark"
+  "theme": "dark",
+  "packages": [
+    "npm:pi-mcp-adapter"
+  ]
 }
