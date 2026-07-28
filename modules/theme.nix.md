@@ -21,7 +21,7 @@ Dual-layer theme system: declarative base via Stylix + dynamic runtime via Matug
 | `flake.theme.noctaliaColors` | Noctalia color role mapping (`mPrimary`, `mSurface`, etc.) — flat hex values, consumed by `wm/noctalia.nix` |
 | `flake.nixosModules.theme` | Imports Stylix, sets polarity to dark, base16 scheme, fonts (JetBrainsMono monospace, Ubuntu Sans serif/sansserif), font sizes |
 | `flake.homeModules.theme` — packages | `set-wallpaper` (awww + matugen), `theme-reset` (matugen color), `matugen`, `awww` |
-| `flake.homeModules.theme` — templates | 6 Matugen template files in `~/.config/matugen/templates/`, rendered to `~/.local/state/theme/current/` (or `~/.config/noctalia/`) on every Matugen run |
+| `flake.homeModules.theme` — templates | 7 Matugen template files in `~/.config/matugen/templates/`, rendered to `~/.local/state/theme/current/` or app config dirs on every Matugen run |
 | `flake.homeModules.theme` — config | `~/.config/matugen/config.toml` (templates + post_hooks), `~/.config/theme/default/colors.json` (fallback), `~/.config/noctalia/colors.json` (default), GTK settings, awww wallpaper daemon service |
 | `flake.homeModules.theme` — activation | Bootstraps `~/.local/state/theme/current/colors.json` from default palette if missing (no render step — templates run via Matugen CLI) |
 
@@ -34,6 +34,7 @@ Dual-layer theme system: declarative base via Stylix + dynamic runtime via Matug
 | `tmux.conf` | `~/.config/matugen/templates/tmux.conf` | `~/.local/state/theme/current/tmux.conf` | `tmux source-file` |
 | `hyprland.lua` | `~/.config/matugen/templates/hyprland.lua` | `~/.local/state/theme/current/hyprland.lua` | `hyprctl reload` |
 | `neovim.lua` | `~/.config/matugen/templates/neovim.lua` | `~/.local/state/theme/current/neovim.lua` | _(none)_ |
+| `lazygit.yml` | `~/.config/matugen/templates/lazygit.yml` | `~/.config/lazygit/config.yml` | _(none)_ |
 | `noctalia-colors.json` | `~/.config/matugen/templates/noctalia-colors.json` | `~/.config/noctalia/colors.json` | _(none)_ |
 
 All templates use Matugen's Go template syntax: `{{colors.<role>.default.hex_stripped}}` for hex values without `#`, with alpha appended directly (e.g. `{{colors.primary.default.hex_stripped}}ff`).
@@ -49,6 +50,7 @@ All templates use Matugen's Go template syntax: `{{colors.<role>.default.hex_str
 | `~/.local/state/theme/current/tmux.conf` | Rendered tmux config, sourced by `modules/tmux.nix` via `configAfter` |
 | `~/.local/state/theme/current/neovim.lua` | Rendered neovim colorscheme, loaded by `modules/nvim/lua/theme.lua` at startup |
 | `~/.config/noctalia/colors.json` | Canonical noctia colors location (overridden by Matugen template at runtime) |
+| `~/.config/lazygit/config.yml` | Rendered lazygit theme (overwritten in-place by Matugen on every wallpaper change/reset — see note below) |
 
 ## Consumers
 
@@ -64,7 +66,7 @@ All templates use Matugen's Go template syntax: `{{colors.<role>.default.hex_str
 
 ## How theme changes flow
 
-1. **`set-wallpaper <image>`** → `awww img` sets wallpaper → `matugen image` reads image, generates palette, renders all 6 templates, runs post_hooks → apps update live
+1. **`set-wallpaper <image>`** → `awww img` sets wallpaper → `matugen image` reads image, generates palette, renders all 7 templates, runs post_hooks → apps update live
 2. **`theme-reset`** → `matugen color <source_color> --mode dark` → same render + post_hook chain → apps update live
 3. **Activation** → bootstraps `colors.json` from default palette if missing (one-time, no render)
 4. **(Future)** Light/dark mode switch → `matugen color <source_color> --mode light` → same chain
@@ -82,3 +84,4 @@ All templates use Matugen's Go template syntax: `{{colors.<role>.default.hex_str
 - Stylix targets for hyprland, neovim, rofi, and tmux are `mkForce false` — Matugen templates handle rendering for these apps. Stylix only sets the base16 palette and fonts.
 - The default palette (`matugenDefault`) is written to `~/.config/theme/default/colors.json` and used as Matugen's `fallback_color` and `theme-reset` source.
 - Noctalia colors are written to `~/.config/noctalia/colors.json` at build time (static defaults) and at runtime (Matugen template overrides). The runtime write is a direct file copy from the template output — no symlink needed.
+- **lazygit is special**: unlike kitty/tmux/neovim/hyprland/rofi, lazygit does **not** support `include`, `source`, or `dofile` — it reads exactly one `~/.config/lazygit/config.yml`. The lazygit matugen template is therefore a **complete config file**, not just a theme block. Matugen overwrites the entire file on every `set-wallpaper` or `theme-reset`. To add non-theme settings (keybindings, customCommands, services, etc.), edit the `lazygitTemplate` in `theme.nix` directly — add them alongside the `gui.theme` section. The rendered output at `~/.config/lazygit/config.yml` is owned by Matugen, not by home-manager.

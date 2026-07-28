@@ -328,6 +328,44 @@ in {
         "mTertiary": "{{colors.tertiary.default.hex}}"
       }
     '';
+
+    # lazygit config: complete YAML file (lazygit does not support include/source).
+    # Non-theme settings (keybindings, customCommands, etc.) must be added here
+    # alongside the matugen interpolation in gui.theme.
+    lazygitTemplate = pkgs.writeText "lazygit.yml" ''
+      gui:
+        theme:
+          activeBorderColor:
+            - '{{ colors.primary.default.hex }}'
+            - bold
+          inactiveBorderColor:
+            - '{{ colors.outline.default.hex }}'
+          searchingActiveBorderColor:
+            - '{{ colors.tertiary.default.hex }}'
+            - bold
+          optionsTextColor:
+            - '{{ colors.secondary.default.hex }}'
+          selectedLineBgColor:
+            - '{{ colors.primary_container.default.hex }}'
+          inactiveViewSelectedLineBgColor:
+            - '{{ colors.surface_container_high.default.hex }}'
+          cherryPickedCommitFgColor:
+            - '{{ colors.on_tertiary_container.default.hex }}'
+          cherryPickedCommitBgColor:
+            - '{{ colors.tertiary_container.default.hex }}'
+          markedBaseCommitFgColor:
+            - '{{ colors.on_secondary_container.default.hex }}'
+          markedBaseCommitBgColor:
+            - '{{ colors.secondary_container.default.hex }}'
+          unstagedChangesColor:
+            - '{{ colors.error.default.hex }}'
+          defaultFgColor:
+            - '{{ colors.on_background.default.hex }}'
+
+      git:
+        paging:
+          colorArg: always
+    '';
   in {
     stylix.targets = {
       hyprland.enable = lib.mkForce false;
@@ -375,6 +413,10 @@ in {
       input_path = "${matugenTemplates}/neovim.lua"
       output_path = "${runtimeDir}/neovim.lua"
 
+      [templates.lazygit]
+      input_path = "${matugenTemplates}/lazygit.yml"
+      output_path = "~/.config/lazygit/config.yml"
+
       [templates.noctalia]
       input_path = "${matugenTemplates}/noctalia-colors.json"
       output_path = "~/.config/noctalia/colors.json"
@@ -386,6 +428,7 @@ in {
     home.file.".config/matugen/templates/tmux.conf".source = tmuxTemplate;
     home.file.".config/matugen/templates/hyprland.lua".source = hyprlandTemplate;
     home.file.".config/matugen/templates/neovim.lua".source = neovimTemplate;
+    home.file.".config/matugen/templates/lazygit.yml".source = lazygitTemplate;
     home.file.".config/matugen/templates/noctalia-colors.json".source = noctaliaTemplate;
 
     # Noctia colors: let Matugen template create at runtime (Nix writes are read-only)
