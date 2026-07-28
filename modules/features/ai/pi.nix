@@ -26,7 +26,7 @@
   in {
     home.packages = [
       wrappedPi
-      pkgs.nodejs
+      pkgs.nodejs_22
     ];
 
     home.file = {
