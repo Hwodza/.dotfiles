@@ -256,7 +256,7 @@ local function toggle_active_column_width()
   end
 end
 
-hl.bind(chord(main_mod, "C"), toggle_active_column_width)
+hl.bind(chord(main_mod, "T"), toggle_active_column_width)
 hl.bind(chord(main_mod, "SHIFT", "H"), hl.dsp.layout("swapcol l"))
 hl.bind(chord(main_mod, "SHIFT", "L"), hl.dsp.layout("swapcol r"))
 
