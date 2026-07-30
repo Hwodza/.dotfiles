@@ -26,7 +26,12 @@
       selfPkgs.myNoctalia
       jq
     ];
-    home.file.".config/rofi/config.rasi".source = ./rofi.config.rasi;
+    home.file = {
+      ".config/rofi/config.rasi".source = ./rofi.config.rasi;
+      ".config/hypr/config".source = config.lib.file.mkOutOfStoreSymlink "${hyprPath}/config";
+      ".config/hypr/keybinds".source = config.lib.file.mkOutOfStoreSymlink "${hyprPath}/keybinds";
+      ".config/hypr/lib".source = config.lib.file.mkOutOfStoreSymlink "${hyprPath}/lib";
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       package = hyprlandPkgs.hyprland;

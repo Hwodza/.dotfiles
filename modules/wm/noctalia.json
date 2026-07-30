@@ -515,7 +515,7 @@
       "networkPanelView": "wifi",
       "wifiDetailsViewMode": "grid",
       "bluetoothDetailsViewMode": "grid",
-      "bluetoothHideUnnamedDevices": false,
+      "bluetoothHideUnnamedDevices": true,
       "disableDiscoverability": false,
       "bluetoothAutoConnect": true
     },
@@ -731,7 +731,7 @@
         "y": 0,
         "active_workspace": 1,
         "vrr": false,
-        "focused": true
+        "focused": false
       },
       "HDMI-A-1": {
         "name": "HDMI-A-1",
@@ -743,7 +743,7 @@
         "y": 0,
         "active_workspace": 201,
         "vrr": false,
-        "focused": false
+        "focused": true
       }
     },
     "notificationsState": {
