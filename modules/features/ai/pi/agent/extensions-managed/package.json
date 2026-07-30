@@ -1,0 +1,8 @@
+{
+  "name": "pi-extensions-managed",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "pi-mcp-adapter": "2.15.0"
+  }
+}
