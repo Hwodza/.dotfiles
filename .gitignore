@@ -4,3 +4,4 @@ tmux-client-*.log
 **/agent/sessions/
 .issues/
 .scratch/
+**/node_modules/
