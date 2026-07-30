@@ -34,6 +34,7 @@
       self.nixosModules.theme
       self.nixosModules.aiHarness
       self.nixosModules.mouse
+      self.nixosModules.bluetooth
     ];
 
     # imports = [
