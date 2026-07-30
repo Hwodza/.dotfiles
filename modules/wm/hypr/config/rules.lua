@@ -41,6 +41,14 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  name = "workspace_special_po",
+  match = {
+    class = "^(io.gitlab.idevecore.Pomodoro)$",
+  },
+  workspace = "special:pomodoro",
+})
+
+hl.window_rule({
   name = "workspace_special_ya",
   match = {
     class = "^(kitty-yazi)$",

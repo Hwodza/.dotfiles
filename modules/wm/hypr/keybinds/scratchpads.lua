@@ -30,6 +30,7 @@ end
 local scratchpads = {
   { key = "D", workspace = "discord", command = "Discord" },
   { key = "S", workspace = "spotify", command = "spotify" },
+  { key = "P", workspace = "pomodoro", command = "pomodoro" },
   { key = "E", workspace = "yazi", command = "kitty --class=kitty-yazi -e yazi" },
   { key = "B", workspace = "btop", command = "kitty --class=kitty-btop -e btop" },
 }
