@@ -29,6 +29,7 @@
       thunderbird
       pomodoro-gtk
       simple-mtpfs
+      qgis
     ];
 
     services.udiskie = {
