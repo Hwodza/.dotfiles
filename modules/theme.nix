@@ -159,6 +159,7 @@ in {
       name = "set-wallpaper";
       runtimeInputs = with pkgs; [
         awww
+        kitty
         matugen
         systemd
       ];
