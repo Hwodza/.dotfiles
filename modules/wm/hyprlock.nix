@@ -24,8 +24,8 @@
 
         background = {
           monitor = "";
-          path = "screenshot";
-          blur_passes = 3;
+          path = "${config.home.homeDirectory}/Pictures/Wallpapers/wallpaper";
+          blur_passes = 0;
         };
 
         input-field = {
