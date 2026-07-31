@@ -166,8 +166,8 @@ in {
       text = ''
         set -euo pipefail
 
-        if [ "$#" -ne 1 ]; then
-          echo "usage: set-wallpaper /path/to/image" >&2
+        if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+          echo "usage: set-wallpaper /path/to/image [source-color-index]" >&2
           exit 2
         fi
 
@@ -177,10 +177,12 @@ in {
           exit 1
         fi
 
+        source_color_index="''${2:-0}"
+
         systemctl --user start awww.service >/dev/null 2>&1 || true
         awww img --resize crop --transition-type fade --transition-duration 1.2 --transition-fps 60 "$image"
 
-        matugen image "$image" --mode dark --config ${lib.escapeShellArg matugenConfig}
+        matugen image "$image" --mode dark --source-color-index "$source_color_index" --config ${lib.escapeShellArg matugenConfig}
       '';
     };
 
