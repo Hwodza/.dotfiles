@@ -107,9 +107,8 @@
         Description = "Daily NASA APOD wallpaper update";
       };
       Timer = {
-        # Fire at 12:05 AM Eastern time every day.
+        # Fire at 12:05 AM Eastern time every day (system timezone is already America/New_York).
         OnCalendar = "*-*-* 00:05:00";
-        TimeZone = "America/New_York";
 
         # Also run shortly after every boot, in case the machine was off at 12:05.
         # 2 minutes gives the network time to come up before the script runs.
