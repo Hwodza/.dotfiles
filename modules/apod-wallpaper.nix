@@ -11,7 +11,7 @@
     # TODO currently the script assumes all photos are jpg
     apod-wallpaper = pkgs.writeShellApplication {
       name = "apod-wallpaper";
-      runtimeInputs = [pkgs.curl pkgs.jq];
+      runtimeInputs = with pkgs; [curl jq awww kitty matugen systemd];
       text = ''
         WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
@@ -51,7 +51,7 @@
         if [ ! -d "$TodayDir" ]; then
           echo "$TodayDir doesn't exist."
           echo "Creating $TodayDir."
-          mkdir "$TodayDir"
+          mkdir -p "$TodayDir"
           echo "$TodayDir created"
 
           echo "Downloading image"
