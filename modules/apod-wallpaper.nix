@@ -108,8 +108,8 @@
       };
       Timer = {
         # Fire at 12:05 AM Eastern time every day.
-        # systemd accepts IANA tz names directly in OnCalendar.
-        OnCalendar = "America/New_York *-*-* 00:05:00";
+        OnCalendar = "*-*-* 00:05:00";
+        TimeZone = "America/New_York";
 
         # Also run shortly after every boot, in case the machine was off at 12:05.
         # 2 minutes gives the network time to come up before the script runs.
