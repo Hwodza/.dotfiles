@@ -17,7 +17,10 @@
     home.packages = with pkgs; [
       cloudflared
       kdePackages.dolphin
+      google-chrome
       kdePackages.kio-extras
+      zotero
+      libreoffice
       tor-browser
       obsidian
       zathura
