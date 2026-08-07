@@ -3,6 +3,18 @@
   self,
   ...
 }: let
+  bullets-nvim-overlay = final: prev: {
+    vimPlugins =
+      prev.vimPlugins
+      // {
+        bullets-nvim = prev.vimUtils.buildVimPlugin {
+          pname = "bullets.nvim";
+          version = "1.0.1";
+          src = inputs.bullets-nvim-src;
+          meta.homepage = "https://github.com/bullets-vim/bullets.nvim";
+        };
+      };
+  };
   lua = {pkgs, ...}: {
     runtimePkgs = [
       pkgs.lua-language-server
@@ -79,6 +91,7 @@
     };
   };
 in {
+  flake.overlays.default = bullets-nvim-overlay;
   flake.modules.neovim.main = {
     config,
     wlib,
@@ -162,6 +175,7 @@ in {
           outline-nvim
           autosave-nvim
           markdown-preview-nvim
+          bullets-nvim
         ];
       };
 
