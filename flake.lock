@@ -68,6 +68,22 @@
         "type": "github"
       }
     },
+    "bullets-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782091901,
+        "narHash": "sha256-1hHaxX6XsHGsdPmdkzN+bmTGNBkLqrmXbYCTcTKjE1U=",
+        "owner": "bullets-vim",
+        "repo": "bullets.nvim",
+        "rev": "cc162bfd3b49982e6707958dee399df4cb6ba0d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bullets-vim",
+        "repo": "bullets.nvim",
+        "type": "github"
+      }
+    },
     "bun2nix": {
       "inputs": {
         "flake-parts": [
@@ -381,6 +397,7 @@
     },
     "root": {
       "inputs": {
+        "bullets-nvim-src": "bullets-nvim-src",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",

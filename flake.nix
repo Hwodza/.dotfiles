@@ -6,6 +6,11 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     self-hosted-AI-pkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    bullets-nvim-src = {
+      url = "github:bullets-vim/bullets.nvim";
+      flake = false;
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
