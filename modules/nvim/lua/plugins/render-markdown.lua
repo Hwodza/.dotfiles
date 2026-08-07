@@ -6,11 +6,11 @@ return {
     require("render-markdown").setup({
       bullet = {
         enabled = true,
-        icons = "mini",
+        -- icons = "mini",
       },
       heading = {
         enabled = true,
-        icons = "mini",
+        -- icons = "mini",
       },
       link = {
         enable_hover = true,

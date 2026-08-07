@@ -1,9 +1,26 @@
-{self, ...}: {
-  flake.homeModules.desktop = {pkgs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
+  flake.homeModules.desktop = {
+    config,
+    pkgs,
+    ...
+  }: {
+    imports = [inputs.sops-nix.homeModules.sops];
+
+    sops = {
+      defaultSopsFile = ../../secrets/secrets.yaml;
+      age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    };
     home.packages = with pkgs; [
       cloudflared
       kdePackages.dolphin
+      google-chrome
       kdePackages.kio-extras
+      zotero
+      libreoffice
       tor-browser
       obsidian
       zathura
@@ -33,6 +50,8 @@
     imports = [
       self.nixosModules.theme
       self.nixosModules.aiHarness
+      self.nixosModules.mouse
+      self.nixosModules.bluetooth
     ];
 
     # imports = [
@@ -50,6 +69,7 @@
       self.homeModules.hypridle
       self.homeModules.hyprlock
       self.homeModules.pi
+      self.homeModules.apod-wallpaper
     ];
     environment.sessionVariables = {
       TERMINAL = lib.getExe pkgs.kitty;

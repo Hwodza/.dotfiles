@@ -23,6 +23,7 @@
         self.nixosModules.desktop
         self.nixosModules.ssh
         self.nixosModules.selfHostedAI
+        self.nixosModules.virtualMachines
       ];
       environment.systemPackages = [
         (pkgs.btop.override {cudaSupport = true;})

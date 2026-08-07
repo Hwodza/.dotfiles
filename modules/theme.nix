@@ -25,71 +25,66 @@
   };
 
   hex = color: "#${color}";
-  mkMatugenColor = color: {
-    dark.color = color;
-    default.color = color;
-    light.color = color;
-  };
-  mkBase16Color = color: mkMatugenColor (hex color);
 
+  # Simplified: plain hex values, no dark/light nesting
   matugenDefault = {
     base16 = {
-      base00 = mkBase16Color base16.base00;
-      base01 = mkBase16Color base16.base01;
-      base02 = mkBase16Color base16.base02;
-      base03 = mkBase16Color base16.base03;
-      base04 = mkBase16Color base16.base04;
-      base05 = mkBase16Color base16.base05;
-      base06 = mkBase16Color base16.base06;
-      base07 = mkBase16Color base16.base07;
-      base08 = mkBase16Color base16.base08;
-      base09 = mkBase16Color base16.base09;
-      base0a = mkBase16Color base16.base0A;
-      base0b = mkBase16Color base16.base0B;
-      base0c = mkBase16Color base16.base0C;
-      base0d = mkBase16Color base16.base0D;
-      base0e = mkBase16Color base16.base0E;
-      base0f = mkBase16Color base16.base0F;
+      base00 = hex base16.base00;
+      base01 = hex base16.base01;
+      base02 = hex base16.base02;
+      base03 = hex base16.base03;
+      base04 = hex base16.base04;
+      base05 = hex base16.base05;
+      base06 = hex base16.base06;
+      base07 = hex base16.base07;
+      base08 = hex base16.base08;
+      base09 = hex base16.base09;
+      base0a = hex base16.base0A;
+      base0b = hex base16.base0B;
+      base0c = hex base16.base0C;
+      base0d = hex base16.base0D;
+      base0e = hex base16.base0E;
+      base0f = hex base16.base0F;
     };
     colors = {
-      background = mkMatugenColor (hex base16.base00);
-      error = mkMatugenColor (hex base16.base08);
-      error_container = mkMatugenColor (hex base16.base0F);
-      inverse_on_surface = mkMatugenColor (hex base16.base01);
-      inverse_primary = mkMatugenColor (hex base16.base0D);
-      inverse_surface = mkMatugenColor (hex base16.base05);
-      on_background = mkMatugenColor (hex base16.base05);
-      on_error = mkMatugenColor (hex base16.base00);
-      on_error_container = mkMatugenColor (hex base16.base05);
-      on_primary = mkMatugenColor (hex base16.base00);
-      on_primary_container = mkMatugenColor (hex base16.base05);
-      on_secondary = mkMatugenColor (hex base16.base00);
-      on_secondary_container = mkMatugenColor (hex base16.base05);
-      on_surface = mkMatugenColor (hex base16.base05);
-      on_surface_variant = mkMatugenColor (hex base16.base04);
-      on_tertiary = mkMatugenColor (hex base16.base00);
-      on_tertiary_container = mkMatugenColor (hex base16.base05);
-      outline = mkMatugenColor (hex base16.base03);
-      outline_variant = mkMatugenColor (hex base16.base02);
-      primary = mkMatugenColor (hex base16.base0D);
-      primary_container = mkMatugenColor (hex base16.base02);
-      scrim = mkMatugenColor "#000000";
-      secondary = mkMatugenColor (hex base16.base0C);
-      secondary_container = mkMatugenColor (hex base16.base02);
-      shadow = mkMatugenColor "#000000";
-      source_color = mkMatugenColor (hex base16.base0D);
-      surface = mkMatugenColor (hex base16.base00);
-      surface_bright = mkMatugenColor (hex base16.base02);
-      surface_container = mkMatugenColor (hex base16.base01);
-      surface_container_high = mkMatugenColor (hex base16.base02);
-      surface_container_highest = mkMatugenColor (hex base16.base03);
-      surface_container_low = mkMatugenColor (hex base16.base00);
-      surface_container_lowest = mkMatugenColor "#11111b";
-      surface_dim = mkMatugenColor (hex base16.base00);
-      surface_tint = mkMatugenColor (hex base16.base0D);
-      surface_variant = mkMatugenColor (hex base16.base02);
-      tertiary = mkMatugenColor (hex base16.base0E);
-      tertiary_container = mkMatugenColor (hex base16.base02);
+      background = hex base16.base00;
+      error = hex base16.base08;
+      error_container = hex base16.base0F;
+      inverse_on_surface = hex base16.base01;
+      inverse_primary = hex base16.base0D;
+      inverse_surface = hex base16.base05;
+      on_background = hex base16.base05;
+      on_error = hex base16.base00;
+      on_error_container = hex base16.base05;
+      on_primary = hex base16.base00;
+      on_primary_container = hex base16.base05;
+      on_secondary = hex base16.base00;
+      on_secondary_container = hex base16.base05;
+      on_surface = hex base16.base05;
+      on_surface_variant = hex base16.base04;
+      on_tertiary = hex base16.base00;
+      on_tertiary_container = hex base16.base05;
+      outline = hex base16.base03;
+      outline_variant = hex base16.base02;
+      primary = hex base16.base0D;
+      primary_container = hex base16.base02;
+      scrim = "#000000";
+      secondary = hex base16.base0C;
+      secondary_container = hex base16.base02;
+      shadow = "#000000";
+      source_color = hex base16.base0D;
+      surface = hex base16.base00;
+      surface_bright = hex base16.base02;
+      surface_container = hex base16.base01;
+      surface_container_high = hex base16.base02;
+      surface_container_highest = hex base16.base03;
+      surface_container_low = hex base16.base00;
+      surface_container_lowest = "#11111b";
+      surface_dim = hex base16.base00;
+      surface_tint = hex base16.base0D;
+      surface_variant = hex base16.base02;
+      tertiary = hex base16.base0E;
+      tertiary_container = hex base16.base02;
     };
     image = null;
     is_dark_mode = true;
@@ -97,20 +92,20 @@
   };
 
   noctaliaColors = {
-    mError = matugenDefault.colors.error.default.color;
-    mOnError = matugenDefault.colors.on_error.default.color;
-    mOnPrimary = matugenDefault.colors.on_primary.default.color;
-    mOnSecondary = matugenDefault.colors.on_secondary.default.color;
-    mOnSurface = matugenDefault.colors.on_surface.default.color;
-    mOnSurfaceVariant = matugenDefault.colors.on_surface_variant.default.color;
-    mOnTertiary = matugenDefault.colors.on_tertiary.default.color;
-    mOutline = matugenDefault.colors.outline.default.color;
-    mPrimary = matugenDefault.colors.primary.default.color;
-    mSecondary = matugenDefault.colors.secondary.default.color;
-    mShadow = matugenDefault.colors.shadow.default.color;
-    mSurface = matugenDefault.colors.surface.default.color;
-    mSurfaceVariant = matugenDefault.colors.surface_variant.default.color;
-    mTertiary = matugenDefault.colors.tertiary.default.color;
+    mError = matugenDefault.colors.error;
+    mOnError = matugenDefault.colors.on_error;
+    mOnPrimary = matugenDefault.colors.on_primary;
+    mOnSecondary = matugenDefault.colors.on_secondary;
+    mOnSurface = matugenDefault.colors.on_surface;
+    mOnSurfaceVariant = matugenDefault.colors.on_surface_variant;
+    mOnTertiary = matugenDefault.colors.on_tertiary;
+    mOutline = matugenDefault.colors.outline;
+    mPrimary = matugenDefault.colors.primary;
+    mSecondary = matugenDefault.colors.secondary;
+    mShadow = matugenDefault.colors.shadow;
+    mSurface = matugenDefault.colors.surface;
+    mSurfaceVariant = matugenDefault.colors.surface_variant;
+    mTertiary = matugenDefault.colors.tertiary;
   };
 in {
   flake.theme = {
@@ -158,252 +153,21 @@ in {
   }: let
     runtimeDir = "${config.home.homeDirectory}/.local/state/theme/current";
     matugenConfig = "${config.home.homeDirectory}/.config/matugen/config.toml";
-    defaultPalette = pkgs.writeText "default-theme-colors.json" (builtins.toJSON self.theme.matugenDefault);
-
-    themeApply = pkgs.writeShellApplication {
-      name = "theme-apply";
-      runtimeInputs = with pkgs; [
-        coreutils
-        jq
-        kitty
-        tmux
-        hyprland
-      ];
-      text = ''
-                set -euo pipefail
-
-                render_only=0
-                if [ "''${1:-}" = "--render-only" ]; then
-                  render_only=1
-                fi
-
-                current_dir="''${HOME}/.local/state/theme/current"
-                palette="''${current_dir}/colors.json"
-                noctalia_colors="''${current_dir}/noctalia-colors.json"
-
-                if [ ! -f "$palette" ]; then
-                  echo "theme-apply: missing palette: $palette" >&2
-                  exit 1
-                fi
-
-                mkdir -p "$current_dir"
-
-                get_color() {
-                  local query="$1"
-                  local fallback="$2"
-                  local value
-                  value="$(jq -r "$query // empty" "$palette")"
-                  if [ -n "$value" ] && [ "$value" != "null" ]; then
-                    printf '%s' "$value"
-                  else
-                    printf '%s' "$fallback"
-                  fi
-                }
-
-                strip_hash() {
-                  printf '%s' "''${1#\#}"
-                }
-
-                base00="$(get_color '.base16.base00.default.color' '#1a1b26')"
-                base01="$(get_color '.base16.base01.default.color' '#24283b')"
-                base02="$(get_color '.base16.base02.default.color' '#414868')"
-                base03="$(get_color '.base16.base03.default.color' '#565f89')"
-                base04="$(get_color '.base16.base04.default.color' '#a9b1d6')"
-                base05="$(get_color '.base16.base05.default.color' '#c0caf5')"
-                base07="$(get_color '.base16.base07.default.color' '#ffffff')"
-                base08="$(get_color '.base16.base08.default.color' '#f7768e')"
-                base09="$(get_color '.base16.base09.default.color' '#ff9e64')"
-                base0a="$(get_color '.base16.base0a.default.color' '#e0af68')"
-                base0b="$(get_color '.base16.base0b.default.color' '#9ece6a')"
-                base0c="$(get_color '.base16.base0c.default.color' '#7dcfff')"
-                base0d="$(get_color '.base16.base0d.default.color' '#7aa2f7')"
-                base0e="$(get_color '.base16.base0e.default.color' '#bb9af7')"
-
-                primary="$(get_color '.colors.primary.default.color' "$base0d")"
-                on_primary="$(get_color '.colors.on_primary.default.color' "$base00")"
-                secondary="$(get_color '.colors.secondary.default.color' "$base0c")"
-                on_secondary="$(get_color '.colors.on_secondary.default.color' "$base00")"
-                tertiary="$(get_color '.colors.tertiary.default.color' "$base0e")"
-                on_tertiary="$(get_color '.colors.on_tertiary.default.color' "$base00")"
-                surface="$(get_color '.colors.surface.default.color' "$base00")"
-                surface_variant="$(get_color '.colors.surface_variant.default.color' "$base02")"
-                on_surface="$(get_color '.colors.on_surface.default.color' "$base05")"
-                on_surface_variant="$(get_color '.colors.on_surface_variant.default.color' "$base04")"
-                outline="$(get_color '.colors.outline.default.color' "$base03")"
-                error="$(get_color '.colors.error.default.color' "$base08")"
-                on_error="$(get_color '.colors.on_error.default.color' "$base00")"
-                shadow="$(get_color '.colors.shadow.default.color' '#000000')"
-
-                cat > "''${current_dir}/kitty.conf" <<EOF
-        foreground $base05
-        background $base00
-        selection_foreground $base00
-        selection_background $base03
-        cursor $base05
-        cursor_text_color $base00
-        active_tab_foreground $base00
-        active_tab_background $primary
-        inactive_tab_foreground $base04
-        inactive_tab_background $base01
-        color0 $base00
-        color1 $base08
-        color2 $base0b
-        color3 $base0a
-        color4 $base0d
-        color5 $base0e
-        color6 $base0c
-        color7 $base05
-        color8 $base03
-        color9 $base08
-        color10 $base0b
-        color11 $base0a
-        color12 $base0d
-        color13 $base0e
-        color14 $base0c
-        color15 $base07
-        EOF
-
-                cat > "''${current_dir}/rofi.rasi" <<EOF
-        * {
-            b-color: ''${base00}FF;
-            fg-color: ''${base05}FF;
-            fgp-color: ''${base04}FF;
-            hl-color: ''${primary}FF;
-            hlt-color: ''${on_primary}FF;
-            alt-color: ''${base01}FF;
-            wbg-color: ''${base00}CC;
-            w-border-color: ''${primary}FF;
-        }
-        EOF
-
-                cat > "''${current_dir}/hyprland.lua" <<EOF
-        return {
-          active_border = "rgba($(strip_hash "$primary")ff)",
-          inactive_border = "rgba($(strip_hash "$outline")aa)",
-          shadow = "rgba($(strip_hash "$shadow")ee)",
-        }
-        EOF
-
-                cat > "''${current_dir}/tmux.conf" <<EOF
-        set -g status-style "bg=$base00,fg=$base05"
-        set -g message-style "bg=$base02,fg=$base07"
-        set -g message-command-style "bg=$base02,fg=$base07"
-        set -g mode-style "bg=$primary,fg=$on_primary"
-        set -g pane-border-style "fg=$base02"
-        set -g pane-active-border-style "fg=$primary"
-        set -g window-status-style "bg=$base00,fg=$base04"
-        set -g window-status-current-style "bg=$primary,fg=$on_primary,bold"
-        set -g window-status-activity-style "bg=$base00,fg=$base0a"
-        set -g status-left "#[fg=$on_primary,bg=$primary,bold] #S #[fg=$primary,bg=$base00,nobold]"
-        set -g status-right "#[fg=$base04,bg=$base00] %H:%M #[fg=$on_primary,bg=$primary,bold] %d %b "
-        EOF
-
-                cat > "''${current_dir}/neovim.lua" <<EOF
-        vim.g.colors_name = "matugen-runtime"
-        vim.o.termguicolors = true
-
-        local function hi(group, opts)
-          vim.api.nvim_set_hl(0, group, opts)
-        end
-
-        hi("Normal", { fg = "$base05", bg = "$base00" })
-        hi("NormalNC", { fg = "$base05", bg = "$base00" })
-        hi("NormalFloat", { fg = "$base05", bg = "$base01" })
-        hi("FloatBorder", { fg = "$primary", bg = "$base01" })
-        hi("Cursor", { fg = "$base00", bg = "$base05" })
-        hi("CursorLine", { bg = "$base01" })
-        hi("LineNr", { fg = "$base03" })
-        hi("CursorLineNr", { fg = "$primary", bold = true })
-        hi("SignColumn", { fg = "$base04", bg = "$base00" })
-        hi("StatusLine", { fg = "$base05", bg = "$base02" })
-        hi("StatusLineNC", { fg = "$base04", bg = "$base01" })
-        hi("WinSeparator", { fg = "$base02" })
-        hi("Visual", { bg = "$base02" })
-        hi("Search", { fg = "$base00", bg = "$base0a" })
-        hi("IncSearch", { fg = "$base00", bg = "$primary" })
-        hi("Pmenu", { fg = "$base05", bg = "$base01" })
-        hi("PmenuSel", { fg = "$on_primary", bg = "$primary" })
-        hi("MatchParen", { fg = "$primary", bold = true })
-        hi("Comment", { fg = "$base03", italic = true })
-        hi("Constant", { fg = "$base09" })
-        hi("String", { fg = "$base0b" })
-        hi("Identifier", { fg = "$base0d" })
-        hi("Function", { fg = "$base0d", bold = true })
-        hi("Statement", { fg = "$base0e" })
-        hi("Keyword", { fg = "$base0e" })
-        hi("PreProc", { fg = "$base0c" })
-        hi("Type", { fg = "$base0a" })
-        hi("Special", { fg = "$base0c" })
-        hi("Underlined", { fg = "$primary", underline = true })
-        hi("Error", { fg = "$error" })
-        hi("Todo", { fg = "$base0a", bold = true })
-        hi("DiagnosticError", { fg = "$base08" })
-        hi("DiagnosticWarn", { fg = "$base0a" })
-        hi("DiagnosticInfo", { fg = "$base0c" })
-        hi("DiagnosticHint", { fg = "$base0b" })
-        hi("DiffAdd", { fg = "$base0b", bg = "$base01" })
-        hi("DiffChange", { fg = "$base0a", bg = "$base01" })
-        hi("DiffDelete", { fg = "$base08", bg = "$base01" })
-        hi("TelescopeBorder", { fg = "$primary", bg = "$base01" })
-        hi("TelescopeNormal", { fg = "$base05", bg = "$base01" })
-        hi("TelescopeSelection", { fg = "$base07", bg = "$base02" })
-        EOF
-
-                cat > "$noctalia_colors" <<EOF
-        {
-          "mError": "$error",
-          "mOnError": "$on_error",
-          "mOnPrimary": "$on_primary",
-          "mOnSecondary": "$on_secondary",
-          "mOnSurface": "$on_surface",
-          "mOnSurfaceVariant": "$on_surface_variant",
-          "mOnTertiary": "$on_tertiary",
-          "mOutline": "$outline",
-          "mPrimary": "$primary",
-          "mSecondary": "$secondary",
-          "mShadow": "$shadow",
-          "mSurface": "$surface",
-          "mSurfaceVariant": "$surface_variant",
-          "mTertiary": "$tertiary"
-        }
-        EOF
-
-                mkdir -p "''${HOME}/.config/noctalia"
-                cp "$noctalia_colors" "''${HOME}/.config/noctalia/colors.json"
-
-                if [ "$render_only" -eq 1 ]; then
-                  exit 0
-                fi
-
-                if command -v hyprctl >/dev/null 2>&1; then
-                  hyprctl reload >/dev/null 2>&1 || true
-                fi
-
-                if command -v kitty >/dev/null 2>&1; then
-                  kitty @ set-colors --all "''${current_dir}/kitty.conf" >/dev/null 2>&1 || true
-                fi
-
-                if command -v tmux >/dev/null 2>&1 && tmux has-session >/dev/null 2>&1; then
-                  tmux source-file "''${current_dir}/tmux.conf" >/dev/null 2>&1 || true
-                fi
-      '';
-    };
+    matugenTemplates = "${config.home.homeDirectory}/.config/matugen/templates";
 
     setWallpaper = pkgs.writeShellApplication {
       name = "set-wallpaper";
       runtimeInputs = with pkgs; [
         awww
-        coreutils
-        jq
+        kitty
         matugen
         systemd
-        themeApply
       ];
       text = ''
         set -euo pipefail
 
-        if [ "$#" -ne 1 ]; then
-          echo "usage: set-wallpaper /path/to/image" >&2
+        if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+          echo "usage: set-wallpaper /path/to/image [source-color-index]" >&2
           exit 2
         fi
 
@@ -413,43 +177,198 @@ in {
           exit 1
         fi
 
-        current_dir="''${HOME}/.local/state/theme/current"
-        mkdir -p "$current_dir"
+        source_color_index="''${2:-0}"
 
         systemctl --user start awww.service >/dev/null 2>&1 || true
         awww img --resize crop --transition-type fade --transition-duration 1.2 --transition-fps 60 "$image"
 
-        tmp="''${current_dir}/colors.json.tmp"
-        matugen image "$image" --mode dark --config ${lib.escapeShellArg matugenConfig} --json hex --quiet > "$tmp"
-        jq empty "$tmp"
-        mv "$tmp" "''${current_dir}/colors.json"
-
-        theme-apply
+        matugen image "$image" --mode dark --source-color-index "$source_color_index" --config ${lib.escapeShellArg matugenConfig}
       '';
     };
 
     themeReset = pkgs.writeShellApplication {
       name = "theme-reset";
       runtimeInputs = with pkgs; [
-        coreutils
-        themeApply
+        matugen
       ];
       text = ''
         set -euo pipefail
-
-        default_palette="''${HOME}/.config/theme/default/colors.json"
-        fallback_palette=${lib.escapeShellArg defaultPalette}
-        current_dir="''${HOME}/.local/state/theme/current"
-
-        if [ ! -f "$default_palette" ]; then
-          default_palette="$fallback_palette"
-        fi
-
-        mkdir -p "$current_dir"
-        cp "$default_palette" "''${current_dir}/colors.json"
-        theme-apply
+        matugen color ${matugenDefault.colors.source_color} --mode dark --config ${lib.escapeShellArg matugenConfig} --json hex --quiet
       '';
     };
+
+    # Template files that matugen renders with interpolation
+    kittyTemplate = pkgs.writeText "kitty.conf" ''
+      foreground {{colors.on_surface.default.hex}}
+      background {{colors.surface.default.hex}}
+      selection_foreground {{colors.surface.default.hex}}
+      selection_background {{colors.outline.default.hex}}
+      cursor {{colors.on_surface.default.hex}}
+      cursor_text_color {{colors.surface.default.hex}}
+      active_tab_foreground {{colors.surface.default.hex}}
+      active_tab_background {{colors.primary.default.hex}}
+      inactive_tab_foreground {{colors.on_surface_variant.default.hex}}
+      inactive_tab_background {{colors.surface_container.default.hex}}
+      color0 {{colors.surface.default.hex}}
+      color1 {{colors.error.default.hex}}
+      color2 {{colors.secondary.default.hex}}
+      color3 {{colors.tertiary.default.hex}}
+      color4 {{colors.primary.default.hex}}
+      color5 {{colors.tertiary.default.hex}}
+      color6 {{colors.secondary.default.hex}}
+      color7 {{colors.on_surface.default.hex}}
+      color8 {{colors.outline.default.hex}}
+      color9 {{colors.error.default.hex}}
+      color10 {{colors.secondary.default.hex}}
+      color11 {{colors.tertiary.default.hex}}
+      color12 {{colors.primary.default.hex}}
+      color13 {{colors.tertiary.default.hex}}
+      color14 {{colors.secondary.default.hex}}
+      color15 {{colors.on_background.default.hex}}
+    '';
+
+    rofiTemplate = pkgs.writeText "rofi.rasi" ''
+      * {
+          b-color: {{colors.surface.default.hex}}FF;
+          fg-color: {{colors.on_surface.default.hex}}FF;
+          fgp-color: {{colors.on_surface_variant.default.hex}}FF;
+          hl-color: {{colors.primary.default.hex}}FF;
+          hlt-color: {{colors.on_primary.default.hex}}FF;
+          alt-color: {{colors.surface_container.default.hex}}FF;
+          wbg-color: {{colors.surface.default.hex}}CC;
+          w-border-color: {{colors.primary.default.hex}}FF;
+      }
+    '';
+
+    tmuxTemplate = pkgs.writeText "tmux.conf" ''
+      set -g status-style "bg={{colors.surface.default.hex}},fg={{colors.on_surface.default.hex}}"
+      set -g message-style "bg={{colors.surface_container_high.default.hex}},fg={{colors.on_background.default.hex}}"
+      set -g message-command-style "bg={{colors.surface_container_high.default.hex}},fg={{colors.on_background.default.hex}}"
+      set -g mode-style "bg={{colors.primary.default.hex}},fg={{colors.on_primary.default.hex}}"
+      set -g pane-border-style "fg={{colors.surface_container_high.default.hex}}"
+      set -g pane-active-border-style "fg={{colors.primary.default.hex}}"
+      set -g window-status-style "bg={{colors.surface.default.hex}},fg={{colors.on_surface_variant.default.hex}}"
+      set -g window-status-current-style "bg={{colors.primary.default.hex}},fg={{colors.on_primary.default.hex}},bold"
+      set -g window-status-activity-style "bg={{colors.surface.default.hex}},fg={{colors.tertiary.default.hex}}"
+      set -g status-left "#[fg={{colors.on_primary.default.hex}},bg={{colors.primary.default.hex}},bold] #S #[fg={{colors.primary.default.hex}},bg={{colors.surface.default.hex}},nobold]"
+      set -g status-right "#[fg={{colors.on_surface_variant.default.hex}},bg={{colors.surface.default.hex}}] %H:%M #[fg={{colors.on_primary.default.hex}},bg={{colors.primary.default.hex}},bold] %d %b "
+    '';
+
+    hyprlandTemplate = pkgs.writeText "hyprland.lua" ''
+      return {
+        active_border = "rgba({{colors.primary.default.hex_stripped}}ff)",
+        inactive_border = "rgba({{colors.outline.default.hex_stripped}}aa)",
+        shadow = "rgba({{colors.shadow.default.hex_stripped}}ee)",
+      }
+    '';
+
+    neovimTemplate = pkgs.writeText "neovim.lua" ''
+      vim.g.colors_name = "matugen-runtime"
+      vim.o.termguicolors = true
+
+      local function hi(group, opts)
+        vim.api.nvim_set_hl(0, group, opts)
+      end
+
+      hi("Normal",            { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface.default.hex}}" })
+      hi("NormalNC",          { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface.default.hex}}" })
+      hi("NormalFloat",       { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("FloatBorder",       { fg = "{{colors.primary.default.hex}}",     bg = "{{colors.surface_container.default.hex}}" })
+      hi("Cursor",            { fg = "{{colors.surface.default.hex}}",    bg = "{{colors.on_surface.default.hex}}" })
+      hi("CursorLine",        { bg = "{{colors.surface_container.default.hex}}" })
+      hi("LineNr",            { fg = "{{colors.outline.default.hex}}" })
+      hi("CursorLineNr",      { fg = "{{colors.primary.default.hex}}", bold = true })
+      hi("SignColumn",        { fg = "{{colors.on_surface_variant.default.hex}}", bg = "{{colors.surface.default.hex}}" })
+      hi("StatusLine",        { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface_container_high.default.hex}}" })
+      hi("StatusLineNC",      { fg = "{{colors.on_surface_variant.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("WinSeparator",      { fg = "{{colors.surface_container_high.default.hex}}" })
+      hi("Visual",            { bg = "{{colors.surface_container_high.default.hex}}" })
+      hi("Search",            { fg = "{{colors.surface.default.hex}}", bg = "{{colors.tertiary.default.hex}}" })
+      hi("IncSearch",         { fg = "{{colors.surface.default.hex}}", bg = "{{colors.primary.default.hex}}" })
+      hi("Pmenu",             { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("PmenuSel",          { fg = "{{colors.on_primary.default.hex}}", bg = "{{colors.primary.default.hex}}" })
+      hi("MatchParen",        { fg = "{{colors.primary.default.hex}}", bold = true })
+      hi("Comment",           { fg = "{{colors.outline.default.hex}}", italic = true })
+      hi("Constant",          { fg = "{{colors.tertiary.default.hex}}" })
+      hi("String",            { fg = "{{colors.secondary.default.hex}}" })
+      hi("Identifier",        { fg = "{{colors.primary.default.hex}}" })
+      hi("Function",          { fg = "{{colors.primary.default.hex}}", bold = true })
+      hi("Statement",         { fg = "{{colors.tertiary.default.hex}}" })
+      hi("Keyword",           { fg = "{{colors.tertiary.default.hex}}" })
+      hi("PreProc",           { fg = "{{colors.secondary.default.hex}}" })
+      hi("Type",              { fg = "{{colors.tertiary.default.hex}}" })
+      hi("Special",           { fg = "{{colors.secondary.default.hex}}" })
+      hi("Underlined",        { fg = "{{colors.primary.default.hex}}", underline = true })
+      hi("Error",             { fg = "{{colors.error.default.hex}}" })
+      hi("Todo",              { fg = "{{colors.tertiary.default.hex}}", bold = true })
+      hi("DiagnosticError",   { fg = "{{colors.error.default.hex}}" })
+      hi("DiagnosticWarn",    { fg = "{{colors.tertiary.default.hex}}" })
+      hi("DiagnosticInfo",    { fg = "{{colors.secondary.default.hex}}" })
+      hi("DiagnosticHint",    { fg = "{{colors.secondary.default.hex}}" })
+      hi("DiffAdd",           { fg = "{{colors.secondary.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("DiffChange",        { fg = "{{colors.tertiary.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("DiffDelete",        { fg = "{{colors.error.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("TelescopeBorder",   { fg = "{{colors.primary.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("TelescopeNormal",   { fg = "{{colors.on_surface.default.hex}}", bg = "{{colors.surface_container.default.hex}}" })
+      hi("TelescopeSelection",{ fg = "{{colors.on_background.default.hex}}", bg = "{{colors.surface_container_high.default.hex}}" })
+    '';
+
+    noctaliaTemplate = pkgs.writeText "noctalia-colors.json" ''
+      {
+        "mError": "{{colors.error.default.hex}}",
+        "mOnError": "{{colors.on_error.default.hex}}",
+        "mOnPrimary": "{{colors.on_primary.default.hex}}",
+        "mOnSecondary": "{{colors.on_secondary.default.hex}}",
+        "mOnSurface": "{{colors.on_surface.default.hex}}",
+        "mOnSurfaceVariant": "{{colors.on_surface_variant.default.hex}}",
+        "mOnTertiary": "{{colors.on_tertiary.default.hex}}",
+        "mOutline": "{{colors.outline.default.hex}}",
+        "mPrimary": "{{colors.primary.default.hex}}",
+        "mSecondary": "{{colors.secondary.default.hex}}",
+        "mShadow": "{{colors.shadow.default.hex}}",
+        "mSurface": "{{colors.surface.default.hex}}",
+        "mSurfaceVariant": "{{colors.surface_variant.default.hex}}",
+        "mTertiary": "{{colors.tertiary.default.hex}}"
+      }
+    '';
+
+    # lazygit config: complete YAML file (lazygit does not support include/source).
+    # Non-theme settings (keybindings, customCommands, etc.) must be added here
+    # alongside the matugen interpolation in gui.theme.
+    lazygitTemplate = pkgs.writeText "lazygit.yml" ''
+      gui:
+        theme:
+          activeBorderColor:
+            - '{{ colors.primary.default.hex }}'
+            - bold
+          inactiveBorderColor:
+            - '{{ colors.outline.default.hex }}'
+          searchingActiveBorderColor:
+            - '{{ colors.tertiary.default.hex }}'
+            - bold
+          optionsTextColor:
+            - '{{ colors.secondary.default.hex }}'
+          selectedLineBgColor:
+            - '{{ colors.primary_container.default.hex }}'
+          inactiveViewSelectedLineBgColor:
+            - '{{ colors.surface_container_high.default.hex }}'
+          cherryPickedCommitFgColor:
+            - '{{ colors.on_tertiary_container.default.hex }}'
+          cherryPickedCommitBgColor:
+            - '{{ colors.tertiary_container.default.hex }}'
+          markedBaseCommitFgColor:
+            - '{{ colors.on_secondary_container.default.hex }}'
+          markedBaseCommitBgColor:
+            - '{{ colors.secondary_container.default.hex }}'
+          unstagedChangesColor:
+            - '{{ colors.error.default.hex }}'
+          defaultFgColor:
+            - '{{ colors.on_background.default.hex }}'
+
+      git:
+        paging:
+          colorArg: always
+    '';
   in {
     stylix.targets = {
       hyprland.enable = lib.mkForce false;
@@ -462,19 +381,60 @@ in {
       pkgs.awww
       pkgs.matugen
       setWallpaper
-      themeApply
       themeReset
     ];
 
-    home.file.".config/theme/default/colors.json".text = builtins.toJSON self.theme.matugenDefault;
+    home.file.".config/theme/default/colors.json".text = builtins.toJSON matugenDefault;
+
+    # Matugen config: templates + post_hooks replace theme-apply entirely
     home.file.".config/matugen/config.toml".text = ''
       [config]
       version_check = false
-      fallback_color = "${self.theme.matugenDefault.colors.source_color.default.color}"
+      fallback_color = "${matugenDefault.colors.source_color}"
       caching = false
 
-      [templates]
+      [templates.kitty]
+      input_path = "${matugenTemplates}/kitty.conf"
+      output_path = "${runtimeDir}/kitty.conf"
+      post_hook = "kitty @ set-colors --all ${runtimeDir}/kitty.conf"
+
+      [templates.rofi]
+      input_path = "${matugenTemplates}/rofi.rasi"
+      output_path = "${runtimeDir}/rofi.rasi"
+
+      [templates.tmux]
+      input_path = "${matugenTemplates}/tmux.conf"
+      output_path = "${runtimeDir}/tmux.conf"
+      post_hook = "tmux source-file ${runtimeDir}/tmux.conf"
+
+      [templates.hyprland]
+      input_path = "${matugenTemplates}/hyprland.lua"
+      output_path = "${runtimeDir}/hyprland.lua"
+      post_hook = "hyprctl reload"
+
+      [templates.neovim]
+      input_path = "${matugenTemplates}/neovim.lua"
+      output_path = "${runtimeDir}/neovim.lua"
+
+      [templates.lazygit]
+      input_path = "${matugenTemplates}/lazygit.yml"
+      output_path = "~/.config/lazygit/config.yml"
+
+      [templates.noctalia]
+      input_path = "${matugenTemplates}/noctalia-colors.json"
+      output_path = "~/.config/noctalia/colors.json"
     '';
+
+    # Write template files
+    home.file.".config/matugen/templates/kitty.conf".source = kittyTemplate;
+    home.file.".config/matugen/templates/rofi.rasi".source = rofiTemplate;
+    home.file.".config/matugen/templates/tmux.conf".source = tmuxTemplate;
+    home.file.".config/matugen/templates/hyprland.lua".source = hyprlandTemplate;
+    home.file.".config/matugen/templates/neovim.lua".source = neovimTemplate;
+    home.file.".config/matugen/templates/lazygit.yml".source = lazygitTemplate;
+    home.file.".config/matugen/templates/noctalia-colors.json".source = noctaliaTemplate;
+
+    # Noctia colors: let Matugen template create at runtime (Nix writes are read-only)
 
     gtk.gtk2.force = true;
     xdg.configFile = {
@@ -497,18 +457,14 @@ in {
     home.activation.dynamicTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
       runtime_dir=${lib.escapeShellArg runtimeDir}
       default_palette="${config.home.homeDirectory}/.config/theme/default/colors.json"
-      fallback_palette=${lib.escapeShellArg defaultPalette}
 
       mkdir -p "$runtime_dir"
+      mkdir -p "${config.home.homeDirectory}/.config/noctalia"
       if [ ! -f "$runtime_dir/colors.json" ]; then
         if [ -f "$default_palette" ]; then
           cp "$default_palette" "$runtime_dir/colors.json"
-        else
-          cp "$fallback_palette" "$runtime_dir/colors.json"
         fi
       fi
-
-      ${lib.getExe themeApply} --render-only
     '';
   };
 }

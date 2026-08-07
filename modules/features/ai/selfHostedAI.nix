@@ -47,6 +47,11 @@
     ];
     sops.secrets."searx" = {};
     services = {
+      open-webui = {
+        enable = true;
+        port = 8084;
+        environment = {WEBUI_AUTH = "False";};
+      };
       searx = {
         enable = true;
         # Utilize the maintained SearXNG fork rather than the deprecated Searx

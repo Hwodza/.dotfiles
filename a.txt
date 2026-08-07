@@ -1,0 +1,10 @@
+Aug 03 12:03:33 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:6: Failed to parse calendar specification, ignoring: America/New_York *-*-* 00:05:00
+Aug 03 12:03:34 pc systemd[1862]: Stopped Daily NASA APOD wallpaper update.
+Aug 03 12:03:34 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:8: Unknown key 'TimeZone' in section [Timer], ignoring.
+Aug 03 12:03:34 pc systemd[1862]: Started Daily NASA APOD wallpaper update.
+Aug 03 12:06:24 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:8: Unknown key 'TimeZone' in section [Timer], ignoring.
+Aug 03 12:06:24 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:8: Unknown key 'TimeZone' in section [Timer], ignoring.
+Aug 03 12:06:25 pc systemd[1862]: Stopped Daily NASA APOD wallpaper update.
+Aug 03 12:06:25 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:8: Unknown key 'TimeZone' in section [Timer], ignoring.
+Aug 03 12:06:25 pc systemd[1862]: /home/henry/.config/systemd/user/apod-wallpaper.timer:12: Unknown key 'TimeZone' in section [Unit], ignoring.
+Aug 03 12:06:25 pc systemd[1862]: Started Daily NASA APOD wallpaper update.

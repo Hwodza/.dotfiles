@@ -24,7 +24,7 @@
         general = {
           lock_cmd = "pidof hyprlock || hyprlock";
           before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
+          after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
           ignore_dbus_inhibit = false;
           ignore_systemd_inhibit = false;
           inhibit_sleep = 2;
@@ -57,10 +57,10 @@
           }
 
           # --- Laptop: hibernate after 2 hours regardless of power ---
-          {
-            timeout = 7200;
-            on-timeout = "${isLaptop} && systemctl hibernate";
-          }
+          # {
+          #   timeout = 7200;
+          #   on-timeout = "${isLaptop} && systemctl hibernate";
+          # }
 
           # --- Desktop: suspend after 30 min ---
           {
@@ -69,10 +69,10 @@
           }
 
           # --- Desktop: hibernate after 24 hours ---
-          {
-            timeout = 86400;
-            on-timeout = "${isDesktop} && systemctl hibernate";
-          }
+          # {
+          #   timeout = 86400;
+          #   on-timeout = "${isDesktop} && systemctl hibernate";
+          # }
         ];
       };
     };

@@ -36,7 +36,7 @@
             "icon": "rocket",
             "iconColor": "none",
             "id": "Launcher",
-            "useDistroLogo": false
+            "useDistroLogo": true
           },
           {
             "clockColor": "none",
@@ -46,28 +46,6 @@
             "id": "Clock",
             "tooltipFormat": "HH:mm ddd, MMM dd",
             "useCustomFont": false
-          },
-          {
-            "compactMode": true,
-            "diskPath": "/",
-            "iconColor": "none",
-            "id": "SystemMonitor",
-            "showCpuCores": false,
-            "showCpuFreq": false,
-            "showCpuTemp": true,
-            "showCpuUsage": true,
-            "showDiskAvailable": false,
-            "showDiskUsage": false,
-            "showDiskUsageAsPercent": false,
-            "showGpuTemp": false,
-            "showLoadAverage": false,
-            "showMemoryAsPercent": false,
-            "showMemoryUsage": true,
-            "showNetworkStats": false,
-            "showSwapUsage": false,
-            "textColor": "none",
-            "useMonospaceFont": true,
-            "usePadding": false
           },
           {
             "displayMode": "onhover",
@@ -82,10 +60,6 @@
             "textColor": "none"
           },
           {
-            "iconColor": "none",
-            "id": "Settings"
-          },
-          {
             "colorizeIcons": false,
             "hideMode": "hidden",
             "iconScale": 0.8,
@@ -97,6 +71,28 @@
             "showTitle": false,
             "smartWidth": true,
             "titleWidth": 120
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Volume",
+            "middleClickCommand": "pwvucontrol || pavucontrol",
+            "textColor": "none"
+          },
+          {
+            "applyToAllMonitors": false,
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Brightness",
+            "textColor": "none"
+          },
+          {
+            "hideWhenZero": false,
+            "hideWhenZeroUnread": false,
+            "iconColor": "none",
+            "id": "NotificationHistory",
+            "showUnreadBadge": true,
+            "unreadBadgeColor": "primary"
           }
         ],
         "center": [
@@ -138,6 +134,28 @@
             "textColor": "none"
           },
           {
+            "compactMode": true,
+            "diskPath": "/",
+            "iconColor": "none",
+            "id": "SystemMonitor",
+            "showCpuCores": false,
+            "showCpuFreq": false,
+            "showCpuTemp": true,
+            "showCpuUsage": true,
+            "showDiskAvailable": false,
+            "showDiskUsage": false,
+            "showDiskUsageAsPercent": false,
+            "showGpuTemp": false,
+            "showLoadAverage": false,
+            "showMemoryAsPercent": false,
+            "showMemoryUsage": true,
+            "showNetworkStats": false,
+            "showSwapUsage": false,
+            "textColor": "none",
+            "useMonospaceFont": true,
+            "usePadding": false
+          },
+          {
             "compactMode": false,
             "hideMode": "hidden",
             "hideWhenIdle": false,
@@ -154,14 +172,6 @@
             "visualizerType": "linear"
           },
           {
-            "hideWhenZero": false,
-            "hideWhenZeroUnread": false,
-            "iconColor": "none",
-            "id": "NotificationHistory",
-            "showUnreadBadge": true,
-            "unreadBadgeColor": "primary"
-          },
-          {
             "deviceNativePath": "__default__",
             "displayMode": "graphic-clean",
             "hideIfIdle": false,
@@ -171,18 +181,8 @@
             "showPowerProfiles": false
           },
           {
-            "displayMode": "onhover",
             "iconColor": "none",
-            "id": "Volume",
-            "middleClickCommand": "pwvucontrol || pavucontrol",
-            "textColor": "none"
-          },
-          {
-            "applyToAllMonitors": false,
-            "displayMode": "onhover",
-            "iconColor": "none",
-            "id": "Brightness",
-            "textColor": "none"
+            "id": "Settings"
           },
           {
             "colorizeDistroLogo": false,
@@ -318,7 +318,7 @@
       ]
     },
     "wallpaper": {
-      "enabled": true,
+      "enabled": false,
       "overviewEnabled": false,
       "directory": "/home/henry/Pictures/Wallpapers",
       "monitorDirectories": [],
@@ -515,13 +515,13 @@
       "networkPanelView": "wifi",
       "wifiDetailsViewMode": "grid",
       "bluetoothDetailsViewMode": "grid",
-      "bluetoothHideUnnamedDevices": false,
+      "bluetoothHideUnnamedDevices": true,
       "disableDiscoverability": false,
       "bluetoothAutoConnect": true
     },
     "sessionMenu": {
       "enableCountdown": true,
-      "countdownDuration": 10000,
+      "countdownDuration": 3000,
       "position": "center",
       "showHeader": true,
       "showKeybinds": true,
@@ -531,7 +531,7 @@
         {
           "action": "lock",
           "command": "pidof hyprlock || hyprlock",
-          "countdownEnabled": true,
+          "countdownEnabled": false,
           "enabled": true,
           "keybind": "1"
         },
@@ -716,8 +716,8 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "DP-1": "/home/henry/Pictures/Wallpapers/2026-07-23/The Large Magellanic Cloud",
-      "HDMI-A-1": "/home/henry/Pictures/Wallpapers/2026-07-23/The Large Magellanic Cloud"
+      "DP-1": "/home/henry/Pictures/Wallpapers/null/null",
+      "HDMI-A-1": "/home/henry/Pictures/Wallpapers/null/null"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -731,7 +731,7 @@
         "y": 0,
         "active_workspace": 1,
         "vrr": false,
-        "focused": true
+        "focused": false
       },
       "HDMI-A-1": {
         "name": "HDMI-A-1",
@@ -743,7 +743,7 @@
         "y": 0,
         "active_workspace": 201,
         "vrr": false,
-        "focused": false
+        "focused": true
       }
     },
     "notificationsState": {

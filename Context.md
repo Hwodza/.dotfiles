@@ -72,6 +72,18 @@ The `pi` AI binary from `llm-agents.nix`, wrapped with `NODE_PATH` pointing to a
 
 **live-linked config**
 A config file placed via `lib.file.mkOutOfStoreSymlink` so it points directly into the dotfiles repo rather than the Nix store. Changes to the file take effect immediately. Used for the `pi` agent config, the Hyprland Lua config, and the `opencode` JSONC config.
+
+**pi extension**
+A Node.js package (typically under `~/.pi/agent/extensions/` or in a `NODE_PATH`-referenced `node_modules/`) that registers tools, commands, or hooks with the pi agent at `session_start`. Two categories: (1) npm-installed packages (currently `pi-mcp-adapter` and `@gotgenes/pi-permission-system`) and (2) source extensions placed directly under the symlinked `~/.pi/agent/extensions/` directory.
+
+**pi plugin state dir**
+The directory `~/.local/state/pi-plugins/` where `npm install` is run at home activation. Contains `node_modules/` with runtime npm packages. Its existence and contents are produced by the `installPiPlugins` home.activation script in `pi.nix`. Currently the only non-reproducible artifact in the pi setup.
+
+**pi-mcp-adapter**
+The npm package `pi-mcp-adapter` (v2.11.0) that provides MCP (Model Context Protocol) server bridging to the pi agent. It is installed into the plugin state dir via `npm install`. It has 6 direct npm dependencies (`@earendil-works/pi-ai`, `@earendil-works/pi-tui`, `@modelcontextprotocol/ext-apps`, `@modelcontextprotocol/sdk`, `open`, `recheck`, `typebox`, plus optional `zod`) and pulls in a large transitive dependency tree. The user wants a declarative, reproducible replacement.
+
+**zero-dependency MCP extension**
+A planned replacement for `pi-mcp-adapter` (documented in `.issues/pi-mcp-adapter.md`) that uses only Node.js built-ins (`child_process`, `fs`, `path`, `events`) with zero npm dependencies. It reads `mcp.json`, spawns stdio MCP servers lazily, and registers discovered tools as `mcp/<serverName>/<toolName>` in pi's tool registry. Not yet implemented — the `extensions/` directory in the dotfiles is currently empty.
 _Avoid: "out-of-store symlink" (implementation detail), "mutable config"._
 
 ---
