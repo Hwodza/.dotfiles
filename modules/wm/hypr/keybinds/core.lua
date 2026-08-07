@@ -44,3 +44,16 @@ local layout_focus_binds = {
 for _, bind in ipairs(layout_focus_binds) do
   hl.bind(chord(main_mod, bind[1]), hl.dsp.layout(bind[2]))
 end
+
+-- Lid closed: lock, then turn the screen off shortly after
+hl.bind("switch:on:Lid Switch", function()
+  hl.dispatch(hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
+  hl.timer(function()
+    hl.dispatch(hl.dsp.dpms({ action = "disable" }))
+  end, { timeout = 500, type = "oneshot" })
+end, { locked = true })
+
+-- Lid opened: turn the screen back on
+hl.bind("switch:off:Lid Switch", function()
+  hl.dispatch(hl.dsp.dpms({ action = "enable" }))
+end, { locked = true })

@@ -39,7 +39,7 @@
       networking.networkmanager.enable = true;
 
       services.logind.settings.Login = {
-        HandleLidSwitch = "lock"; # closing the lid just locks the session,
+        HandleLidSwitch = "ignore"; # closing the lid just locks the session,
         HandleLidSwitchDocked = "ignore"; # if docked with an external display, ignore lid state entirely
       };
       # Set your time zone.
