@@ -4,6 +4,7 @@
       self.nixosModules.cloudflare
       self.nixosModules.rclone
       self.nixosModules.miniflux
+      self.nixosModules.vaultwarden
     ];
   };
 
