@@ -1,8 +1,8 @@
 return {
-    "nvim-autopairs",
-    event = "DeferredUIEnter",
-    after = function()
-        require("nvim-autopairs").setup({
-        })
-    end
+  "nvim-autopairs",
+  event = "DeferredUIEnter",
+  after = function()
+    require("nvim-autopairs").setup({
+    })
+  end
 }
