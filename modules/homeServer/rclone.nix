@@ -5,8 +5,7 @@
     ...
   }: let
     userName = config.preferences.user.name;
-    homeDir = "/home/${userName}";
-    supernoteDir = "${homeDir}/HomeLab/Supernote";
+    dataDir = "/var/lib/rclone-webdav/supernote";
   in {
     users.users.rclone-webdav = {
       isSystemUser = true;
@@ -19,14 +18,11 @@
       group = "rclone-webdav";
     };
 
-    # Create the tree with the right ownership, and grant rclone-webdav
-    # execute access on the home dir + HomeLab without changing their
-    # normal permissions (0700 stays for everyone else).
     systemd.tmpfiles.rules = [
-      "d ${homeDir}/HomeLab 0750 ${userName} rclone-webdav -"
-      "d ${supernoteDir} 0770 ${userName} rclone-webdav -"
-      "a ${homeDir} - - - - u:rclone-webdav:x"
-      "a ${homeDir}/HomeLab - - - - u:rclone-webdav:x"
+      "d /var/lib/rclone-webdav 0750 rclone-webdav rclone-webdav -"
+      "d ${dataDir} 0750 rclone-webdav rclone-webdav -"
+      # Symlink into home for convenient browsing.
+      "L+ /home/${userName}/HomeLab/Supernote - - - - ${dataDir}"
     ];
 
     systemd.services.rclone-webdav = {
@@ -40,13 +36,14 @@
         Group = "rclone-webdav";
         LoadCredential = ["rclonepass:${config.sops.secrets."rclonePass".path}"];
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav ${supernoteDir}/ \
+          ${pkgs.bash}/bin/bash -c '${pkgs.rclone}/bin/rclone serve webdav ${dataDir}/ \
             --addr 127.0.0.1:8081 \
             --user supernote \
             --pass "$(cat ''${CREDENTIALS_DIRECTORY}/rclonepass)"'
         '';
         Restart = "on-failure";
-        ReadWritePaths = [supernoteDir];
+        StateDirectory = "rclone-webdav/supernote";
+        ReadWritePaths = [dataDir];
       };
     };
   };
