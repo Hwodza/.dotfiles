@@ -91,7 +91,7 @@
     };
   };
 in {
-  flake.overlays.default = bullets-nvim-overlay;
+  flake.overlays.bullets = bullets-nvim-overlay;
   flake.modules.neovim.main = {
     config,
     wlib,

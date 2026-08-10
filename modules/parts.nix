@@ -19,7 +19,7 @@
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [self.overlays.default];
+        overlays = builtins.attrValues inputs.self.overlays;
       };
     };
   };
