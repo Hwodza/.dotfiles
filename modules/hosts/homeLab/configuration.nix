@@ -17,6 +17,7 @@
       self.nixosModules.homeLab-user
       self.nixosModules.ssh
       self.nixosModules.homeServer
+      self.nixosModules.supernote-tool
     ];
 
     home-manager.users.server1.imports = [
