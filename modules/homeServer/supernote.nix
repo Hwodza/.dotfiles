@@ -1,4 +1,4 @@
-{...}: {
+{inputs, ...}: {
   flake.nixosModules.rclone = {
     config,
     pkgs,
@@ -46,5 +46,53 @@
         ReadWritePaths = [dataDir];
       };
     };
+  };
+  flake.overlays.supernote-tool = final: _prev: let
+    python = final.python3;
+
+    potracer = python.pkgs.buildPythonPackage rec {
+      pname = "potracer";
+      version = "0.0.1";
+      format = "setuptools";
+
+      src = python.pkgs.fetchPypi {
+        inherit pname version;
+        sha256 = "057wz5368nfwklaajdcc738x983978ash8xqnf9b378m614vgf9c";
+      };
+
+      propagatedBuildInputs = with python.pkgs; [numpy];
+      doCheck = false;
+    };
+  in {
+    supernote-tool = python.pkgs.buildPythonApplication {
+      pname = "supernotelib";
+      version = "0.7.1";
+      pyproject = true;
+
+      # the flake input itself is already a fetched store path, usable as src
+      src = inputs.supernote-tool;
+
+      nativeBuildInputs = with python.pkgs; [hatchling];
+
+      propagatedBuildInputs = with python.pkgs; [
+        colour
+        fusepy
+        numpy
+        pillow
+        potracer
+        pypng
+        reportlab
+        svglib
+        svgwrite
+      ];
+
+      doCheck = false;
+    };
+  };
+
+  flake.nixosModules.supernote-tool = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      supernote-tool 
+    ];
   };
 }
