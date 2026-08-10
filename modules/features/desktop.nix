@@ -70,6 +70,7 @@
       self.homeModules.hyprlock
       self.homeModules.pi
       self.homeModules.apod-wallpaper
+      self.homeModules.ssh
     ];
     environment.sessionVariables = {
       TERMINAL = lib.getExe pkgs.kitty;
