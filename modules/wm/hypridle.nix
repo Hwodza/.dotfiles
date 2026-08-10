@@ -4,21 +4,27 @@
   ...
 }: {
   # Home-manager module for hypridle
-  flake.homeModules.hypridle = {config, ...}: let
-    isLaptop = ''
-      { [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "9" ] || \
-        [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "10" ] || \
-        [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "31" ] || \
-        [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "32" ]; }
-    '';
+  flake.homeModules.hypridle = {
+    pkgs,
+    config,
+    ...
+  }: let
+    isLaptop = ''[ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "9" ] || [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "10" ] || [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "31" ] || [ "$(cat /sys/class/dmi/id/chassis_type 2>/dev/null)" = "32" ]'';
 
     isDesktop = ''! ${isLaptop}'';
 
     onAC = ''[ "$(cat /sys/class/power_supply/AC/online 2>/dev/null)" = "1" ]'';
     onBattery = ''[ "$(cat /sys/class/power_supply/AC/online 2>/dev/null)" = "0" ]'';
+    system = pkgs.stdenv.hostPlatform.system;
+    hyprlandPkgs = import inputs.nixpkgs-hyprland {
+      inherit system;
+      config = pkgs.config;
+    };
   in {
     services.hypridle = {
       enable = true;
+      
+      package = hyprlandPkgs.hypridle;
 
       settings = {
         general = {
