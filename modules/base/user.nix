@@ -8,7 +8,9 @@
     lib,
     ...
   }: {
+    # flake.overlays is where overlays live, this gets all of them
     config.nixpkgs.overlays = builtins.attrValues self.overlays;
+
     options.preferences.user = {
       name = lib.mkOption {
         type = lib.types.str;
