@@ -2,6 +2,7 @@ keys:
   - &primary age19ngpq39epqcgl6yj3tvnmp08h84mmu78j6wtg9am9878s8ysuazqaktsl3
   - &pc age12tujktwlc596wx6dcu35gfm4ct0tul3ztxvylmwxey3j994m79ysdqdlht
   - &server1 age1fw0scgkqy729e2jy48l2hh77u2z8p7yzn2uxrg98f09f6ategauqa8dtq2
+  - &framework age139ewux6mjpu74m3ssekh7r8674zxsfk80tzf0akwvnxduat25u2su40dl8
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
@@ -10,3 +11,4 @@ creation_rules:
       - *primary
       - *pc
       - *server1
+      - *framework
