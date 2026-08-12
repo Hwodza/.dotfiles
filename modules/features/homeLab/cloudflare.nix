@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.cloudflare = {config, ...}: {
+  flake.nixosModules.homeLab-cloudflare = {config, ...}: {
     sops.secrets."cloudflareTunnelhomeLab1" = {};
     services.cloudflared = {
       enable = true;

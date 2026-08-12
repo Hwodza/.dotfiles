@@ -1,7 +1,7 @@
 {self, ...}: {
-  flake.nixosModules.homeServer = {pkgs, ...}: {
+  flake.nixosModules.homeLab = {pkgs, ...}: {
     imports = [
-      self.nixosModules.cloudflare
+      self.nixosModules.homeLab-cloudflare
       self.nixosModules.rclone
       self.nixosModules.miniflux
       self.nixosModules.vaultwarden

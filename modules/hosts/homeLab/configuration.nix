@@ -16,7 +16,7 @@
       self.nixosModules.nix
       self.nixosModules.homeLab-user
       self.nixosModules.ssh
-      self.nixosModules.homeServer
+      self.nixosModules.homeLab
       self.nixosModules.supernote-tool
     ];
 
