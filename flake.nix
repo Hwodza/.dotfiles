@@ -6,6 +6,11 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     self-hosted-AI-pkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     bullets-nvim-src = {
       url = "github:bullets-vim/bullets.nvim";
       flake = false;
