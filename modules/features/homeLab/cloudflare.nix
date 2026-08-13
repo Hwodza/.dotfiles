@@ -17,4 +17,19 @@
       };
     };
   };
+  flake.nixosModules.tail-cloudflare = {config, ...}: {
+    sops.secrets."cloudflareTunneltail" = {};
+    services.cloudflared = {
+      enable = true;
+      tunnels = {
+        "445bd463-f7f2-457d-b1bb-99492288e743" = {
+          credentialsFile = "${config.sops.secrets."cloudflareTunneltail".path}";
+          default = "http_status:404";
+          ingress = {
+            "tail.odza.dev" = "ssh://127.0.0.1:22";
+          };
+        };
+      };
+    };
+  };
 }

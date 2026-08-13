@@ -35,6 +35,14 @@
           IdentityFile = "~/.ssh/id_server1";
           IdentitiesOnly = "yes";
         };
+
+        "Host tail" = {
+          HostName = "tail.odza.dev";
+          User = "tail";
+          ProxyCommand = "cloudflared access ssh --hostname %h";
+          IdentityFile = "~/.ssh/id_tail";
+          IdentitiesOnly = "yes";
+        };
       };
     };
   };
