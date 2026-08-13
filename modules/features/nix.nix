@@ -10,7 +10,7 @@
     ];
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
-      age.keyFile = "/home/${config.preferences.user.name}/.config/sops/age/keys.txt";
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     };
     programs.nix-index-database.comma.enable = true;
     nix = {
