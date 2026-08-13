@@ -3,6 +3,7 @@ keys:
   - &pc age12tujktwlc596wx6dcu35gfm4ct0tul3ztxvylmwxey3j994m79ysdqdlht
   - &server1 age1fw0scgkqy729e2jy48l2hh77u2z8p7yzn2uxrg98f09f6ategauqa8dtq2
   - &framework age139ewux6mjpu74m3ssekh7r8674zxsfk80tzf0akwvnxduat25u2su40dl8
+  - &tail age12d4rdzahhrj92mvdt0dll703pkas8nzdnnu3ht5ku0us0m5ctcasah93k6
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
@@ -12,3 +13,4 @@ creation_rules:
       - *pc
       - *server1
       - *framework
+      - *tail
