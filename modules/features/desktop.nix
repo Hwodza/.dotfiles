@@ -53,6 +53,7 @@
       self.nixosModules.mouse
       self.nixosModules.bluetooth
       self.nixosModules.tail
+      self.nixosModules.syncthing
     ];
 
     # imports = [
