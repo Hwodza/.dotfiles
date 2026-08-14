@@ -30,15 +30,17 @@
         devices = {
           "pc" = {id = "V66CMBP-VA272KR-R26JLIG-4FQQI2Q-ROMUPDF-TOXIQIP-QOERQFW-R4QWFA5";};
           "iphone" = {id = "6B3IUKH-DCGPSSM-63ONWC7-AZTHPQV-QIMXSMC-UTWXCFQ-RNJNIMP-7DUBMA7";};
+          "framework" = {id = "NL5XTR3-Y7E4SWR-UPGUNEY-N3RWNEG-KPD6IXS-Q4X6MR4-2AJTF5K-Y77LDQ4";};
+          "homeLab" = {id = "ZEQXQHI-FDPGGHW-K75ENKC-WDNNE3V-3W2VLGT-DHQCZM2-B55GYXI-EX6EQQ3";};
         };
         folders = {
           "Documents" = {
             path = "${syncPath}/Documents";
-            devices = ["pc"];
+            devices = ["pc" "framework" "homeLab"];
           };
           "todo" = {
             path = "${syncPath}/todo";
-            devices = ["pc" "iphone"];
+            devices = ["pc" "iphone" "framework" "homeLab"];
             ignorePerms = true;
           };
         };
