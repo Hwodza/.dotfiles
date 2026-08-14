@@ -100,7 +100,10 @@
     systemd.services.wpa_supplicant.restartIfChanged = false;
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [22 443];
+    networking.firewall = {
+      allowedTCPPorts = [22 443];
+      checkReversePath = "loose";
+    };
 
     # Keep the lid from suspending when closed.'
     services.logind.settings.Login.HandleLidSwitch = "ignore";
