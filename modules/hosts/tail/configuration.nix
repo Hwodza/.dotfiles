@@ -94,10 +94,6 @@
         PermitRootLogin = "no";
       };
     };
-    systemd.services.NetworkManager.restartIfChanged = false;
-    systemd.services.NetworkManager.stopIfChanged = false;
-    # also worth doing for its dependents:
-    systemd.services.wpa_supplicant.restartIfChanged = false;
 
     # Open ports in the firewall.
     networking.firewall = {
