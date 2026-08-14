@@ -41,7 +41,7 @@
           User = "tail";
           ProxyCommand = "cloudflared access ssh --hostname %h";
           IdentityFile = "~/.ssh/id_tail";
-          IdentitiesOnly = "yes";
+          # IdentitiesOnly = "yes";
         };
       };
     };
