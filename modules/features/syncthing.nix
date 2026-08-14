@@ -8,13 +8,13 @@
       group = config.services.syncthing.group;
     };
     users.groups.syncshare = {};
-    users.users.henry.extraGroups = ["syncshare"];
+    users.users.${config.preferences.user.name}.extraGroups = ["syncshare"];
     users.users.${config.services.syncthing.user}.extraGroups = ["syncshare"];
 
     systemd.tmpfiles.rules = [
-      "d ${syncPath} 2770 henry syncshare -"
-      "d ${syncPath}/Documents 2770 henry syncshare -"
-      "d ${syncPath}/todo 2770 henry syncshare -"
+      "d ${syncPath} 2770 ${config.preferences.user.name} syncshare -"
+      "d ${syncPath}/Documents 2770 ${config.preferences.user.name} syncshare -"
+      "d ${syncPath}/todo 2770 ${config.preferences.user.name} syncshare -"
       "L+ ${homeSyncLink} - - - - ${syncPath}"
     ];
 
@@ -25,7 +25,7 @@
       guiPasswordFile = "${config.sops.secrets."syncthingGuiPass".path}";
       settings = {
         gui = {
-          user = "henry";
+          user = "${config.preferences.user.name}";
         };
         devices = {
           "pc" = {id = "V66CMBP-VA272KR-R26JLIG-4FQQI2Q-ROMUPDF-TOXIQIP-QOERQFW-R4QWFA5";};
