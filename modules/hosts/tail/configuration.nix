@@ -29,7 +29,7 @@
 
     security.sudo.extraRules = [
       {
-        groups = ["wheel"];
+        groups = ["tail" "wheel"];
         commands = [
           {
             command = "ALL";
