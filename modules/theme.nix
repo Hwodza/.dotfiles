@@ -198,6 +198,35 @@ in {
     };
 
     # Template files that matugen renders with interpolation
+    tuxedoTemplate = pkgs.writeText "customTuxedo.toml" ''
+      name = CustomWallpaperScheme
+      bg = {{ colors.background.default.hex }}
+      panel = {{ colors.surface_container_low.default.hex }}
+      border = {{ colors.outline_variant.default.hex }}
+      fg = {{ colors.on_background.default.hex }}
+      dim = {{ colors.on_surface_variant.default.hex }}
+      accent = {{ colors.primary.default.hex }}
+      cursor = {{ colors.secondary_container.default.hex }}
+      selection = {{ colors.secondary_container.default.hex }}
+      selected = {{ colors.secondary_container.default.hex }}
+      statusbar = {{ colors.surface_container.default.hex }}
+      status_fg = {{ colors.on_surface_variant.default.hex }}
+      mode_fg = {{ colors.on_primary.default.hex }}
+      mode_bg = {{ colors.primary.default.hex }}
+      pri_a = {{ colors.error.default.hex }}
+      pri_b = {{ colors.tertiary.default.hex }}
+      pri_c = {{ colors.secondary.default.hex }}
+      pri_d = {{ colors.primary.default.hex }}
+      pri_other = {{ colors.primary_container.default.hex }}
+      project = {{ colors.primary.default.hex }}
+      context = {{ colors.tertiary_container.default.hex }}
+      done = {{ colors.outline.default.hex }}
+      matched = {{ colors.inverse_primary.default.hex }}
+      due = {{ colors.inverse_primary.default.hex }}
+      overdue = {{ colors.error.default.hex }}
+      today = {{ colors.error.default.hex }}
+    '';
+
     kittyTemplate = pkgs.writeText "kitty.conf" ''
       foreground {{colors.on_surface.default.hex}}
       background {{colors.surface.default.hex}}
@@ -393,6 +422,10 @@ in {
       fallback_color = "${matugenDefault.colors.source_color}"
       caching = false
 
+      [templates.tuxedo]
+      input_path = "${matugenTemplates}/customTuxedo.toml"
+      output_path = "~/.config/tuxedo/themes/customTuxedo.toml"
+
       [templates.kitty]
       input_path = "${matugenTemplates}/kitty.conf"
       output_path = "${runtimeDir}/kitty.conf"
@@ -426,6 +459,7 @@ in {
     '';
 
     # Write template files
+    home.file.".config/matugen/templates/customTuxedo.toml".source = tuxedoTemplate;
     home.file.".config/matugen/templates/kitty.conf".source = kittyTemplate;
     home.file.".config/matugen/templates/rofi.rasi".source = rofiTemplate;
     home.file.".config/matugen/templates/tmux.conf".source = tmuxTemplate;

@@ -54,6 +54,7 @@
       self.nixosModules.bluetooth
       self.nixosModules.tail
       self.nixosModules.syncthing
+      self.nixosModules.tuxedo
     ];
 
     # imports = [
