@@ -61,7 +61,7 @@
           echo "$explanation" > "$TodayDir/$title-explanation"
 
           echo "Creating symlink to wallpaper"
-          ln -s "$TodayDir/$title.jpg" "$WALLPAPER_DIR/wallpaper"
+          ln -sf "$TodayDir/$title.jpg" "$WALLPAPER_DIR/wallpaper"
 
           echo "Setting wallpaper and theme"
           set-wallpaper "$TodayDir/$title.jpg"
