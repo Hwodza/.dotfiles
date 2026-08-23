@@ -39,7 +39,7 @@ local function toggle_active_column_width()
   end
 end
 
-hl.bind(chord(main_mod, "T"), toggle_active_column_width)
+hl.bind(chord(main_mod, "A"), toggle_active_column_width)
 hl.bind(chord(main_mod, "SHIFT", "H"), hl.dsp.layout("swapcol l"))
 hl.bind(chord(main_mod, "SHIFT", "L"), hl.dsp.layout("swapcol r"))
 
@@ -87,4 +87,4 @@ hl.define_submap("layout", function()
   hl.bind("Q", hl.dsp.submap("reset"))
 end)
 
-hl.bind(chord(main_mod, "A"), hl.dsp.submap("layout"))
+hl.bind(chord(main_mod, "SHIFT", "A"), hl.dsp.submap("layout"))

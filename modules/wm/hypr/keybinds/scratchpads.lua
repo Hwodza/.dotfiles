@@ -33,6 +33,7 @@ local scratchpads = {
   { key = "P", workspace = "pomodoro", command = "pomodoro" },
   { key = "E", workspace = "yazi", command = "kitty --class=kitty-yazi -e yazi" },
   { key = "B", workspace = "btop", command = "kitty --class=kitty-btop -e btop" },
+  { key = "T", workspace = "tuxedo", command = "kitty --class=kitty-tuxedo -e tuxedo"},
 }
 
 for _, scratchpad in ipairs(scratchpads) do

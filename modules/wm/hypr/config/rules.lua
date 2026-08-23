@@ -69,3 +69,14 @@ hl.window_rule({
   -- no_blur = true,
   workspace = "special:btop",
 })
+
+hl.window_rule({
+  name = "workspace_special_tx",
+  match = {
+    class = "^(kitty-tuxedo)$",
+  },
+  opacity = "0.8",
+  xray = true,
+  -- no_blur = true,
+  workspace = "special:tuxedo",
+})
