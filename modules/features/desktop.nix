@@ -16,6 +16,7 @@
     };
     home.packages = with pkgs; [
       cloudflared
+      zoom-us
       kdePackages.dolphin
       google-chrome
       kdePackages.kio-extras
