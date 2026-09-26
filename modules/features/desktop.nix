@@ -33,6 +33,7 @@
       thunderbird
       pomodoro-gtk
       simple-mtpfs
+      slack
     ];
 
     services.udiskie = {
