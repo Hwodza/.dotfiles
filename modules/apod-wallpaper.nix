@@ -19,7 +19,7 @@
         APOD_KEY="$(cat "$APOD_KEY_FILE")"
 
         echo "Downloading APOD data"
-        json=$(curl -sf "https://api.nasa.gov/planetary/apod?api_key=$APOD_KEY") || {
+        json=$(curl -sf "https://science.nasa.gov/wp-json/wp/v2/apod-basic/?api_key=$APOD_KEY" | jq -r '.[0]') || {
           echo "Failed to fetch APOD data" >&2
           exit 1
         }
@@ -28,7 +28,7 @@
         explanation=$(echo "$json"  | jq -r '.explanation')
         media_type=$(echo "$json"   | jq -r '.media_type')
         title=$(echo "$json"        | jq -r '.title')
-        url=$(echo "$json"          | jq -r '.url')
+        url=$(echo "$json"          | jq -r '.hdurl')
         thumbnail_url=$(echo "$json" | jq -r '.thumbnail_url // empty')
 
         TodayDir="$WALLPAPER_DIR/$date"
@@ -54,7 +54,7 @@
           mkdir -p "$TodayDir"
           echo "$TodayDir created"
 
-          echo "Downloading image"
+          echo "Downloading image: $title"
           curl -s "$download_url" --output "$TodayDir/$title.jpg"
 
           echo "Downloading explanation"
