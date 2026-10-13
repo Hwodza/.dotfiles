@@ -25,6 +25,7 @@
       tor-browser
       obsidian
       zathura
+      freecad
       poppler
       obs-studio
       discord
