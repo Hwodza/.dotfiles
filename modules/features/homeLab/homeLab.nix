@@ -9,6 +9,7 @@
       self.nixosModules.miniflux
       self.nixosModules.vaultwarden
       self.nixosModules.syncthing
+      self.nixosModules.microbin
     ];
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.ssh
