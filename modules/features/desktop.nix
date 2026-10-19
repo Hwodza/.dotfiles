@@ -16,6 +16,7 @@
     };
     home.packages = with pkgs; [
       cloudflared
+      signal-desktop
       zoom-us
       kdePackages.dolphin
       google-chrome
