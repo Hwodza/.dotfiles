@@ -15,6 +15,7 @@ hl.bind(chord(main_mod, "SPACE"), hl.dsp.exec_cmd(settings.app_launcher))
 hl.bind(chord(main_mod, "R"), hl.dsp.exec_cmd(reload_noctalia_state))
 hl.bind(chord(main_mod, "SHIFT", "S"), hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
 hl.bind(chord(main_mod, "C"), hl.dsp.exec_cmd("noctalia-shell ipc call launcher clipboard"))
+hl.bind(chord(main_mod, "SHIFT", "P"), hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 -- hl.bind(chord(main_mod, "W"), hl.dsp.exec_cmd("hyprctl hyprpaper wallpaper"))
 
 -- SUPER + arrows/hjkl: move focus between windows in a direction.

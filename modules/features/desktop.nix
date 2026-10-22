@@ -16,6 +16,9 @@
     };
     home.packages = with pkgs; [
       cloudflared
+      grim
+      slurp
+      wl-clipboard
       signal-desktop
       zoom-us
       kdePackages.dolphin
