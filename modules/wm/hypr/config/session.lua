@@ -18,13 +18,15 @@ end)
 -- --------------------------------------------------------------------------------
 
 local env_vars = {
-  { "XCURSOR_SIZE", 24 },
-  { "HYPRCURSOR_SIZE", 24 },
+  { "XCURSOR_SIZE",                 24 },
+  { "HYPRCURSOR_SIZE",              24 },
   { "ELECTRON_OZONE_PLATFORM_HINT", "auto" },
-  { "TERM", "xterm-256color" },
-  { "GDK_BACKEND", "x11" },
+  { "TERM",                         "xterm-256color" },
+  { "GDK_BACKEND",                  "x11" },
 }
 
 for _, env in ipairs(env_vars) do
   hl.env(env[1], env[2])
 end
+
+hl.config({ misc = { allow_session_lock_restore = true } })

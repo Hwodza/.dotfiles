@@ -21,6 +21,7 @@
       config = pkgs.config;
     };
   in {
+    security.pam.services.hyprlock = {};
     services.hypridle = {
       enable = true;
       
@@ -40,7 +41,7 @@
           # --- Shared: lock after 5 minutes ---
           {
             timeout = 300;
-            on-timeout = "hyprlock";
+            on-timeout = "loginctl lock-session";
           }
 
           # --- Shared: screen off after 5.5 minutes ---
