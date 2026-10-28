@@ -51,10 +51,10 @@
           }
 
           # --- Laptop: suspend after 30 min on AC ---
-          {
-            timeout = 1800;
-            on-timeout = "${isLaptop} && ${onAC} && systemctl suspend";
-          }
+          # {
+          #   timeout = 1800;
+          #   on-timeout = "${isLaptop} && ${onAC} && systemctl suspend";
+          # }
 
           # --- Laptop: suspend after 7.5 min on battery ---
           {
@@ -69,10 +69,10 @@
           # }
 
           # --- Desktop: suspend after 30 min ---
-          {
-            timeout = 1800;
-            on-timeout = "${isDesktop} && systemctl suspend";
-          }
+          # {
+          #   timeout = 1800;
+          #   on-timeout = "${isDesktop} && systemctl suspend";
+          # }
 
           # --- Fallback
           {
