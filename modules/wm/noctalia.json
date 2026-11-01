@@ -286,7 +286,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Kalamazoo",
+      "name": "Denver",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -537,7 +537,7 @@
         },
         {
           "action": "suspend",
-          "command": "",
+          "command": "loginctl lock-session && systemctl supsend",
           "countdownEnabled": true,
           "enabled": true,
           "keybind": "2"
@@ -713,11 +713,11 @@
     "doNotDisturb": false,
     "noctaliaPerformanceMode": false,
     "barVisible": true,
-    "openedPanel": "",
+    "openedPanel": "settingsPanel-DP-1",
     "lockScreenActive": false,
     "wallpapers": {
       "DP-1": "/home/henry/Pictures/Wallpapers/null/null",
-      "HDMI-A-1": "/home/henry/Pictures/Wallpapers/null/null"
+      "DP-3": "/home/henry/Pictures/Wallpapers/null/null"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -728,26 +728,26 @@
         "height": 1080,
         "refresh_rate": 143.981,
         "x": 0,
-        "y": 0,
+        "y": 155,
         "active_workspace": 1,
         "vrr": false,
-        "focused": false
+        "focused": true
       },
-      "HDMI-A-1": {
-        "name": "HDMI-A-1",
-        "scale": 1,
-        "width": 1920,
-        "height": 1080,
-        "refresh_rate": 60,
+      "DP-3": {
+        "name": "DP-3",
+        "scale": 1.5,
+        "width": 3840,
+        "height": 2160,
+        "refresh_rate": 119.88,
         "x": 1920,
-        "y": 0,
+        "y": 155,
         "active_workspace": 201,
         "vrr": false,
-        "focused": true
+        "focused": false
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1781371244000
+      "lastSeenTs": 1785514068000
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"

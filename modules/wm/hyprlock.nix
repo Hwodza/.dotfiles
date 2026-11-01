@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{...}: {
   flake.homeModules.hyprlock = {config, ...}: {
     programs.hyprlock = {
       enable = true;

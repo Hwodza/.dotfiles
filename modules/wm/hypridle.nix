@@ -21,7 +21,6 @@
       config = pkgs.config;
     };
   in {
-    security.pam.services.hyprlock = {};
     services.hypridle = {
       enable = true;
       
@@ -34,7 +33,7 @@
           after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
           ignore_dbus_inhibit = false;
           ignore_systemd_inhibit = false;
-          inhibit_sleep = 2;
+          inhibit_sleep = 3;
         };
 
         listener = [
