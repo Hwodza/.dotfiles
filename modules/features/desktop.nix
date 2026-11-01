@@ -39,6 +39,7 @@
       pomodoro-gtk
       simple-mtpfs
       slack
+      freecad
     ];
 
     services.udiskie = {
