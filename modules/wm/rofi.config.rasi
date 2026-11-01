@@ -19,9 +19,15 @@
 @import "~/.local/state/theme/current/rofi.rasi"
 
 configuration {
-    modi: "window,run,drun";
+    modi: "window,run,drun,session:sessionMenuScript";
+    combi-modes: "drun,session";
+    combi-display-format: "{mode}: {text}";
     show-icons: true;
     display-drun: "";
+    display-run: "Run";
+    display-window: "Windows";
+    display-session: "Session";
+    drun-display-format: "{name}";
 }
 
 listview {

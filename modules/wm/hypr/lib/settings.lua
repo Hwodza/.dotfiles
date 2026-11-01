@@ -4,7 +4,8 @@
 
 return {
   terminal = os.getenv("TERMINAL") or "kitty",
-  app_launcher = "rofi -show drun",
+  app_launcher = "rofi -show combi",
+  session_launcher = "rofi -show session",
   main_mod = "ALT",
   caps_mod = "MOD2",
   workspace_count = 10,

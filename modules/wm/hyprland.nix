@@ -20,6 +20,7 @@
       config = pkgs.config;
     };
   in {
+    imports = [self.homeModules.sessionMenuScript];
     home.packages = with pkgs; [
       rofi
       unstablePkgs.nwg-displays
