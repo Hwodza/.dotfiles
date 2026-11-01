@@ -43,6 +43,12 @@
           IdentityFile = "~/.ssh/id_tail";
           # IdentitiesOnly = "yes";
         };
+
+        "Host codeberg.org" = {
+          HostName = "codeberg.org";
+          User = "git";
+          IdentityFile = "~/.ssh/id_codeberg";
+        };
       };
     };
   };
