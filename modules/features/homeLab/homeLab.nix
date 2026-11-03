@@ -10,6 +10,7 @@
       self.nixosModules.vaultwarden
       self.nixosModules.syncthing
       self.nixosModules.microbin
+      self.nixosModules.home-assistant
     ];
     home-manager.users.${config.preferences.user.name}.imports = [
       self.homeModules.ssh

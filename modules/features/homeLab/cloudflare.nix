@@ -13,6 +13,7 @@
             "miniflux.odza.dev" = "http://127.0.0.1:8080";
             "vaultwarden.odza.dev" = "http://127.0.0.1:8222";
             "microbin.odza.dev" = "http://127.0.0.1:8090";
+            "home-assistant.odza.dev" = "http://127.0.0.1:8123";
           };
         };
       };
